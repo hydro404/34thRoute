@@ -8,11 +8,12 @@ import {
 
 
 import {app,db} from './config.js'
-sessionStorage.setItem("userID", "52QQVMF5J2DkYFIsQo0Q");
+// sessionStorage.setItem("userID", "52QQVMF5J2DkYFIsQo0Q");
 
 const userID = sessionStorage.getItem("userID");
 const docRef = doc(db, "cart", userID);
 const docSnap = await getDoc(docRef);
+
 let total_price = 0;
 
 if (docSnap.exists()) {
