@@ -167,7 +167,7 @@
                 </div>
                 <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                   <div class="fs-sm me-2 py-2"><span class="text-muted">Total:</span><span
-                      class="text-accent fs-base ms-1">$24.<small>00</small></span></div><a
+                      class="text-accent fs-base ms-1" id="total_price2">Php 0</span></div><a
                     class="btn btn-outline-secondary btn-sm" href="food-delivery-cart.html">Expand cart<i
                       class="ci-arrow-right ms-1 me-n1"></i></a>
                 </div><a class="btn btn-primary btn-sm d-block w-100" href="food-delivery-checkout.html"><i
@@ -309,14 +309,13 @@
             </div>
 
 
-            <script type="module" src="./js/removeItems.js">
-            </script>
+            
             <!-- Sidebar-->
             <div class="col-lg-4 col-md-5 pt-3 pt-sm-4">
               <div class="rounded-3 bg-secondary px-3 px-sm-4 py-4">
                 <div class="text-center mb-4 pb-3 border-bottom">
                   <h3 class="h5 mb-3 pb-1">Total</h3>
-                  <h4 class="fw-normal">$24.<small>00</small></h4>
+                  <h4 class="fw-normal" id="total_price"></h4>
                 </div>
                 <div class="mb-4">
                   <label class="form-label mb-3" for="order-comments"><span
@@ -446,6 +445,8 @@
   <script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
   <!-- Main theme script-->
   <script src="js/theme.min.js"></script>
+  <script type="module" src="./js/removeItems.js">
+  </script>
 </body>
 
 </html>

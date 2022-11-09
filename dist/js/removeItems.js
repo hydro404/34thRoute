@@ -28,6 +28,7 @@ const db = getFirestore(app);
 const userID = "52QQVMF5J2DkYFIsQo0Q"
 const docRef = doc(db, "cart", userID);
 const docSnap = await getDoc(docRef);
+let total_price = 0;
 
 if (docSnap.exists()) {
   console.log("Document data:", docSnap.data());
@@ -52,14 +53,17 @@ if (docSnap.exists()) {
   }
   else{
     Object.entries(parsed).forEach((item, index) => {
+
+      total_price += parseFloat(item[1].price)
+
+      console.log(total_price)
       
         var appendItem = `<div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${item[0]}">
                                     <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img src="img/food-delivery/cart/01.jpg" width="120" alt="Pizza"></a>
                                       <div class="pt-2">
                                         <h3 class="product-title fs-base mb-2"><a href="#">${item[1].product_name}</a></h3>
-                                        <div class="fs-sm"><span class="text-muted me-2">Size:</span>Medium</div>
-                                        <div class="fs-sm"><span class="text-muted me-2">Base:</span>Standard</div>
-                                        <div class="fs-lg text-accent pt-2">$9.<small>00</small></div>
+                                        <div class="fs-sm"><span class="text-muted me-2">Type:</span>${item[1].type}</div>
+                                        <div class="fs-lg text-accent pt-2">Php ${item[1].price}.<small>00</small></div>
                                       </div>
                                     </div>
                                     <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start" style="max-width: 9rem;">
@@ -82,21 +86,24 @@ if (docSnap.exists()) {
 }
 
   $("#items-cart").html(item_array);
+
+  $("#total_price").html(total_price)
 } else {
   // doc.data() will be undefined in this case
   console.log("No such document!");
   
 }
 
-window.remove = function remove(item) {
+window.remove = async function remove(item) {
     console.log(typeof item)
   document.getElementById(item).remove();
   delete parsed[item];
   sessionStorage.setItem("items_array", JSON.stringify(parsed));
 
-  updateDoc(docRef, {
+  await updateDoc(docRef, {
     [item]: deleteField(),
   });
+  location.reload()
 };
 
 window.increase = function increase(item,value) {
