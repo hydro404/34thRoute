@@ -45,6 +45,7 @@
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body tab-content py-4">
+          <!--SIGN IN -->
           <form class="needs-validation tab-pane fade show active" autocomplete="off" novalidate id="signin-tab">
             <div class="mb-3">
               <label class="form-label" for="si-email">Email address</label>
@@ -66,8 +67,9 @@
                 <label class="form-check-label" for="si-remember">Remember me</label>
               </div><a class="fs-sm" href="#">Forgot password?</a>
             </div>
-            <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Sign in</button>
-          </form>
+            <button class="btn btn-primary btn-shadow d-block w-100" onclick="SignIn()">Sign in</button>
+          </form> 
+          <!--SIGN IN END-->
           <form class="needs-validation tab-pane fade" autocomplete="off" novalidate id="signup-tab">
             <div class="mb-3">
               <label class="form-label" for="su-name">Full name</label>
@@ -444,7 +446,7 @@
   <script src="vendor/tiny-slider/dist/min/tiny-slider.js"></script>
   <script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
   <!-- Main theme script-->
-  <script src="js/theme.min.js"></script>
+  <script src="js/theme.js"></script>
   <script type="module" src="./js/removeItems.js">
   </script>
 </body>
