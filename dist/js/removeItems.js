@@ -53,7 +53,7 @@ if (docSnap.exists()) {
   else{
     Object.entries(parsed).forEach((item, index) => {
       
-        var appendItem =          `<div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${item[0]}">
+        var appendItem = `<div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${item[0]}">
                                     <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img src="img/food-delivery/cart/01.jpg" width="120" alt="Pizza"></a>
                                       <div class="pt-2">
                                         <h3 class="product-title fs-base mb-2"><a href="#">${item[1].product_name}</a></h3>
@@ -64,7 +64,15 @@ if (docSnap.exists()) {
                                     </div>
                                     <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start" style="max-width: 9rem;">
                                       <label class="form-label" for="quantity1">Quantity</label>
-                                      <input class="form-control" type="number" id="quantity1" value="1" min="1">
+                                      <input class="form-control" type="number" id="quantity_${item[0]}" value="1" min="1">
+                                  <script>
+                                    document.getElementById("quantity_${item[0]}").addEventListener("input", (value) => {
+
+
+                                      console.log(value.target.value + "" +value.target.id);
+                                      increase('${item[0]}',value.target.value)
+                                    });
+                                  </script>
                                       <button class="btn btn-link px-0 text-danger" type="button" onclick="remove('${item[0]}')">
                                       <i class="ci-close-circle me-2"></i><span class="fs-sm">Remove</span></button>
                                     </div>
@@ -90,4 +98,12 @@ window.remove = function remove(item) {
     [item]: deleteField(),
   });
 };
+
+window.increase = function increase(item,value) {
+  console.log(item)
+  updateDoc(docRef, {
+    [`${item}.quantity`]: value
+  });
+};
+
 
