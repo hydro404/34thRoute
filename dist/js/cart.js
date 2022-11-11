@@ -1,4 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
 import {
   doc,
   getDoc,
@@ -7,8 +6,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
 import { app, db } from "./config.js";
-
-// sessionStorage.setItem("userID", "52QQVMF5J2DkYFIsQo0Q");
+import { auth } from "./config.js";
 
 const userID = sessionStorage.getItem("userID");
 
@@ -18,6 +16,7 @@ const docSnap = await getDoc(docRef);
 let total_price = 0;
 
 if (docSnap.exists()) {
+
   console.log("Document data:", docSnap.data());
 
   sessionStorage.setItem("items_array", JSON.stringify(docSnap.data()));
