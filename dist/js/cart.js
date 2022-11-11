@@ -11,9 +11,7 @@ import { app, db } from "./config.js";
 // sessionStorage.setItem("userID", "52QQVMF5J2DkYFIsQo0Q");
 
 const userID = sessionStorage.getItem("userID");
-if(!userID || userID == ''){
-  window.location.href = 'home-food-delivery.html'
-}
+
 const docRef = doc(db, "cart", userID);
 const docSnap = await getDoc(docRef);
 
