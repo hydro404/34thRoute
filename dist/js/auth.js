@@ -5,6 +5,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
 
 import { app, auth, db } from "./config.js";
+
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 //SIGNIN
 
 //current user checker
@@ -74,5 +76,13 @@ window.SignUp = function SignUp() {
   });
     }
   }
+};
+
+window.SignGuest = async function SignGuest() {
+  const docRef = await addDoc(collection(db, "guests"), {});
+  console.log("Document written with ID: ", docRef.id);
+
+  sessionStorage.setItem("userID",docRef.id);
+  window.location.href = 'index.html'
 };
 

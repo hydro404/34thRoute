@@ -5,6 +5,7 @@ import {
   getFirestore,
   updateDoc,
   deleteField,
+  addDoc,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 import {
   getAuth,
