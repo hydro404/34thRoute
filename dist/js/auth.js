@@ -1,5 +1,4 @@
 import {
-  getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
@@ -15,7 +14,7 @@ onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     console.log(user)
     sessionStorage.setItem("userID",user.uid);
-    //window.location.href = 'food-delivery-single.html'
+    window.location.href = 'food-delivery-single.html'
     // ...
     console.log(uid)
   } else {
@@ -40,9 +39,6 @@ window.SignIn = function SignIn() {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-
-          
-
           window.location.reload();
           
         })
@@ -51,22 +47,34 @@ window.SignIn = function SignIn() {
           const errorMessage = error.message;
           //console.log(errorMessage);
           //console.log(errorCode);
+          alert("Error Sign In");
         });
     }
   }
 };
 
-/*createUserWithEmailAndPassword(auth, userEmail, passWord)
+window.SignUp = function SignUp() {
+  const userEmail = document.getElementById("su-email").value;
+  const passWord = document.getElementById("su-password").value;
+  //console.log(userEmail);
+  if (userEmail !== "") {
+    if (passWord !== "") {
+      createUserWithEmailAndPassword(auth, userEmail, passWord)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
     console.log(user);
+    window.location.reload();
     // ...
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log(errorMessage)
+    alert("Error Sign Up");
     // ..
   });
-*/
+    }
+  }
+};
+
