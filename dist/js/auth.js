@@ -1,6 +1,7 @@
 import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
 
 import { app, auth, db } from "./config.js";
@@ -33,8 +34,6 @@ window.SignIn = function SignIn() {
   const userEmail = document.getElementById("si-email").value;
   const passWord = document.getElementById("si-password").value;
   //console.log(userEmail);
-  if (userEmail !== "") {
-    if (passWord !== "") {
       signInWithEmailAndPassword(auth, userEmail, passWord)
         .then((userCredential) => {
           // Signed in
@@ -49,8 +48,7 @@ window.SignIn = function SignIn() {
           //console.log(errorCode);
           alert("Error Sign In");
         });
-    }
-  }
+    
 };
 
 window.SignUp = function SignUp() {
@@ -70,7 +68,7 @@ window.SignUp = function SignUp() {
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorMessage)
+    console.log(error)
     alert("Error Sign Up");
     // ..
   });
