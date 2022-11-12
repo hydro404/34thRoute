@@ -1,12 +1,13 @@
 import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  signInAnonymously
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
 
 import { app, auth, db } from "./config.js";
 
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
+import { addDoc, collection, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 //SIGNIN
 
 //current user checker
@@ -17,7 +18,7 @@ onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     console.log(user)
     sessionStorage.setItem("userID",user.uid);
-    window.location.href = 'food-delivery-single.html'
+    //window.location.href = 'food-delivery-single.html'
     // ...
     console.log(uid)
   } else {
@@ -78,12 +79,27 @@ window.SignUp = function SignUp() {
   }
 };
 
-window.SignGuest = async function SignGuest() {
-  const docRef = await addDoc(collection(db, "guests"), {});
-  console.log("Document written with ID: ", docRef.id);
+window.CreateID = function CreateID() {
+  signInAnonymously(auth)
+  .then(async(vars) => {
+    console.log(vars);
+    console.log("VARS written with ID: ", vars.user.uid);
 
-  sessionStorage.setItem("userID",docRef.id);
-  window.location.href = 'index.html'
+    const docRef = await setDoc(doc(db, "guests", vars.user.uid), {});
+    sessionStorage.setItem("userID", vars.user.uid);
+    //window.location.href = 'food-delivery-checkout.html'
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage)
+    // ...
+  });
+};
+
+window.SignGuest = async function SignGuest() {
+  window.location = "food-delivery-checkout.html";
+  //kukuruhanon na data
 };
 
 window.Checkout = async function Checkout() {
@@ -91,4 +107,3 @@ window.Checkout = async function Checkout() {
     window.location = "food-delivery-checkout.html";
   }
 };
-

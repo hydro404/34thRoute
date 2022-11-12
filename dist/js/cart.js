@@ -3,6 +3,8 @@ import {
   getDoc,
   updateDoc,
   deleteField,
+  collection,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
 import { app, db } from "./config.js";
@@ -105,4 +107,48 @@ window.increase = function increase(item, value) {
   updateDoc(docRef, {
     [`${item}.quantity`]: value,
   });
+};
+
+window.addtoCart = async function addtoCart(value) {
+  const washingtonRef = doc(db, "cart", userID);
+  // Set the "capital" field of the city 'DC'
+  //loop thru the collection, if exists, add 1 else updateDoc
+  const docRef = doc(db, "cart", userID);
+  const docSnap = await getDoc(docRef);
+  var bool = false
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    Object.entries(docSnap.data()).forEach(productID =>{
+      //if(value===productID){
+        const docRef2 = doc(db, "cart", productID[0]);
+
+        console.log(productID)
+        updateDoc(docRef2, {
+          "quantity": 13,
+        });
+      //}
+    })
+
+    
+
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+
+  await updateDoc(washingtonRef, {
+    [value]:{
+      product_name:"Big DONUT",
+      quantity:1,
+      price:100
+    }
+}).then(async(vars) => {
+})
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  console.log(errorMessage)
+  // ...
+});
+
 };
