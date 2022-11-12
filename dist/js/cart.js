@@ -120,11 +120,9 @@ window.addtoCart = async function addtoCart(value) {
     console.log("Document data:", docSnap.data());
     Object.entries(docSnap.data()).forEach(productID =>{
       //if(value===productID){
-        const docRef2 = doc(db, "cart", productID[0]);
-
         console.log(productID)
-        updateDoc(docRef2, {
-          "quantity": 13,
+        updateDoc(docRef, {
+          [`${productID[0].quantity}`]: 13,
         });
       //}
     })
