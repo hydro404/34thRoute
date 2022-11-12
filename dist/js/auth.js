@@ -86,3 +86,9 @@ window.SignGuest = async function SignGuest() {
   window.location.href = 'index.html'
 };
 
+window.Checkout = async function Checkout() {
+  if (sessionStorage['isLoggedIn'] == "true") {
+    window.location = "food-delivery-checkout.html";
+  }
+};
+
