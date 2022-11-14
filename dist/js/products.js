@@ -4,13 +4,15 @@ import {
   getDocs,
   doc,
   getDoc,
-  updateDoc,setDoc
+  updateDoc,
+  setDoc,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
+document.getElementById("products_gallery").innerText = "";
 window.addToCart = function (item) {
   console.log("WORKING");
 };
-const userID = sessionStorage['userID'];
+const userID = sessionStorage["userID"];
 async function getProducts() {
   const querySnapshot = await getDocs(collection(db, "products"));
   querySnapshot.forEach((doc) => {
@@ -37,9 +39,17 @@ function displayProduct(id, product_data) {
   let name = product_data.product_name;
   let quantity = product_data.quantity;
   let available = product_data.available;
+  let details_obj = {
+    price: price,
+    name: name,
+    quantity: quantity,
+    available: available,
+  };
 
   let template_html = `<div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter" id = "${id}">
-    <div class="card product-card border pb-2"><a class="d-block" href="#quick-view" data-bs-toggle="modal"><img
+    <div class="card product-card border pb-2">
+    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available})">
+    <img
           class="card-img-top" src="img/food-delivery/restaurants/single/01.jpg" alt="Pizza"></a>
       <div class="card-body pt-1 pb-2">
         <h3 class="product-title fs-md"><a href="#quick-view" data-bs-toggle="modal">${name}</a></h3>
@@ -85,9 +95,9 @@ getProducts();
 
 window.addtoCart = async function addtoCart(value) {
   //const washingtonRef = doc(db, "cart", userID);
-  let cart_type = 'cart';
-  if(sessionStorage['isAnonymous'] == 'true'){
-    cart_type = 'guests'
+  let cart_type = "cart";
+  if (sessionStorage["isAnonymous"] == "true") {
+    cart_type = "guests";
   }
   const docRef = doc(db, cart_type, userID);
   const docSnap = await getDoc(docRef);
@@ -107,7 +117,7 @@ window.addtoCart = async function addtoCart(value) {
   //   // doc.data() will be undefined in this case
   //   console.log("No such document!");
   // }
-    let product_detials = await getProduct(value)
+  let product_detials = await getProduct(value);
   await updateDoc(docRef, {
     [value]: {
       product_name: product_detials.product_name,
@@ -122,4 +132,73 @@ window.addtoCart = async function addtoCart(value) {
       console.log(errorMessage);
       // ...
     });
+};
+
+window.updateModal = function (price,name,quantity,available) {
+  
+  let modal_template = `<div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">${name}</h4>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Product gallery-->
+          <div class="col-lg-7 col-md-6 pe-lg-0"><img src="img/food-delivery/restaurants/single/large-preview.jpg"
+              alt="Pizza"></div>
+          <!-- Product details-->
+          <div class="col-lg-5 col-md-6 pt-4 pt-lg-0">
+            <div class="product-details ms-auto pb-3">
+              <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$15.<small>99</small></span></div>
+              <form class="mb-grid-gutter">
+                <div class="row mx-n2">
+                  <div class="col-6 px-2">
+                    <div class="mb-3">
+                      <label class="form-label" for="pizza-size">Size:</label>
+                      <select class="form-select" id="pizza-size">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-6 px-2">
+                    <div class="mb-3">
+                      <label class="form-label" for="pizza-base">Base:</label>
+                      <select class="form-select" id="pizza-base">
+                        <option value="standard">Standard</option>
+                        <option value="thin">Thin</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                  <select class="form-select me-3" style="width: 5rem;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <button class="btn btn-primary btn-shadow d-block w-100" type="submit"><i
+                      class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                </div>
+              </form>
+              <h5 class="h6 mb-3 pb-3 border-bottom"><i
+                  class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Product info</h5>
+              <h6 class="fs-sm mb-2">Ingredients:</h6>
+              <p class="fs-sm">Salami, Olives, Bell pepper, Mushrooms, Mozzarella, Parmesan</p>
+              <h6 class="fs-sm mb-2">Allergies</h6>
+              <p class="fs-sm">Gluten, Dairy</p>
+              <h6 class="fs-sm mb-2">Calories</h6>
+              <p class="fs-sm mb-0">811</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById("quick-view").innerHTML = modal_template;
 };
