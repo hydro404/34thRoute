@@ -21,6 +21,8 @@ const docSnap = await getDoc(docRef);
 
 let total_price = 0;
 
+var product_obj = [];
+
 var item_array = [];
 
 if (docSnap.exists()) {
@@ -46,7 +48,14 @@ if (docSnap.exists()) {
     item_array.push(noItemsonCart);
   } else {
     Object.entries(parsed).forEach((item, index) => {
-      total_price += parseFloat(item[1].price);
+      total_price += parseFloat(item[1].price * item[1].quantity);
+      product_obj.push({
+  [item[0]]:{
+    price:item[1].price,
+    quantity:item[1].quantity
+  }
+})
+      
 
       console.log(total_price);
 
@@ -55,18 +64,28 @@ if (docSnap.exists()) {
                                       <div class="pt-2">
                                         <h3 class="product-title fs-base mb-2"><a href="#">${item[1].product_name}</a></h3>
                                         <div class="fs-sm"><span class="text-muted me-2">Type:</span>${item[1].type}</div>
-                                        <div class="fs-lg text-accent pt-2">Php ${item[1].price}.<small>00</small></div>
+                                        <div class="fs-lg text-accent pt-2" id="Phprice_${item[0]}" value="${item[1].price}">Php ${item[1].price}.<small>00</small></div>
                                       </div>
                                     </div>
                                     <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start" style="max-width: 9rem;">
                                       <label class="form-label" for="quantity1">Quantity</label>
-                                      <input class="form-control" type="number" id="quantity_${item[0]}" value="1" min="1">
+                                      <input class="form-control" type="number" id="quantity_${item[0]}" value="${item[1].quantity}" min="1">
                                   <script>
                                     document.getElementById("quantity_${item[0]}").addEventListener("input", (value) => {
+                                      
+                                      let c_price = ${item[1].price}
+                                      let c_quantity = ${item[1].quantity}
+                                      
+                                      let c_total = c_price * c_quantity;
 
+                                      let n_total = c_price * value.target.value;
 
-                                      console.log(value.target.value + "" +value.target.id);
+                                      let n_total_price = parseInt(document.getElementById('total_price').innerHTML) + n_total - c_total;
+                                      console.log(${total_price}+" "+c_price+" "+c_quantity+" "+c_price+" "+value.target.value);
+                                       
                                       increase('${item[0]}',value.target.value)
+
+                                     $("#total_price").html(n_total_price);
                                     });
                                   </script>
                                       <button class="btn btn-link px-0 text-danger" type="button" onclick="remove('${item[0]}')">
@@ -76,7 +95,7 @@ if (docSnap.exists()) {
       item_array.push(appendItem);
     });
   }
-
+console.log(product_obj);
   $("#items-cart").html(item_array);
 
   $("#total_price").html(total_price);
@@ -107,10 +126,31 @@ window.remove = async function remove(item) {
 };
 
 window.increase = function increase(item, value) {
-  console.log(item);
+  //console.log(item);
   updateDoc(docRef, {
     [`${item}.quantity`]: value,
   });
+
+  // let cTotal = document.getElementById("total_price").innerHTML;
+  // let cPrice = document.getElementById("Phprice_"+item).innerHTML;
+  // //Php 100.<small>00</small>
+  // const myArray = cPrice.split(" ");
+  // //console.log(myArray[1]);
+  // const myArray2 = myArray[1].split(".");
+  // //console.log(myArray2[0]);
+
+  // cPrice = myArray2[0]; //100 //200 //200
+
+  // let cQuantity = document.getElementById("span_"+item).innerHTML;
+  
+  // let total = cPrice * parseFloat(cQuantity);
+
+  // //console.log(parseFloat(cTotal)+" "+ total+" "+ cPrice+" "+ cPrice +" "+cQuantity)
+  // let totals = parseFloat(cTotal) + total - cPrice + value;
+  // //console.log(totals)
+  // document.getElementById("total_price").innerHTML = totals;
+
+  //https://stackoverflow.com/questions/47964049/how-to-make-javascript-basic-shopping-cart-amount-calculator
 };
 
 // window.addtoCart = async function addtoCart(value) {

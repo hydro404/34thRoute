@@ -54,30 +54,6 @@ function displayProduct(id, product_data) {
       <div class="card-body pt-1 pb-2">
         <h3 class="product-title fs-md"><a href="#quick-view" data-bs-toggle="modal">${name}</a></h3>
         <p class="fs-ms text-muted">Broccoli, Mushrooms, Bell pepper, Corn, Onion, Mozzarella, Parmesan</p>
-        <div class="d-flex mb-1">
-          <div class="form-check form-option form-check-justified mb-2">
-            <input class="form-check-input" type="radio" name="size1" id="s1" checked>
-            <label class="form-option-label" for="s1">Small</label>
-          </div>
-          <div class="form-check form-option form-check-justified mb-2">
-            <input class="form-check-input" type="radio" name="size1" id="m1">
-            <label class="form-option-label" for="m1">Medium</label>
-          </div>
-          <div class="form-check form-option form-check-justified mb-2">
-            <input class="form-check-input" type="radio" name="size1" id="l1">
-            <label class="form-option-label" for="l1">Large</label>
-          </div>
-        </div>
-        <div class="d-flex mb-3">
-          <div class="form-check form-option form-check-justified mb-2">
-            <input class="form-check-input" type="radio" name="base1" id="standard1" checked>
-            <label class="form-option-label" for="standard1">Standard</label>
-          </div>
-          <div class="form-check form-option form-check-justified mb-2">
-            <input class="form-check-input" type="radio" name="base1" id="thin1">
-            <label class="form-option-label" for="thin1">Thin</label>
-          </div>
-        </div>
         <div class="d-flex align-items-center justify-content-between">
           <div class="product-price"><span class="text-accent">Php${price}</span></div>
           <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(this.value)" value="${id}">+<i class="ci-cart fs-base ms-1"></i></button>
@@ -116,7 +92,7 @@ window.addtoCart = async function addtoCart(value) {
   // } else {
   //   // doc.data() will be undefined in this case
   //   console.log("No such document!");
-  // }
+  // } 
   let product_detials = await getProduct(value);
   await updateDoc(docRef, {
     [value]: {
@@ -135,7 +111,7 @@ window.addtoCart = async function addtoCart(value) {
 };
 
 window.updateModal = function (price,name,quantity,available) {
-  
+
   let modal_template = `<div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -152,25 +128,7 @@ window.updateModal = function (price,name,quantity,available) {
             <div class="product-details ms-auto pb-3">
               <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$15.<small>99</small></span></div>
               <form class="mb-grid-gutter">
-                <div class="row mx-n2">
                   <div class="col-6 px-2">
-                    <div class="mb-3">
-                      <label class="form-label" for="pizza-size">Size:</label>
-                      <select class="form-select" id="pizza-size">
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-6 px-2">
-                    <div class="mb-3">
-                      <label class="form-label" for="pizza-base">Base:</label>
-                      <select class="form-select" id="pizza-base">
-                        <option value="standard">Standard</option>
-                        <option value="thin">Thin</option>
-                      </select>
-                    </div>
                   </div>
                 </div>
                 <div class="mb-3 d-flex align-items-center">
@@ -199,6 +157,5 @@ window.updateModal = function (price,name,quantity,available) {
       </div>
     </div>
   </div>`;
-
   document.getElementById("quick-view").innerHTML = modal_template;
 };
