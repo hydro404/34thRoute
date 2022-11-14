@@ -12,7 +12,11 @@ import { auth } from "./config.js";
 
 const userID = sessionStorage.getItem("userID");
 
-const docRef = doc(db, "cart", userID);
+let cart_type = 'cart';
+  if(sessionStorage['isAnonymous'] == 'true'){
+    cart_type = 'guests'
+  }
+const docRef = doc(db, cart_type, userID);
 const docSnap = await getDoc(docRef);
 
 let total_price = 0;
@@ -109,44 +113,44 @@ window.increase = function increase(item, value) {
   });
 };
 
-window.addtoCart = async function addtoCart(value) {
-  const washingtonRef = doc(db, "cart", userID);
-  // Set the "capital" field of the city 'DC'
-  //loop thru the collection, if exists, add 1 else updateDoc
-  const docRef = doc(db, "cart", userID);
-  const docSnap = await getDoc(docRef);
-  var bool = false
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    Object.entries(docSnap.data()).forEach(productID =>{
-      //if(value===productID){
-        console.log(productID)
-        updateDoc(docRef, {
-          [`${productID[0].quantity}`]: 13,
-        });
-      //}
-    })
+// window.addtoCart = async function addtoCart(value) {
+//   const washingtonRef = doc(db, "cart", userID);
+//   // Set the "capital" field of the city 'DC'
+//   //loop thru the collection, if exists, add 1 else updateDoc
+//   const docRef = doc(db, "cart", userID);
+//   const docSnap = await getDoc(docRef);
+//   var bool = false
+//   if (docSnap.exists()) {
+//     console.log("Document data:", docSnap.data());
+//     Object.entries(docSnap.data()).forEach(productID =>{
+//       //if(value===productID){
+//         console.log(productID)
+//         updateDoc(docRef, {
+//           [`${productID[0].quantity}`]: 13,
+//         });
+//       //}
+//     })
 
     
 
-  } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-  }
+//   } else {
+//     // doc.data() will be undefined in this case
+//     console.log("No such document!");
+//   }
 
-  await updateDoc(washingtonRef, {
-    [value]:{
-      product_name:"Big DONUT",
-      quantity:1,
-      price:100
-    }
-}).then(async(vars) => {
-})
-.catch((error) => {
-  const errorCode = error.code;
-  const errorMessage = error.message;
-  console.log(errorMessage)
-  // ...
-});
+//   await updateDoc(washingtonRef, {
+//     [value]:{
+//       product_name:"Big DONUT",
+//       quantity:1,
+//       price:100
+//     }
+// }).then(async(vars) => {
+// })
+// .catch((error) => {
+//   const errorCode = error.code;
+//   const errorMessage = error.message;
+//   console.log(errorMessage)
+//   // ...
+// });
 
-};
+// };

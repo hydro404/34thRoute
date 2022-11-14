@@ -13,10 +13,14 @@ import { addDoc, collection, setDoc, doc } from "https://www.gstatic.com/firebas
 //current user checker
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
-    console.log(user)
+    console.log(user.isAnonymous)
+    if(user.isAnonymous){
+      sessionStorage.setItem("isAnonymous","true");
+    }
+    else{
+      sessionStorage.setItem("isAnonymous","false");
+    }
     sessionStorage.setItem("userID",user.uid);
     //window.location.href = 'food-delivery-single.html'
     // ...
