@@ -26,6 +26,7 @@ onAuthStateChanged(auth, (user) => {
     // ...
     console.log(uid)
   } else {
+    CreateID();
     // User is signed out
     // ...
   }
