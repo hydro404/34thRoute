@@ -16,7 +16,7 @@ if (sessionStorage["isAnonymous"] == "true") {
   cart_type = "guests";
 }
 
-const cart_reference = doc(db, cart_type, userID);
+// const cart_reference = doc(db, cart_type, userID);
 
 export async function getProducts() {
   const querySnapshot = await getDocs(collection(db, "products"));
@@ -24,11 +24,13 @@ export async function getProducts() {
 }
 
 export async function getCartItems() {
+  const cart_reference = doc(db, cart_type, userID);
   const docSnap = await getDoc(cart_reference);
   return docSnap;
 }
 
 export async function updateQuantity(item, value) {
+  const cart_reference = doc(db, cart_type, userID);
   let updated = JSON.parse(sessionStorage["items_array"]);
   updated[item].quantity = parseInt(value);
   console.log(JSON.parse(sessionStorage["items_array"])[item]);
@@ -39,6 +41,7 @@ export async function updateQuantity(item, value) {
 }
 
 export async function removeCartItem(item) {
+  const cart_reference = doc(db, cart_type, userID);
   await updateDoc(cart_reference, {
     [item]: deleteField(),
   });
@@ -46,4 +49,11 @@ export async function removeCartItem(item) {
   //location.reload();
 }
 
+export async function transferGuestData(){
+  let guest_cart_items = await getCartItems();
+
+  console.log(guest_cart_items.data());
+  sessionStorage["isAnonymous"] = 'false';
+  await setDoc(doc(db, "cart", userID), guest_cart_items.data());
+}
 
