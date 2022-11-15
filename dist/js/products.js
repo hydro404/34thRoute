@@ -7,19 +7,21 @@ import {
   updateDoc,
   setDoc,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
+import { getProducts } from "./firestore-querries.js";
+
 
 document.getElementById("products_gallery").innerText = "";
 window.addToCart = function (item) {
   console.log("WORKING");
 };
 const userID = sessionStorage["userID"];
-async function getProducts() {
-  const querySnapshot = await getDocs(collection(db, "products"));
-  querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
-    displayProduct(doc.id, doc.data());
-  });
-}
+
+const products = await getProducts();
+
+products.forEach((doc) => {
+  console.log(doc.id, " => ", doc.data());
+  displayProduct(doc.id, doc.data());
+});
 
 async function getProduct(id) {
   const docRef = doc(db, "products", id);
@@ -66,8 +68,6 @@ function displayProduct(id, product_data) {
     .getElementById("products_gallery")
     .insertAdjacentHTML("beforeend", template_html);
 }
-
-getProducts();
 
 window.addtoCart = async function addtoCart(value) {
   //const washingtonRef = doc(db, "cart", userID);
@@ -159,3 +159,6 @@ window.updateModal = function (price,name,quantity,available) {
   </div>`;
   document.getElementById("quick-view").innerHTML = modal_template;
 };
+
+
+

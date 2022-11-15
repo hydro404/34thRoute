@@ -9,31 +9,32 @@ import {
 
 import { app, db } from "./config.js";
 import { auth } from "./config.js";
+import { getCartItems, removeCartItem, updateQuantity } from "./firestore-querries.js";
 
 const userID = sessionStorage.getItem("userID");
 
-let cart_type = 'cart';
-  if(sessionStorage['isAnonymous'] == 'true'){
-    cart_type = 'guests'
-  }
-const docRef = doc(db, cart_type, userID);
-const docSnap = await getDoc(docRef);
+let cart_type = "cart";
+if (sessionStorage["isAnonymous"] == "true") {
+  cart_type = "guests";
+}
 
+window.updateQuantity = await updateQuantity;
+
+let cartItems = await getCartItems();
 let total_price = 0;
 
 var product_obj = [];
 
 var item_array = [];
 
-if (docSnap.exists()) {
+if (cartItems.exists()) {
+  console.log("Document data:", cartItems.data());
 
-  console.log("Document data:", docSnap.data());
-
-  sessionStorage.setItem("items_array", JSON.stringify(docSnap.data()));
+  sessionStorage.setItem("items_array", JSON.stringify(cartItems.data()));
 
   window.parsed = JSON.parse(sessionStorage.getItem("items_array"));
-  console.log(parsed)
-  
+  console.log(parsed);
+
   console.log(Object.keys(parsed).length);
 
   if (Object.keys(parsed).length === 0) {
@@ -50,12 +51,11 @@ if (docSnap.exists()) {
     Object.entries(parsed).forEach((item, index) => {
       total_price += parseFloat(item[1].price * item[1].quantity);
       product_obj.push({
-  [item[0]]:{
-    price:item[1].price,
-    quantity:item[1].quantity
-  }
-})
-      
+        [item[0]]: {
+          price: item[1].price,
+          quantity: item[1].quantity,
+        },
+      });
 
       console.log(total_price);
 
@@ -71,21 +71,9 @@ if (docSnap.exists()) {
                                       <label class="form-label" for="quantity1">Quantity</label>
                                       <input class="form-control" type="number" id="quantity_${item[0]}" value="${item[1].quantity}" min="1">
                                   <script>
-                                    document.getElementById("quantity_${item[0]}").addEventListener("input", (value) => {
-                                      
-                                      let c_price = ${item[1].price}
-                                      let c_quantity = ${item[1].quantity}
-                                      
-                                      let c_total = c_price * c_quantity;
-
-                                      let n_total = c_price * value.target.value;
-
-                                      let n_total_price = parseInt(document.getElementById('total_price').innerHTML) + n_total - c_total;
-                                      console.log(${total_price}+" "+c_price+" "+c_quantity+" "+c_price+" "+value.target.value);
-                                       
-                                      increase('${item[0]}',value.target.value)
-
-                                     $("#total_price").html(n_total_price);
+                                    document.getElementById("quantity_${item[0]}").addEventListener("input", (element) => {
+                                      updateQuantity('${item[0]}',element.target.value)
+                                      updateTotal();
                                     });
                                   </script>
                                       <button class="btn btn-link px-0 text-danger" type="button" onclick="remove('${item[0]}')">
@@ -95,7 +83,7 @@ if (docSnap.exists()) {
       item_array.push(appendItem);
     });
   }
-console.log(product_obj);
+  console.log(product_obj);
   $("#items-cart").html(item_array);
 
   $("#total_price").html(total_price);
@@ -109,49 +97,64 @@ console.log(product_obj);
 				Return to shop			</a>
 		</div>
 	</div>`;
-    item_array.push(noItemsonCart);
-    $("#items-cart").html(item_array);
+  item_array.push(noItemsonCart);
+  $("#items-cart").html(item_array);
 }
 
+
 window.remove = async function remove(item) {
+
+  await removeCartItem(item);
   console.log(typeof item);
   document.getElementById(item).remove();
   delete parsed[item];
   sessionStorage.setItem("items_array", JSON.stringify(parsed));
-
-  await updateDoc(docRef, {
-    [item]: deleteField(),
-  });
-  location.reload();
+  //location.reload();
 };
 
-window.increase = function increase(item, value) {
-  //console.log(item);
-  updateDoc(docRef, {
-    [`${item}.quantity`]: value,
-  });
-
-  // let cTotal = document.getElementById("total_price").innerHTML;
-  // let cPrice = document.getElementById("Phprice_"+item).innerHTML;
-  // //Php 100.<small>00</small>
-  // const myArray = cPrice.split(" ");
-  // //console.log(myArray[1]);
-  // const myArray2 = myArray[1].split(".");
-  // //console.log(myArray2[0]);
-
-  // cPrice = myArray2[0]; //100 //200 //200
-
-  // let cQuantity = document.getElementById("span_"+item).innerHTML;
   
-  // let total = cPrice * parseFloat(cQuantity);
 
-  // //console.log(parseFloat(cTotal)+" "+ total+" "+ cPrice+" "+ cPrice +" "+cQuantity)
-  // let totals = parseFloat(cTotal) + total - cPrice + value;
-  // //console.log(totals)
-  // document.getElementById("total_price").innerHTML = totals;
 
-  //https://stackoverflow.com/questions/47964049/how-to-make-javascript-basic-shopping-cart-amount-calculator
-};
+window.updateTotal = function() {
+  let amount = 0;
+  let items_array = JSON.parse(sessionStorage["items_array"]);
+
+  Object.entries(items_array).forEach((item) => {
+    let item_total = parseFloat(item[1].price) * parseFloat(item[1].quantity);
+
+    amount += item_total;
+  });
+  document.getElementById("total_price").innerHTML = amount;
+
+}
+
+// window.increase = function increase(item, value) {
+//   //console.log(item);
+//   updateDoc(docRef, {
+//     [`${item}.quantity`]: value,
+//   });
+
+//   // let cTotal = document.getElementById("total_price").innerHTML;
+//   // let cPrice = document.getElementById("Phprice_"+item).innerHTML;
+//   // //Php 100.<small>00</small>
+//   // const myArray = cPrice.split(" ");
+//   // //console.log(myArray[1]);
+//   // const myArray2 = myArray[1].split(".");
+//   // //console.log(myArray2[0]);
+
+//   // cPrice = myArray2[0]; //100 //200 //200
+
+//   // let cQuantity = document.getElementById("span_"+item).innerHTML;
+
+//   // let total = cPrice * parseFloat(cQuantity);
+
+//   // //console.log(parseFloat(cTotal)+" "+ total+" "+ cPrice+" "+ cPrice +" "+cQuantity)
+//   // let totals = parseFloat(cTotal) + total - cPrice + value;
+//   // //console.log(totals)
+//   // document.getElementById("total_price").innerHTML = totals;
+
+//   //https://stackoverflow.com/questions/47964049/how-to-make-javascript-basic-shopping-cart-amount-calculator
+// };
 
 // window.addtoCart = async function addtoCart(value) {
 //   const washingtonRef = doc(db, "cart", userID);
@@ -170,8 +173,6 @@ window.increase = function increase(item, value) {
 //         });
 //       //}
 //     })
-
-    
 
 //   } else {
 //     // doc.data() will be undefined in this case
