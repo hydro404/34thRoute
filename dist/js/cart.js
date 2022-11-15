@@ -103,16 +103,15 @@ if (cartItems.exists()) {
 
 
 window.remove = async function remove(item) {
-
-  await removeCartItem(item);
-  console.log(typeof item);
-  document.getElementById(item).remove();
-  delete parsed[item];
-  sessionStorage.setItem("items_array", JSON.stringify(parsed));
-  //location.reload();
+  if (confirm('Are you sure you want remove the item from the cart?')) {
+    await removeCartItem(item);
+    console.log(typeof item);
+    document.getElementById(item).remove();
+    delete parsed[item];
+    sessionStorage.setItem("items_array", JSON.stringify(parsed));
+    updateTotal();
+  }
 };
-
-  
 
 
 window.updateTotal = function() {

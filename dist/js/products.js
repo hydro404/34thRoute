@@ -11,6 +11,7 @@ import { getProducts } from "./firestore-querries.js";
 
 
 document.getElementById("products_gallery").innerText = "";
+
 window.addToCart = function (item) {
   console.log("WORKING");
 };
