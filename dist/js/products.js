@@ -6,9 +6,9 @@ import {
   getDoc,
   updateDoc,
   setDoc,
+  increment,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 import { getProducts } from "./firestore-querries.js";
-
 
 document.getElementById("products_gallery").innerText = "";
 
@@ -29,7 +29,7 @@ async function getProduct(id) {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
+    //console.log("Document data:", docSnap.data());
     return docSnap.data();
   } else {
     // doc.data() will be undefined in this case
@@ -78,41 +78,57 @@ window.addtoCart = async function addtoCart(value) {
   }
   const docRef = doc(db, cart_type, userID);
   const docSnap = await getDoc(docRef);
-  var bool = false;
-  // if (docSnap.exists()) {
-  //   console.log("Document data:", docSnap.data());
-  //   Object.entries(docSnap.data()).forEach(productID =>{
-  //     //if(value===productID){
-  //       console.log(productID)
-  //       updateDoc(docRef, {
-  //         [`${productID[0].quantity}`]: 13,
-  //       });
-  //     //}
-  //   })
-
-  // } else {
-  //   // doc.data() will be undefined in this case
-  //   console.log("No such document!");
-  // } 
-  let product_detials = await getProduct(value);
-  await updateDoc(docRef, {
-    [value]: {
-      product_name: product_detials.product_name,
-      quantity: product_detials.quantity,
-      price: product_detials.price,
-    },
-  })
-    .then(async (vars) => {})
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage);
-      // ...
-    });
+  if (docSnap.exists()) {
+    console.log("Document datas:", Object.entries(docSnap.data()));
+    let id_exist = Object.entries(docSnap.data()).find(
+      data => data[0] == value
+    );
+    console.log(id_exist);
+    if (id_exist) {
+      console.log(true);
+      //console.log(productID);
+      updateDoc(docRef, {
+        [`${value}.quantity`]: increment(1),
+      });
+    } else {
+      let product_detials = await getProduct(value);
+      await updateDoc(docRef, {
+        [value]: {
+          product_name: product_detials.product_name,
+          quantity: product_detials.quantity,
+          price: product_detials.price,
+        },
+      })
+        .then(async (vars) => {})
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          // ...
+        });
+    }
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  // let product_detials = await getProduct(value);
+  // await updateDoc(docRef, {
+  //   [value]: {
+  //     product_name: product_detials.product_name,
+  //     //quantity: product_detials.quantity,
+  //     price: product_detials.price,
+  //   },
+  // })
+  //   .then(async (vars) => {})
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     console.log(errorMessage);
+  //     // ...
+  //   });
 };
 
-window.updateModal = function (price,name,quantity,available) {
-
+window.updateModal = function (price, name, quantity, available) {
   let modal_template = `<div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -160,6 +176,3 @@ window.updateModal = function (price,name,quantity,available) {
   </div>`;
   document.getElementById("quick-view").innerHTML = modal_template;
 };
-
-
-
