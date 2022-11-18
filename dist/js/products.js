@@ -42,23 +42,28 @@ function displayProduct(id, product_data) {
   let name = product_data.product_name;
   let quantity = product_data.quantity;
   let available = product_data.available;
+  let img = product_data.img;
+  let description = product_data.description;
+
   let details_obj = {
     price: price,
     name: name,
     quantity: quantity,
     available: available,
+    img:img,
+    description:description
   };
 
   let template_html = `<div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter" id = "${id}">
     <div class="card product-card border pb-2">
-    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available})">
+    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available},${img},${description})">
     <img
-          class="card-img-top" src="img/food-delivery/restaurants/single/01.jpg" alt="Pizza"></a>
+          class="card-img-top" src="${img}" alt="Photo here"></a>
       <div class="card-body pt-1 pb-2">
         <h3 class="product-title fs-md"><a href="#quick-view" data-bs-toggle="modal">${name}</a></h3>
-        <p class="fs-ms text-muted">Broccoli, Mushrooms, Bell pepper, Corn, Onion, Mozzarella, Parmesan</p>
+        <p class="fs-ms text-muted">${description}</p>
         <div class="d-flex align-items-center justify-content-between">
-          <div class="product-price"><span class="text-accent">Php${price}</span></div>
+          <div class="product-price"><span class="text-accent">₱ ${price}</span></div>
           <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(this.value)" value="${id}">+<i class="ci-cart fs-base ms-1"></i></button>
         </div>
       </div>
@@ -91,12 +96,14 @@ window.addtoCart = async function addtoCart(value) {
         [`${value}.quantity`]: increment(1),
       });
     } else {
-      let product_detials = await getProduct(value);
+      let product_details = await getProduct(value);
       await updateDoc(docRef, {
         [value]: {
-          product_name: product_detials.product_name,
-          quantity: product_detials.quantity,
-          price: product_detials.price,
+          product_name: product_details.product_name,
+          quantity: product_details.quantity,
+          price: product_details.price,
+          img: product_details.img,
+          description: product_details.description,
         },
       })
         .then(async (vars) => {})
@@ -111,12 +118,12 @@ window.addtoCart = async function addtoCart(value) {
     // doc.data() will be undefined in this case
     console.log("No such document!");
   }
-  // let product_detials = await getProduct(value);
+  // let product_details = await getProduct(value);
   // await updateDoc(docRef, {
   //   [value]: {
-  //     product_name: product_detials.product_name,
-  //     //quantity: product_detials.quantity,
-  //     price: product_detials.price,
+  //     product_name: product_details.product_name,
+  //     //quantity: product_details.quantity,
+  //     price: product_details.price,
   //   },
   // })
   //   .then(async (vars) => {})
@@ -128,7 +135,7 @@ window.addtoCart = async function addtoCart(value) {
   //   });
 };
 
-window.updateModal = function (price, name, quantity, available) {
+window.updateModal = function (price, name, quantity, available, img, description) {
   let modal_template = `<div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">

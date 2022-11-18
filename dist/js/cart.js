@@ -60,10 +60,10 @@ if (cartItems.exists()) {
       console.log(total_price);
 
       var appendItem = `<div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${item[0]}">
-                                    <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img src="img/food-delivery/cart/01.jpg" width="120" alt="Pizza"></a>
+                                    <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img src="${item[1].img}" height="120" width="120"></a>
                                       <div class="pt-2">
                                         <h3 class="product-title fs-base mb-2"><a href="#">${item[1].product_name}</a></h3>
-                                        <div class="fs-sm"><span class="text-muted me-2">Type:</span>${item[1].type}</div>
+                                        <div class="fs-sm"><span class="text-muted me-2">Description:</span>${item[1].description}</div>
                                         <div class="fs-lg text-accent pt-2" id="Phprice_${item[0]}" value="${item[1].price}">Php ${item[1].price}.<small>00</small></div>
                                       </div>
                                     </div>
