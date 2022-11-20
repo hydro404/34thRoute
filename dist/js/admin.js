@@ -8,7 +8,7 @@ import {
   setDoc,
   increment,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
-import { getProducts} from "./firestore-querries.js";
+import {getProducts} from "./firestore-querries.js";
 
 document.getElementById("products_gallery").innerText = "";
 
@@ -32,6 +32,25 @@ async function getProduct(id) {
     // doc.data() will be undefined in this case
     console.log("No such document!");
   }
+}
+
+window.updateAvailable =  async function updateAvailable() {
+    products.forEach(async (doc) => {
+        let id = doc.id;
+        let available = doc.data().available;
+        available = document.getElementById(`available_${id}`).value;
+        //console.log(available);
+        updateAdmin(id, available);
+    });
+
+    alert("ALL CHANGES ARE SAVED!");
+}
+
+async function updateAdmin(id, value){
+    const docRef = doc(db, "products", id);
+    updateDoc(docRef, {
+        available: value,
+    });
 }
 
 function displayProduct(id, product_data) {
