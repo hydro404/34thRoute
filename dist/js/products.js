@@ -56,12 +56,13 @@ function displayProduct(id, product_data) {
 
   let template_html = `<div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter" id = "${id}">
     <div class="card product-card border pb-2">
-    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available},${img},${description})">
+    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available},'${img}','${description}')">
     <img
           class="card-img-top" src="${img}" alt="Photo here"></a>
       <div class="card-body pt-1 pb-2">
         <h3 class="product-title fs-md"><a href="#quick-view" data-bs-toggle="modal">${name}</a></h3>
         <p class="fs-ms text-muted">${description}</p>
+        <span class="text-accent">Only ${available} left in stock!</span>
         <div class="d-flex align-items-center justify-content-between">
           <div class="product-price"><span class="text-accent">₱ ${price}</span></div>
           <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(this.value)" value="${id}">+<i class="ci-cart fs-base ms-1"></i></button>
@@ -145,12 +146,13 @@ window.updateModal = function (price, name, quantity, available, img, descriptio
       <div class="modal-body">
         <div class="row">
           <!-- Product gallery-->
-          <div class="col-lg-7 col-md-6 pe-lg-0"><img src="img/food-delivery/restaurants/single/large-preview.jpg"
-              alt="Pizza"></div>
+          <div class="col-lg-7 col-md-6 pe-lg-0"><img src="${img}" alt="Pizza" style="padding: 20px; border-radius: 50px;"></div>
           <!-- Product details-->
           <div class="col-lg-5 col-md-6 pt-4 pt-lg-0">
-            <div class="product-details ms-auto pb-3">
-              <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$15.<small>99</small></span></div>
+            <div class="product-details pb-1">
+              <div class="mb-3">
+              <span class="h3 fw-normal text-accent me-1">₱ ${price}</span>
+              </div>
               <form class="mb-grid-gutter">
                   <div class="col-6 px-2">
                   </div>
@@ -168,7 +170,7 @@ window.updateModal = function (price, name, quantity, available, img, descriptio
                 </div>
               </form>
               <h5 class="h6 mb-3 pb-3 border-bottom"><i
-                  class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Product info</h5>
+                  class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Only ${available} left in stock!</h5>
               <h6 class="fs-sm mb-2">Ingredients:</h6>
               <p class="fs-sm">Salami, Olives, Bell pepper, Mushrooms, Mozzarella, Parmesan</p>
               <h6 class="fs-sm mb-2">Allergies</h6>
