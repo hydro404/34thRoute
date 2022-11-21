@@ -6,6 +6,7 @@ import {
   EmailAuthProvider,
   getAuth,
   linkWithCredential,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
 
 import { app, auth, db } from "./config.js";
@@ -40,7 +41,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-import {transferGuestData} from './firestore-querries.js'
+import { transferGuestData } from "./firestore-querries.js";
 
 var form = document.getElementById("signin-tab");
 function handleForm(event) {
@@ -82,7 +83,7 @@ window.SignUp = async function SignUp() {
           console.log("Anonymous account successfully upgraded", user);
           await transferGuestData();
           deleteID(user.uid);
-          window.location.href = 'food-delivery-checkout.html'
+          window.location.href = "food-delivery-checkout.html";
         })
         .catch((error) => {
           console.log("Error upgrading anonymous account", error);
@@ -106,9 +107,9 @@ window.SignUp = async function SignUp() {
   }
 };
 
-window.deleteID = async function deleteID(userID){
+window.deleteID = async function deleteID(userID) {
   await deleteDoc(doc(db, "guests", userID));
-}
+};
 
 window.CreateID = function CreateID() {
   signInAnonymously(auth)
@@ -137,4 +138,15 @@ window.Checkout = async function Checkout() {
   if (sessionStorage["isLoggedIn"] == "true") {
     window.location = "food-delivery-checkout.html";
   }
+};
+
+window.SignOut = async function () {
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      window.location.href = "index.html"
+    })
+    .catch((error) => {
+      // An error happened.
+    });
 };
