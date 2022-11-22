@@ -207,6 +207,7 @@ window.remove = async function remove(item) {
     document.getElementById(item).remove();
     delete parsed[item];
     sessionStorage.setItem("items_array", JSON.stringify(parsed));
+    updateCartDropDown();
     updateTotal();
   }
 };
