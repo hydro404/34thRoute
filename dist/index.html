@@ -100,11 +100,8 @@
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
       <header class="navbar d-block navbar-sticky navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html" style="display: inline-flex !important;">
-            <img src="img/icon.jpg" width="40" alt="34th Route" style="margin-right: 10px;border-radius: 10px;">
-            <span>34th Route</span>
-          </a>
-        <a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logo-icon.png" width="74" alt="Cartzilla"></a>
+        <a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html"><img src="img/logoist.png" width="180" alt="Cartzilla"></a>
+        <a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logoist2.png" width="95" alt="Cartzilla"></a>
           <div class="navbar-toolbar d-flex align-items-center order-lg-3">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool d-none d-lg-flex" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button" aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip">Search</span>
               <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search"></i></div></a><a class="navbar-tool ms-2" href="#signin-modal" data-bs-toggle="modal"><span class="navbar-tool-tooltip">Account</span>
@@ -178,20 +175,53 @@
         </div>
       </header>
       <!-- Hero section-->
-      <section class="bg-darker bg-size-cover bg-position-center py-5 py-lg-10" style="background-image: url(./img/coverphoto.jpg); background-blend-mode: difference;">
+      <section class="bg-darker bg-size-cover bg-position-center py-5 py-lg-10" style="background-image: url(./img/coverphoto.png);">
         <div class="container pb-5">
           <div class="row justify-content-center pb-5">
             <div class="col-xl-6 col-lg-7 col-md-8 col-sm-10 text-center">
-              <h5 class="text-light fw-light">#1 Food Delivery Service since 2010</h5>
+              <h5 class="text-light fw-light">Serving Premium Donuts since 2020</h5>
               <div class="h1 text-light mb-3 pb-4">We deliver your favorite food fresh &amp; fast within Polangui!
                 <div class="dropdown d-inline-block ms-1">
                   <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item fs-base" href="#">Los Angeles</a><a class="dropdown-item fs-base" href="#">Chicago</a><a class="dropdown-item fs-base" href="#">Houston</a><a class="dropdown-item fs-base" href="#">Philadelphia</a><a class="dropdown-item fs-base" href="#">San Diego</a><a class="dropdown-item fs-base" href="#">Miami</a></div>
                 </div>
-              </div><a class="btn btn-primary" href="food-delivery-single.html" data-scroll>What do you want to eat?</a>
+              </div><a class="btn btn-primary" href="food-delivery-single.html" data-scroll>Order Now!</a>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- Categories (cuisine) grid-->
+      <section class="container py-4 my-lg-3 py-sm-5" id="cuisine">
+        <h2 class="text-center pt-4 pt-sm-3">Available Menu Today!</h2>
+        <p class="text-muted text-center mb-5">Choose what you want and we deliver it to you</p>
+        <div class="row">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/01.jpg" alt="Burgers &amp; Fries">
+              <div class="card-body py-4 text-center">
+                <h3 class="h5 mt-1">Burgers &amp; Fries</h3>
+              </div></a></div>
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/02.jpg" alt="Noodles">
+              <div class="card-body py-4 text-center">
+                <h3 class="h5 mt-1">Noodles</h3>
+              </div></a></div>
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/03.jpg" alt="Sushi &amp; Rolls">
+              <div class="card-body py-4 text-center">
+                <h3 class="h5 mt-1">Sushi &amp; Rolls</h3>
+              </div></a></div>
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/04.jpg" alt="Pizza &amp; Pasta">
+              <div class="card-body py-4 text-center">
+                <h3 class="h5 mt-1">Pizza &amp; Pasta</h3>
+              </div></a></div>
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/05.jpg" alt="Coffee &amp; Desserts">
+              <div class="card-body py-4 text-center">
+                <h3 class="h5 mt-1">Coffee &amp; Desserts</h3>
+              </div></a></div>
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/06.jpg" alt="Healthy &amp; Food">
+              <div class="card-body py-4 text-center">
+                <h3 class="h5 mt-1">Healthy &amp; Food</h3>
+              </div></a></div>
+        </div>
+      </section>
+
       <!-- Reviews-->
       <section class="bg-secondary py-5">
         <div class="container py-md-4 pt-3 pb-0 py-sm-3">
