@@ -45,7 +45,7 @@ export async function removeCartItem(item) {
   await updateDoc(cart_reference, {
     [item]: deleteField(),
   });
-  alert("Removed Item from Cart");
+  //alert("Removed Item from Cart");
   //location.reload();
 }
 

@@ -201,7 +201,6 @@ window.updateModal = function (
 
 window.remove = async function remove(item) {
   let parsed = JSON.parse(sessionStorage.getItem("items_array"));
-  if (confirm("Are you sure you want remove the item from the cart?")) {
     await removeCartItem(item);
     console.log(typeof item);
     document.getElementById(item).remove();
@@ -209,7 +208,7 @@ window.remove = async function remove(item) {
     sessionStorage.setItem("items_array", JSON.stringify(parsed));
     updateCartDropDown();
     updateTotal();
-  }
+  
 };
 
 window.updateTotal = function () {
