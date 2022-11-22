@@ -60,7 +60,8 @@ if (cartItems.exists()) {
       console.log(total_price);
 
       var appendItem = `<div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${item[0]}">
-                                    <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img src="${item[1].img}" height="120" width="120"></a>
+                                    <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#">
+                                    <img src="${item[1].img}" height="120" width="120"></a>
                                       <div class="pt-2">
                                         <h3 class="product-title fs-base mb-2"><a href="#">${item[1].product_name}</a></h3>
                                         <div class="fs-sm"><span class="text-muted me-2">Description:</span>${item[1].description}</div>
@@ -194,3 +195,4 @@ window.updateTotal = function() {
 // });
 
 // };
+
