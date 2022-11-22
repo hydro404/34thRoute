@@ -267,7 +267,7 @@ window.updateCartDropDown = async function () {
                       <div class="ps-2">
                         <h6 class="widget-product-title"><a href="#">${item[1].product_name}</a></h6>
                         <div class="widget-product-meta"><span class="text-accent me-2">Php ${item[1].price}.<small>00</small></span><span
-                            class="text-muted">x 1</span></div>
+                            class="text-muted">x ${item[1].quantity}</span></div>
                       </div>
                     </div>
                   </div>`;
