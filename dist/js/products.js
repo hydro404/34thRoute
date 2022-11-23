@@ -16,9 +16,6 @@ import {
 
 document.getElementById("products_gallery").innerText = "";
 
-window.addToCart = function (item) {
-  console.log("WORKING");
-};
 const userID = sessionStorage["userID"];
 
 const products = await getProducts();
@@ -80,8 +77,11 @@ function displayProduct(id, product_data) {
     .insertAdjacentHTML("beforeend", template_html);
 }
 
+
+
 window.addtoCart = async function addtoCart(value) {
   //const washingtonRef = doc(db, "cart", userID);
+
   let cart_type = "cart";
   if (sessionStorage["isAnonymous"] == "true") {
     cart_type = "guests";
@@ -89,15 +89,15 @@ window.addtoCart = async function addtoCart(value) {
   const docRef = doc(db, cart_type, userID);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
-    console.log("Document datas:", Object.entries(docSnap.data()));
-    let id_exist = Object.entries(docSnap.data()).find(
+    console.log("Document datas:", Object.entries(await docSnap.data()));
+    let id_exist = Object.entries(await docSnap.data()).find(
       (data) => data[0] == value
     );
     console.log(id_exist);
     if (id_exist) {
       console.log(true);
       //console.log(productID);
-      updateDoc(docRef, {
+      await updateDoc(docRef, {
         [`${value}.quantity`]: increment(1),
       });
     } else {
@@ -119,8 +119,12 @@ window.addtoCart = async function addtoCart(value) {
           // ...
         });
     }
-    updateCartDropDown();
+    await updateCartDropDown();
     updateTotal();
+    $('#toggleCart').toggleClass('toggleCartz');
+    setTimeout(function(){
+      $('#toggleCart').toggleClass('toggleCartz');
+    }, 2000);
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");

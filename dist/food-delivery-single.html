@@ -23,7 +23,7 @@
   <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css" />
   <link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css" />
   <!-- Main Theme Styles + Bootstrap-->
-  <link rel="stylesheet" media="screen" href="css/theme.min.css">
+  <link rel="stylesheet" media="screen" href="css/theme.css">
   <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
     integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
 </head>
@@ -107,10 +107,8 @@
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <header class="navbar d-block navbar-sticky navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html" style="display: inline-flex !important;">
-          <img src="img/icon.jpg" width="40" alt="34th Route" style="margin-right: 10px;border-radius: 10px;">
-          <span>34th Route</span>
-        </a>
+        <a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html"><img src="img/logoist.png" width="180" alt="Cartzilla"></a>
+        <a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logoist2.png" width="95" alt="Cartzilla"></a>
         <div class="navbar-toolbar d-flex align-items-center order-lg-3">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span
               class="navbar-toggler-icon"></span></button><a class="navbar-tool d-none d-lg-flex"
@@ -126,7 +124,7 @@
               href="food-delivery-cart.html"><span class="navbar-tool-label" id="total-items">3</span><i
                 class="navbar-tool-icon ci-cart"></i></a>
             <!-- Cart dropdown-->
-            <div class="dropdown-menu dropdown-menu-end" onload="">
+            <div class="dropdown-menu dropdown-menu-end" onload="" id="toggleCart">
               <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">
                 <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false" id="dropdown-items-cart">
                   
@@ -262,7 +260,7 @@
     </nav>
     <!-- Menu (Products grid)-->
     <section class="container tab-content py-4 py-sm-5">
-      <h2 class="text-center pt-2 pt-sm-0 mb-sm-5">Donuts</h2>
+      <h2 class="text-center pt-2 pt-sm-0 mb-sm-4">Donuts</h2>
       <div class="row pt-3 pt-sm-0" id="products_gallery">
       <!-- Load more button-->
       <nav class="d-md-flex justify-content-between align-items-center text-center text-md-start pt-2 pb-4 mb-md-2"

@@ -15783,7 +15783,7 @@ a.nav-link:hover .media-tab-media {
   .navbar-tool:hover .navbar-tool-tooltip {
     top: -0.75rem;
     opacity: 0.9;
-  }
+  } 
 }
 
 .navbar-tool-icon-box {
@@ -15945,6 +15945,12 @@ a.nav-link:hover .media-tab-media {
     background-color: #fff;
   }
   .navbar-expand-sm .dropdown:hover > .dropdown-menu {
+    display: block;
+    -webkit-animation: slide-up 0.25s ease-in-out;
+    animation: slide-up 0.25s ease-in-out;
+  }
+
+  .toggleCartz{
     display: block;
     -webkit-animation: slide-up 0.25s ease-in-out;
     animation: slide-up 0.25s ease-in-out;
