@@ -1,6 +1,6 @@
 window.createSource = function () {
-
-    let amount = $('#').val();
+    const userID = sessionStorage.getItem("userID");
+    //let amount = $('#').val();
   const options = {
     method: "POST",
     headers: {
@@ -33,9 +33,9 @@ window.createSource = function () {
           },
           type: "gcash",
           currency: "PHP",
-          metadata:{
-            clientID:"asdadsd"
-          }
+          metadata: {
+            clientID: userID,
+          },
         },
       },
     }),
