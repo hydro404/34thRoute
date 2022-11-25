@@ -13,6 +13,14 @@ import {
   getProducts,
   removeCartItem,
 } from "./firestore-querries.js";
+$("#account-icon").css("display", "none");
+
+if (sessionStorage["isAnonymous"] == "true") {
+  $("#account-icon").css("display", "none");
+}
+else{
+  $("#account-icon").css("display", "block");
+}
 
 document.getElementById("products_gallery").innerText = "";
 
