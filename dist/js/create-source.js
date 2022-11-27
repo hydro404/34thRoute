@@ -81,9 +81,9 @@ async function createSource (
 
   fetch("https://api.paymongo.com/v1/sources", options)
     .then((response) => response.json())
-    .then((response) => {
+    .then(async (response) => {
       console.log(response);
-      createTransaction(
+      await createTransaction(
         name,
         phone,
         email,
@@ -91,7 +91,7 @@ async function createSource (
         line2,
         state,
         postal_code,
-        city
+        city,response.data.id
       );
 
       console.log(response.data.attributes.redirect.checkout_url);

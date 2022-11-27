@@ -65,13 +65,13 @@ export async function createTransaction(
   line2,
   state,
   postal_code,
-  city
+  city,sourceID
 ) {
   let items_cart = await getCartItems();
 
-  console.log(await items_cart.data());
 
-  items_cart.data()["data"] = {
+  let data = items_cart.data()
+  data["data"] = {
     name,
     phone,
     email,
@@ -81,6 +81,9 @@ export async function createTransaction(
     postal_code,
     city,
   };
+  data["paid"] = false
+
+  let source_data = {[sourceID]:data}
   await setDoc(doc(db, cart_type, userID), {});
-  await setDoc(doc(db, "transactions", userID), items_cart.data());
+  await updateDoc(doc(db, "transactions", userID), source_data);
 }
