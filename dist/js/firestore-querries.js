@@ -57,3 +57,12 @@ export async function transferGuestData(){
   await setDoc(doc(db, "cart", userID), guest_cart_items.data());
 }
 
+
+export async function createTransaction(){
+  let items = JSON.parse(sessionStorage["items_array"]);
+
+  Object.entries(items).forEach((item) => {
+    console.log(item[0]);
+  });
+  
+}

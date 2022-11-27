@@ -1,6 +1,6 @@
 window.createSource = function () {
-    const userID = sessionStorage.getItem("userID");
-    //let amount = $('#').val();
+  const userID = sessionStorage.getItem("userID");
+  //let amount = $('#').val();
   const options = {
     method: "POST",
     headers: {
@@ -41,8 +41,14 @@ window.createSource = function () {
     }),
   };
 
+  
+
   fetch("https://api.paymongo.com/v1/sources", options)
     .then((response) => response.json())
-    .then((response) => console.log(response))
+    .then((response) => {
+      console.log(response);
+
+      console.log(response.data.attributes)
+    })
     .catch((err) => console.error(err));
 };
