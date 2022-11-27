@@ -57,12 +57,30 @@ export async function transferGuestData(){
   await setDoc(doc(db, "cart", userID), guest_cart_items.data());
 }
 
+export async function createTransaction(
+  name,
+  phone,
+  email,
+  line1,
+  line2,
+  state,
+  postal_code,
+  city
+) {
+  let items_cart = await getCartItems();
 
-export async function createTransaction(){
-  let items = JSON.parse(sessionStorage["items_array"]);
+  console.log(await items_cart.data());
 
-  Object.entries(items).forEach((item) => {
-    console.log(item[0]);
-  });
-  
+  items_cart.data()["data"] = {
+    name,
+    phone,
+    email,
+    line1,
+    line2,
+    state,
+    postal_code,
+    city,
+  };
+  await setDoc(doc(db, cart_type, userID), {});
+  await setDoc(doc(db, "transactions", userID), items_cart.data());
 }

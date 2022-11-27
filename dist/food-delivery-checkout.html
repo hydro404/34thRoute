@@ -22,6 +22,8 @@
     <link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css"/>
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="css/theme.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+      integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
   </head>
   <!-- Body-->
   <body class="handheld-toolbar-enabled">
@@ -322,7 +324,7 @@
                   <input class="form-check-input" type="radio" name="payment" id="online">
                   <label class="form-check-label" for="online">Pay with:&nbsp;&nbsp;&nbsp;<img class="d-inline-block align-middle" src="img/cards.png" style="width: 187px;" alt="Cerdit Cards"></label>
                 </div>
-                <button class="btn btn-primary d-block w-100 mt-3" type="submit">Complete order</button>
+                <button class="btn btn-primary d-block w-100 mt-3" type="button" onclick="getDetails()">Complete order</button>
               </div>
               <div class="col-sm-6">
                 <div class="d-fle flex-column h-100 rounded-3 bg-secondary px-3 px-sm-4 py-4">
