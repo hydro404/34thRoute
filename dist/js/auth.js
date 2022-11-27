@@ -116,7 +116,7 @@ window.CreateID = function CreateID() {
     .then(async (vars) => {
       console.log(vars);
       console.log("VARS written with ID: ", vars.user.uid);
-
+      await setDoc(doc(db, "transactions", vars.user.uid), {});
       const docRef = await setDoc(doc(db, "guests", vars.user.uid), {});
       sessionStorage.setItem("userID", vars.user.uid);
       //window.location.href = 'food-delivery-checkout.html'
