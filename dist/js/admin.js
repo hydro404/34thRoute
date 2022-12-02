@@ -37,19 +37,24 @@ async function getProduct(id) {
 window.updateAvailable =  async function updateAvailable() {
     products.forEach(async (doc) => {
         let id = doc.id;
-        let available = doc.data().available;
-        available = document.getElementById(`available_${id}`).value;
+        let available = document.getElementById(`available_${id}`).value;
+        let nameProduct = document.getElementById(`name_${id}`).value;
+        let descriptionProduct = document.getElementById(`description_${id}`).value;
+        let priceProduct = document.getElementById(`Phprice_${id}`).value;
         //console.log(available);
-        updateAdmin(id, available);
+        updateAdmin(id, available, nameProduct, descriptionProduct, priceProduct);
     });
 
     alert("ALL CHANGES ARE SAVED!");
 }
 
-async function updateAdmin(id, value){
+async function updateAdmin(id, value, nameProduct, descriptionProduct, priceProduct){
     const docRef = doc(db, "products", id);
     updateDoc(docRef, {
         available: value,
+        product_name: nameProduct,
+        description: descriptionProduct,
+        price: priceProduct,
     });
 }
 
@@ -71,21 +76,35 @@ function displayProduct(id, product_data) {
   };
   
   let template_html = 
-    `<div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${id}">
-        <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img src="${img}" height="120" width="120"></a>
+    `
+    <div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${id}">
+        <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#">
+        <div class="input-group">
+          <div class="image-upload">
+            <label for="file-input_${id}">
+              <img src="${img}" id="img_${id}" height="120" width="120"></a>
+            </label>
+            <input id="file-input_${id}" type="file" onchange="changeImage('${id}');" style="display: none;" accept="image/jpeg, image/png"/>
+          </div>
+
             <div class="pt-2">
-                <h3 class="product-title fs-base mb-2"><a href="#">${name}</a></h3>
-                <div class="fs-sm"><span class="text-muted me-2">Description:</span>${description}</div>
-                <div class="fs-lg text-accent pt-2" id="Phprice_${id}" value="${price}">Php ${price}.<small>00</small></div>
+              <div class="form-group">
+                <span class=" mb-2">Product Name: <input type="text" class="prodRow" id="name_${id}"  value="${name}"></input></span>
+                <div class="fs-sm"><span class="text-muted me-2">Description:</span><input type="textarea" class="prodRow" id="description_${id}" value="${description}"></input></div>
+                <div class="fs-lg text-accent pt-2">Php <input type="text" class="prodRow" value="${price}" id="Phprice_${id}"></input></div>
+              </div>
             </div>
         </div>
         <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start" style="max-width: 9rem;">
             <label class="form-label" for="quantity1">Available</label>
             <input class="form-control" type="number" id="available_${id}" value="${available}" min="1">
         </div>
-    </div>`;
+    </div>
+    `;
 
   document
     .getElementById("products_gallery")
     .insertAdjacentHTML("beforeend", template_html);
 }
+
+
