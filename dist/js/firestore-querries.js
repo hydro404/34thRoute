@@ -87,3 +87,9 @@ export async function createTransaction(
   await setDoc(doc(db, cart_type, userID), {});
   await updateDoc(doc(db, "transactions", userID), source_data);
 }
+
+export async function checkAdmin() {
+  const admin_ref = doc(db, "admins", userID);
+  const docSnap = await getDoc(admin_ref);
+  return docSnap;
+}

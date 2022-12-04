@@ -9,6 +9,7 @@ import {
   increment,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 import {
+  checkAdmin,
   getCartItems,
   getProducts,
   removeCartItem,
@@ -25,6 +26,11 @@ else{
 document.getElementById("products_gallery").innerText = "";
 
 const userID = sessionStorage["userID"];
+$("#admin-list-icon").hide();
+let admin_stat = await checkAdmin();
+if(admin_stat.exists()){
+  $("#admin-list-icon").show();
+}
 
 const products = await getProducts();
 
