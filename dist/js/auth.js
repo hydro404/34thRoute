@@ -57,7 +57,7 @@ window.SignIn = function SignIn() {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      window.location.reload();
+      window.location.href = "food-delivery-single.html";
     })
     .catch((error) => {
       const errorCode = error.code;
