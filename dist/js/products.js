@@ -1,4 +1,7 @@
 import { app, auth, db } from "./config.js";
+import { ref , getStorage, uploadString,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
+// Create a root reference
+const storage = await getStorage();
 import {
   collection,
   getDocs,
@@ -34,9 +37,10 @@ if(admin_stat.exists()){
 
 const products = await getProducts();
 
-products.forEach((doc) => {
+products.forEach(async (doc) =>  {
+  
   console.log(doc.id, " => ", doc.data());
-  displayProduct(doc.id, doc.data());
+  await displayProduct(doc.id, doc.data());
 });
 
 async function getProduct(id) {
@@ -52,7 +56,25 @@ async function getProduct(id) {
   }
 }
 
-function displayProduct(id, product_data) {
+
+
+async function imageUrls(id_img){
+  console.log(id_img)
+  let retUrl = await getDownloadURL(ref(storage, 'product-images/'+id_img))
+  .then((url) => {
+    //const img = document.getElementById("img_"+id_img);
+    //img.setAttribute('src', url);
+    console.log(url)
+    return url;
+  })
+  .catch((error) => {
+    // Handle any errors
+  });
+  return retUrl
+}
+async function displayProduct(id, product_data) {
+
+  let getUrl = await imageUrls(id)
   let price = product_data.price;
   let name = product_data.product_name;
   let quantity = product_data.quantity;
@@ -73,7 +95,7 @@ function displayProduct(id, product_data) {
     <div class="card product-card border pb-2">
     <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available},'${img}','${description}')">
     <img
-          class="card-img-top" src="${img}" alt="Photo here"></a>
+          class="card-img-top" src="${getUrl}" alt="Photo here"></a>
       <div class="card-body pt-1 pb-2">
         <h3 class="product-title fs-md"><a href="#quick-view" data-bs-toggle="modal">${name}</a></h3>
         <p class="fs-ms text-muted">${description}</p>

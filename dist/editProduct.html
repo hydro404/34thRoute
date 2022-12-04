@@ -7,10 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="./admin/img/favicon.ico" rel="icon">
-
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +27,8 @@
     <!-- Template Stylesheet -->
     <link href="./admin/css/style.css" rel="stylesheet">
 
+    
+
     <style>
         .prodRow{
             width: 100%;
@@ -48,13 +47,23 @@
         .image-upload>input {
             display: none;
         }
+
+        .img {
+            position: relative;
+        }
+
+        .img svg {
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
     </style>
 
     <script>
-    //function changeImage(id){
-        
-    //}
     </script>
+
 </head>
 
 <body>
@@ -161,6 +170,8 @@
                 var imgID = "img_" + myArray[1];
 
                 console.log(ID.name);
+                
+                /*
                 let formData = new FormData();           
                 formData.append("file", ID);
                 
@@ -168,10 +179,11 @@
                 method: "POST", 
                 body: formData
                 });
-
-                document.getElementById(imgID).src = "img/food-delivery/restaurants/single/"+ID.name;
+                */
+                //document.getElementById(imgID).src = "img/food-delivery/restaurants/single/"+ID.name;
                 alert('The file has been uploaded successfully.');
             }
+
             </script>
 
 
