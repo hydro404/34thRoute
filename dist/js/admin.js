@@ -80,11 +80,13 @@ function displayProduct(id, product_data) {
     <div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${id}">
         <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#">
         <div class="input-group">
-          <div class="image-upload">
-            <label for="file-input_${id}">
+          <div class="image-upload me-5">
+            <label for="input-file_${id}">
               <img src="${img}" id="img_${id}" height="120" width="120"></a>
             </label>
-            <input id="file-input_${id}" type="file" onchange="changeImage('${id}');" style="display: none;" accept="image/jpeg, image/png"/>
+            <input id="input-file_${id}" type="file" style="display: none;" accept="image/jpeg, image/png"/>
+
+            <button id="upload-button" onchange='uploadFile("input-file_${id}")'; > Upload </button>
           </div>
 
             <div class="pt-2">

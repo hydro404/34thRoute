@@ -51,9 +51,9 @@
     </style>
 
     <script>
-    function changeImage(id){
-        document.getElementById(`img_${id}`).src = document.getElementById(`input-file_${id}`);
-    }
+    //function changeImage(id){
+        
+    //}
     </script>
 </head>
 
@@ -148,11 +148,31 @@
                     <div class="row pt-3 pt-sm-0" id="products_gallery">
                     </div>
                     <span style="display:flex; justify-content:flex-end; width:100%;">
-                        <input type="button" class="btn btn-outline-success m-2" value="Update" onclick="updateAvailable()"/>
+                        <input type="submit" class="btn btn-outline-success m-2" value="Update" onclick="updateAvailable()"/>
                     </span>
                 </div>
             </div>
             <!-- Button End -->
+
+            <script>
+            async function uploadFile(id) {
+                var ID = document.getElementById(id).files[0];
+                const myArray = id.split("_");
+                var imgID = "img_" + myArray[1];
+
+                console.log(ID.name);
+                let formData = new FormData();           
+                formData.append("file", ID);
+                
+                await fetch('upload.php', {
+                method: "POST", 
+                body: formData
+                });
+
+                document.getElementById(imgID).src = "img/food-delivery/restaurants/single/"+ID.name;
+                alert('The file has been uploaded successfully.');
+            }
+            </script>
 
 
             <!-- Footer Start -->
