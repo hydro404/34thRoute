@@ -111,29 +111,23 @@ async function displayProduct(id, product_data) {
 
           <div class="image-upload me-5 img">
             <label for="input-file_${id}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
-                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"></path>
-              </svg>
               <img src="${yuarel}" id="img_${id}" onclick="" height="120" width="120"></a>
               
             </label>
-            
-            <input id="input-file_${id}" type="file" onchange="document.getElementById('img_${id}').src = window.URL.createObjectURL(this.files[0]);" style="display: none;" accept="image/jpeg, image/png"/>
             <!--<button id="upload-button" onchange='uploadFile("input-file_${id}")'; > Upload </button>-->
-            <button id="upload-button" onclick ='imgLogB64("input-file_${id}","${id}")'> Upload </button>
           </div>
 
             <div class="pt-2">
               <div class="form-group">
-                <div class="mb-2 me-2">Product Name: <input type="text" class="prodRow" id="name_${id}"  value="${name}"></input></div>
-                <div class="mb-2 me-2"><span class="text-muted me-2">Description:</span><input type="textarea" class="prodRow" id="description_${id}" value="${description}"></input></div>
+                <div class="mb-2">Product Name: <span id="name_${id}" value="${name}">${name}</span></div>
+                <div class="mb-2"><span class="text-muted me-2">Description:</span><span id="description_${id}" value="${description}">${description}</span></div>
               </div>
               <div class="form-group" style="display: flex !important;">
-                <div class="mb-2 me-2">Price in ₱ <input type="text" class="prodRow" value="${price}" id="Phprice_${id}"></input></div>
-                <div class="mb-2 me-2"><label class="" for="quantity1">Available</label><input class="form-control" type="number" id="available_${id}" value="${available}" min="1"> </div>
+                <div class="mb-2 me-2">Price: <span value="${price}" id="Phprice_${id}">₱${price}</span></div>
+                <div class="mb-2 me-2"><label class="" for="quantity1">Available:</label><span id="available_${id}" value="${available}" min="1">${available} </span</div>
               </div>
             </div>
+            <button class="btn btn-primary">DELETE</button>
         </div>
     </div>
     `;

@@ -17,6 +17,7 @@ import {
   getProducts,
   removeCartItem,
 } from "./firestore-querries.js";
+
 $("#account-icon").css("display", "none");
 
 if (sessionStorage["isAnonymous"] == "true") {
@@ -93,7 +94,7 @@ async function displayProduct(id, product_data) {
 
   let template_html = `<div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter" id = "${id}">
     <div class="card product-card border pb-2">
-    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available},'${img}','${description}')">
+    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available},'${getUrl}','${description}')">
     <img
           class="card-img-top" src="${getUrl}" alt="Photo here"></a>
       <div class="card-body pt-1 pb-2">
@@ -287,7 +288,7 @@ window.updateCartDropDown = async function () {
 	</div>`;
       item_array.push(noItemsonCart);
     } else {
-      Object.entries(parsed).forEach((item, index) => {
+      for(let item of Object.entries(parsed)){
         total_price += parseFloat(item[1].price * item[1].quantity);
         product_obj.push({
           [item[0]]: {
@@ -298,11 +299,13 @@ window.updateCartDropDown = async function () {
 
         console.log(total_price);
 
+        let getUrl = await imageUrls(item[0])
+
         var appendItem = `<div class="widget-cart-item pb-2 border-bottom" id="${item[0]}">
                     <button class="btn-close text-danger" type="button" aria-label="Remove" onclick="remove('${item[0]}')"><span
                         aria-hidden="true">&times;</span></button>
                     <div class="d-flex align-items-center"><a class="d-block" href="#"><img
-                          src="${item[1].img}" width="64" alt="Pizza"></a>
+                          src="${getUrl}" width="64" alt="Pizza"></a>
                       <div class="ps-2">
                         <h6 class="widget-product-title"><a href="#">${item[1].product_name}</a></h6>
                         <div class="widget-product-meta"><span class="text-accent me-2">Php ${item[1].price}.<small>00</small></span><span
@@ -311,9 +314,8 @@ window.updateCartDropDown = async function () {
                     </div>
                   </div>`;
         item_array.push(appendItem);
-      });
+      };
     }
-    console.log(product_obj);
     $("#dropdown-items-cart").html(item_array);
 
     $("#dropdown_total_price").html(total_price);

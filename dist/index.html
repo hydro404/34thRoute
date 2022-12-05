@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Cartzilla | Food Delivery Service</title>
+    <title>34th Route | Delicious Donuts!</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Cartzilla - Bootstrap E-commerce Template">
     <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
@@ -11,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/icon.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/icon.jpg">
     
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -21,7 +21,9 @@
     <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css"/>
     <link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css"/>
     <!-- Main Theme Styles + Bootstrap-->
-    <link rel="stylesheet" media="screen" href="css/theme.min.css">
+    <link rel="stylesheet" media="screen" href="css/theme.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+    integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
   </head>
   <!-- Body-->
   <body class="handheld-toolbar-enabled" onload="">
@@ -98,20 +100,40 @@
     <main class="page-wrapper">
       <!-- Navbar for Food Delivery Service demo-->
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
-      <header class="navbar d-block navbar-sticky navbar-expand-lg navbar-light bg-light">
+      <header class="navbar d-block navbar-sticky navbar-expand-lg navbar-light bg-light" style="background-color: #7d348f !important;">
         <div class="container">
         <a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html"><img src="img/logoist.png" width="180" alt="Cartzilla"></a>
         <a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logoist2.png" width="95" alt="Cartzilla"></a>
           <div class="navbar-toolbar d-flex align-items-center order-lg-3">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool d-none d-lg-flex" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button" aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip">Search</span>
-              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search"></i></div></a><a class="navbar-tool ms-2" href="#signin-modal" data-bs-toggle="modal"><span class="navbar-tool-tooltip">Account</span>
-              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" style="padding-top: 0px;padding-bottom: 0px;"><i class="navbar-tool-icon ci-search" style="color: white !important;"></i></button><a class="navbar-tool d-none d-lg-flex" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button" aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip">Search</span>
+              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search" style="color: white !important;"></i></div></a><a class="navbar-tool ms-2" href="#signin-modal" data-bs-toggle="modal"><span class="navbar-tool-tooltip">Account</span>
+              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user" style="color: white !important;"></i></div></a>
+              <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle"
+                href="food-delivery-cart.html"><span class="navbar-tool-label" id="total-items">3</span><i
+                  class="navbar-tool-icon ci-cart"></i></a>
+                <!-- Cart dropdown-->
+                <div class="dropdown-menu dropdown-menu-end" onload="" id="toggleCart">
+                  <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">
+                    <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false" id="dropdown-items-cart">
+                      
+                    </div>
+                    <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
+                      <div class="fs-sm me-2 py-2"><span class="text-muted">Total:</span><span
+                          class="text-accent fs-base ms-1" id="dropdown_total_price">$24.<small>00</small></span></div><a
+                        class="btn btn-outline-secondary btn-sm" href="food-delivery-cart.html">Expand cart<i
+                          class="ci-arrow-right ms-1 me-n1"></i></a>
+                    </div><a class="btn btn-primary btn-sm d-block w-100" href="food-delivery-checkout.html"><i
+                        class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
+                  </div>
+                </div>
+              </div>
+              
           </div>
           <div class="collapse navbar-collapse me-auto order-lg-2" id="navbarCollapse">
             <!-- Search (mobile)-->
             <div class="d-lg-none py-3">
-              <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                <input class="form-control rounded-start" type="text" placeholder="What do you need?">
+              <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3" style="color: white !important;"></i>
+                <input class="form-control rounded-start" type="text" placeholder="What will you be ordering today?">
               </div>
             </div>
             <!-- Primary menu-->
@@ -120,12 +142,34 @@
         <!-- Search collapse-->
         <div class="search-box collapse" id="searchBox">
           <div class="container py-2">
-            <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-              <input class="form-control rounded-start" type="text" placeholder="What do you need?">
+            <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3" style="color: white !important;"></i>
+              <input class="form-control rounded-start" id="search-bar" type="text" placeholder="What will you be ordering today?" onkeyup="search_lods()">
             </div>
           </div>
         </div>
       </header>
+
+      <script>
+        function search_lods() {
+          let input = document.getElementById('search-bar').value
+          input=input.toLowerCase();
+          let x = "Lowes Anthony"; //X is array of the name of the products
+          const myArray = x.split(" ");
+          console.log(myArray[0]);
+          console.log(input);
+         //for (j=0; j<x.length; j++){
+            //const myArray = x[j].split(" ");
+            for (i = 0; i < myArray.length; i++) { 
+                  if (input.includes(myArray[0].toLowerCase())) {
+                      console.log("TRUE");
+                  }
+                  else {
+                      console.log("FALSE");          
+                  }
+              }
+        }
+        //}
+      </script>
       <!-- Hero section-->
       <section class="bg-darker bg-size-cover bg-position-center py-5 py-lg-10" style="background-image: url(./img/coverphoto.png);">
         <div class="container pb-5">
@@ -136,7 +180,7 @@
                 <div class="dropdown d-inline-block ms-1">
                   <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item fs-base" href="#">Los Angeles</a><a class="dropdown-item fs-base" href="#">Chicago</a><a class="dropdown-item fs-base" href="#">Houston</a><a class="dropdown-item fs-base" href="#">Philadelphia</a><a class="dropdown-item fs-base" href="#">San Diego</a><a class="dropdown-item fs-base" href="#">Miami</a></div>
                 </div>
-              </div><a class="btn btn-primary" href="food-delivery-single.html" data-scroll>Order Now!</a>
+              </div><a class="btn btn-primary" href="food-delivery-single.html" data-scroll><b>Order Today!</b></a>
             </div>
           </div>
         </div>
@@ -155,21 +199,21 @@
               <div class="card-body py-4 text-center">
                 <h3 class="h5 mt-1">Classic Flavored Donuts</h3>
               </div></a></div>
-          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/03.jpg" alt="Sushi &amp; Rolls">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/3.jpg" alt="Sushi &amp; Rolls">
               <div class="card-body py-4 text-center">
-                <h3 class="h5 mt-1">Sushi &amp; Rolls</h3>
+                <h3 class="h5 mt-1">Coffees</h3>
               </div></a></div>
-          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/04.jpg" alt="Pizza &amp; Pasta">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/4.jpg" alt="Pizza &amp; Pasta">
               <div class="card-body py-4 text-center">
-                <h3 class="h5 mt-1">Pizza &amp; Pasta</h3>
+                <h3 class="h5 mt-1">Premium Milkteas</h3>
               </div></a></div>
-          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/05.jpg" alt="Coffee &amp; Desserts">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/5.jpg" alt="Coffee &amp; Desserts">
               <div class="card-body py-4 text-center">
-                <h3 class="h5 mt-1">Coffee &amp; Desserts</h3>
+                <h3 class="h5 mt-1">Frappes</h3>
               </div></a></div>
-          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/category/06.jpg" alt="Healthy &amp; Food">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/6.jpg" alt="Healthy &amp; Food">
               <div class="card-body py-4 text-center">
-                <h3 class="h5 mt-1">Healthy &amp; Food</h3>
+                <h3 class="h5 mt-1">Cakes [Made to order]</h3>
               </div></a></div>
         </div>
       </section>
@@ -183,13 +227,13 @@
               <blockquote class="mb-2">
                 <div class="card card-body fs-md text-muted border-0 shadow-sm">
                   <div class="mb-2">
-                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
                     </div>
-                  </div>Lorem ipsum dolor sit amet, quia non consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>Perfect for birthdays and a personal gift! Their doughnuts are soft perfect pair for a hot coffee. Also, it cheap for its price.
                 </div>
-                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="img/testimonials/03.jpg" width="50" alt="Richard Davis">
+                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="./img/testimonials/gairus.jpg" width="50" alt="Gairus Niel P. Legaspi">
                   <div class="ps-3">
-                    <h6 class="fs-sm mb-n1">Richard Davis</h6><span class="fs-ms text-muted opacity-75">Feb 14, 2020</span>
+                    <h6 class="fs-sm mb-n1">Gairus Niel P. Legaspi</h6><span class="fs-ms text-muted opacity-75">Feb 14, 2020</span>
                   </div>
                 </footer>
               </blockquote>
@@ -198,37 +242,11 @@
                   <div class="mb-2">
                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
                     </div>
-                  </div>Lorem ipsum dolor sit amet, quia non consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>Doughnuts were lovely and fresh, a great choice of flavours and friendly service.
                 </div>
-                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="img/testimonials/04.jpg" width="50" alt="Laura Willson">
+                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="./img/testimonials/quiboloy.jpg" width="50" alt="Pastor Apollo C. Quiboloy">
                   <div class="ps-3">
-                    <h6 class="fs-sm mb-n1">Laura Willson</h6><span class="fs-ms text-muted opacity-75">Feb 05, 2020</span>
-                  </div>
-                </footer>
-              </blockquote>
-              <blockquote class="mb-2">
-                <div class="card card-body fs-md text-muted border-0 shadow-sm">
-                  <div class="mb-2">
-                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
-                    </div>
-                  </div>Lorem ipsum dolor sit amet, quia non consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </div>
-                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="img/testimonials/01.jpg" width="50" alt="Mary Grant">
-                  <div class="ps-3">
-                    <h6 class="fs-sm mb-n1">Mary Alice Grant</h6><span class="fs-ms text-muted opacity-75">Jan 27, 2020</span>
-                  </div>
-                </footer>
-              </blockquote>
-              <blockquote class="mb-2">
-                <div class="card card-body fs-md text-muted border-0 shadow-sm">
-                  <div class="mb-2">
-                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
-                    </div>
-                  </div>Lorem ipsum dolor sit amet, quia non consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </div>
-                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="img/shop/reviews/01.jpg" width="50" alt="Rafael Marquez">
-                  <div class="ps-3">
-                    <h6 class="fs-sm mb-n1">Rafael Marquez</h6><span class="fs-ms text-muted opacity-75">Dec 19, 2020</span>
+                    <h6 class="fs-sm mb-n1">Pastor Apollo C. Quiboloy</h6><span class="fs-ms text-muted opacity-75">Feb 05, 2021</span>
                   </div>
                 </footer>
               </blockquote>
@@ -237,11 +255,38 @@
                   <div class="mb-2">
                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
                     </div>
-                  </div>Lorem ipsum dolor sit amet, quia non consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>One of the best donuts in town! The staffs are also very friendly even the guards. Love this place!
                 </div>
-                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="img/testimonials/02.jpg" width="50" alt="Adrian Lewis">
+                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="./img/testimonials/grado.jpg" width="50" alt="Luis Anthony N. Grado">
                   <div class="ps-3">
-                    <h6 class="fs-sm mb-n1">Adrian Lewis</h6><span class="fs-ms text-muted opacity-75">Dec 13, 2020</span>
+                    <h6 class="fs-sm mb-n1">Luis Anthony N. Grado</h6><span class="fs-ms text-muted opacity-75">Jan 27, 2020</span>
+                  </div>
+                </footer>
+              </blockquote>
+              <blockquote class="mb-2">
+                <div class="card card-body fs-md text-muted border-0 shadow-sm">
+                  <div class="mb-2">
+                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                    </div>
+                  </div>Packaging is a little bit off but the donuts are absolutely delicious! Staff also are very friendly. Very recommendable.
+                </div>
+                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="./img/testimonials/tes1.jpg" width="50" alt="James B. Pagbitaw">
+                  <div class="ps-3">
+                    <h6 class="fs-sm mb-n1">James B. Pagbitaw</h6><span class="fs-ms text-muted opacity-75">Dec 19, 2020</span>
+                  </div>
+                </footer>
+              </blockquote>
+              <blockquote class="mb-2">
+                <div class="card card-body fs-md text-muted border-0 shadow-sm">
+                  <div class="mb-2">
+                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i>
+                    </div>
+                  </div>Their doughnuts were pillow soft to the bite, perfect balance of sweetness and surprisingly not that greasy compared to other doughnut shops.
+                  34th Route's doughnuts definitely made it to my fave list of doughnuts. Will surely be back for another dozen soon!
+                </div>
+                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="./img/testimonials/tes2.jpg" width="50" alt="Mark Adrian N. Lomibao">
+                  <div class="ps-3">
+                    <h6 class="fs-sm mb-n1">Mark Adrian N. Lomibao</h6><span class="fs-ms text-muted opacity-75">Dec 13, 2020</span>
                   </div>
                 </footer>
               </blockquote>
@@ -250,9 +295,9 @@
                   <div class="mb-2">
                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
                     </div>
-                  </div>Lorem ipsum dolor sit amet, quia non consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div> Large, delicious and amazing quality doughnuts. Come in awesome packaging as well so you can carry them around and nibble on them all day. So recommend these!
                 </div>
-                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="img/shop/reviews/03.jpg" width="50" alt="Daniel Adams">
+                <footer class="d-flex justify-content-center align-items-center pt-4"><img class="rounded-circle" src="./img/testimonials/tes3.jpg" width="50" alt="Daniel Adams">
                   <div class="ps-3">
                     <h6 class="fs-sm mb-n1">Daniel Adams</h6><span class="fs-ms text-muted opacity-75">Dec 04, 2020</span>
                   </div>
@@ -264,11 +309,12 @@
       </section>
     </main>
     <!-- Footer-->
-    <footer class="footer bg-darker pt-5">
+    <footer class="footer bg-darker pt-5" style="background-color: #7d348f !important;">
       <div class="container pt-2">
         <div class="row pb-2">
           <div class="col-lg-2 col-sm-4 pb-2 mb-4">
             <div class="mt-n1"><a class="d-inline-block align-middle" href="#"><img class="d-block mb-4" src="img/footer-logo-light.png" width="117" alt="Cartzilla"></a></div>
+            <!--
             <div class="btn-group dropdown disable-autohide">
               <button class="btn btn-outline-light border-light btn-sm dropdown-toggle px-2" type="button" data-bs-toggle="dropdown"><img class="me-2" src="img/flags/en.png" width="20" alt="English">Eng / $</button>
               <ul class="dropdown-menu my-1">
@@ -285,7 +331,9 @@
                 <li><a class="dropdown-item" href="#"><img class="me-2" src="img/flags/it.png" width="20" alt="Italiano">Italiano</a></li>
               </ul>
             </div>
+            -->
           </div>
+          <!--
           <div class="col-lg-2 col-sm-4">
             <div class="widget widget-links widget-light pb-2 mb-4">
               <h3 class="widget-title text-light">Join us</h3>
@@ -297,6 +345,7 @@
               </ul>
             </div>
           </div>
+          -->
           <div class="col-lg-2 col-sm-4">
             <div class="widget widget-links widget-light pb-2 mb-4">
               <h3 class="widget-title text-light">Let us help you</h3>
@@ -337,10 +386,11 @@
         </div>
       </div>
     </footer>
-    <!-- Toolbar for handheld devices (Food delivery)-->
+    <!-- Toolbar for handheld devices (Food delivery)
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="#signin-modal" data-bs-toggle="modal"><span class="handheld-toolbar-icon"><i class="ci-user"></i></span><span class="handheld-toolbar-label">Account</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="food-delivery-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">3</span></span><span class="handheld-toolbar-label">$24.00</span></a></div>
     </div>
+    -->
     <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
     <!-- Vendor scrits: js libraries and plugins-->
     <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -350,5 +400,17 @@
     <!-- Main theme script-->
     <script src="js/theme.min.js"></script>
     <script type="module" src="./js/auth.js"></script>
+    <script type="module" src="./js/index.js"></script>
+    <!-- Start of ChatBot (www.chatbot.com) code -->
+    <script type="text/javascript">
+      window.__be = window.__be || {};
+      window.__be.id = "638d994153cdee0007702f8f";
+      (function() {
+          var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+          be.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.chatbot.com/widget/plugin.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+      })();
+    </script>
+    <!-- End of ChatBot code -->
   </body>
 </html>

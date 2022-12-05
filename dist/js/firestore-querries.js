@@ -29,6 +29,12 @@ export async function getCartItems() {
   return docSnap;
 }
 
+export async function getTransactions() {
+  const trans_reference = doc(db, "transactions", userID);
+  const docSnap = await getDoc(trans_reference);
+  return docSnap;
+}
+
 export async function updateQuantity(item, value) {
   const cart_reference = doc(db, cart_type, userID);
   let updated = JSON.parse(sessionStorage["items_array"]);
@@ -57,7 +63,7 @@ export async function transferGuestData(){
   await setDoc(doc(db, "cart", userID), guest_cart_items.data());
 }
 
-export async function createTransaction(
+export async function createTransaction(price,
   name,
   phone,
   email,
@@ -65,13 +71,14 @@ export async function createTransaction(
   line2,
   state,
   postal_code,
-  city,sourceID
+  city,sourceID,date
 ) {
   let items_cart = await getCartItems();
 
 
-  let data = items_cart.data()
-  data["data"] = {
+  let data = {}
+  data["items"] = items_cart.data()
+  data["data"] = {price,
     name,
     phone,
     email,
@@ -79,7 +86,7 @@ export async function createTransaction(
     line2,
     state,
     postal_code,
-    city,
+    city,date
   };
   data["paid"] = false
 

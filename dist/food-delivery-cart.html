@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Cartzilla | Food Delivery - Cart</title>
+  <title>34th Route | Delicious Donuts!</title>
   <!-- SEO Meta Tags-->
   <meta name="description" content="Cartzilla - Bootstrap E-commerce Template">
   <meta name="keywords"
@@ -13,8 +13,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Favicon and Touch Icons-->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./img/icon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="./img/icon.jpg">
   <link rel="manifest" href="site.webmanifest">
   <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
   <meta name="msapplication-TileColor" content="#ffffff">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css" />
   <link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css" />
   <!-- Main Theme Styles + Bootstrap-->
-  <link rel="stylesheet" media="screen" href="css/theme.min.css">
+  <link rel="stylesheet" media="screen" href="css/theme.css">
 
   <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
     integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
@@ -105,7 +105,7 @@
   <main class="page-wrapper">
     <!-- Navbar for Food Delivery Service demo-->
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
-    <header class="navbar d-block navbar-sticky navbar-expand-lg navbar-light bg-light">
+    <header class="navbar d-block navbar-sticky navbar-expand-lg navbar-light bg-light" style="background-color: #7d348f !important;">
       <div class="container">
         <a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html"><img src="img/logoist.png" width="180" alt="Cartzilla"></a>
         <a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logoist2.png" width="95" alt="Cartzilla"></a>
@@ -113,13 +113,13 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span
               class="navbar-toggler-icon"></span></button><a class="navbar-tool d-none d-lg-flex"
             href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button"
-            aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip">Search</span>
-            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search"></i></div>
+            aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip" >Search</span>
+            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search" style="color: white !important;"></i></div>
           </a>
-          <!-- <a class="navbar-tool ms-2" href="#signin-modal" data-bs-toggle="modal"><span
-              class="navbar-tool-tooltip">Account</span>
-            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-          </a> -->
+          <a class="navbar-tool ms-2" href="account-profile.html" id="account-icon"><span
+            class="navbar-tool-tooltip">Account</span>
+          <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user" style="color: white !important;"></i></div>
+          </a>
           
         <div class="collapse navbar-collapse me-auto order-lg-2" id="navbarCollapse">
           <!-- Search (mobile)-->
@@ -128,7 +128,7 @@
               <input class="form-control rounded-start" type="text" placeholder="What do you need?">
             </div>
           </div>
-          <!-- Location dropdown-->
+          <!-- Location dropdown
           <ul class="navbar-nav navbar-mega-nav ms-lg-4 pe-lg-2 me-lg-2">
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#"
                 data-bs-toggle="dropdown"><i class="ci-location me-2"></i>New York</a>
@@ -142,7 +142,8 @@
               </ul>
             </li>
           </ul>
-          <!-- Primary menu-->
+          -->
+          <!-- Primary menu
           <ul class="navbar-nav">
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
                 data-bs-toggle="dropdown">Cuisine</a>
@@ -219,14 +220,14 @@
               </div>
             </li>
             <li class="nav-item"><a class="nav-link" href="index.html">Back to main demo</a></li>
-          </ul>
+          </ul>-->
         </div>
       </div>
       <!-- Search collapse-->
       <div class="search-box collapse" id="searchBox">
         <div class="container py-2">
           <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-            <input class="form-control rounded-start" type="text" placeholder="What do you need?">
+            <input class="form-control rounded-start" type="text" placeholder="What will you be ordering Today?">
           </div>
         </div>
       </div>
@@ -270,15 +271,15 @@
                       class="badge bg-info fs-xs me-2">Note</span>Additional comments</label>
                   <textarea class="form-control" rows="4" id="order-comments"></textarea>
                 </div>
-                <h3 class="h6 mb-4">Apply promo code</h3>
+                <!--<h3 class="h6 mb-4">Apply promo code</h3> -->
                 <form class="needs-validation" method="post" novalidate>
-                  <div class="mb-3">
+                  <!--<div class="mb-3">
                     <input class="form-control" type="text" placeholder="Promo code" required>
                     <div class="invalid-feedback">Please provide promo code.</div>
                   </div>
-                  <button class="btn btn-outline-primary d-block w-100" type="submit">Apply promo code</button>
+                  <button class="btn btn-outline-primary d-block w-100" type="submit" st>Apply promo code</button>-->
                 </form><a class="btn btn-primary btn-shadow d-block w-100 mt-4 mb-3" onclick="Checkout()"
-                href="#signin-modal" data-bs-toggle="modal"><i class="ci-card fs-lg me-2"></i>Proceed to Checkout</a>
+                href="#signin-modal" data-bs-toggle="modal" style="background-color: #7d348f;border-color: #7d348f; box-shadow: 0 .5rem 1.125rem -.5rem #7d348f"><i class="ci-card fs-lg me-2"></i>Proceed to Checkout</a>
               </div>
             </div>
           </div>
@@ -287,7 +288,7 @@
     </div>
   </main>
   <!-- Footer-->
-  <footer class="footer bg-darker pt-5">
+  <footer class="footer bg-darker pt-5" style="background-color: #7d348f !important;">
     <div class="container pt-2">
       <div class="row pb-2">
         <div class="col-lg-2 col-sm-4 pb-2 mb-4">
@@ -315,6 +316,7 @@
             </ul>
           </div>
         </div>
+        <!--
         <div class="col-lg-2 col-sm-4">
           <div class="widget widget-links widget-light pb-2 mb-4">
             <h3 class="widget-title text-light">Join us</h3>
@@ -326,6 +328,7 @@
             </ul>
           </div>
         </div>
+        -->
         <div class="col-lg-2 col-sm-4">
           <div class="widget widget-links widget-light pb-2 mb-4">
             <h3 class="widget-title text-light">Let us help you</h3>

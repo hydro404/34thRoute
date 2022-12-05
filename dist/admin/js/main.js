@@ -42,11 +42,11 @@
 
 
     // Calender
-    $('#calender').datetimepicker({
+   /* $('#calender').datetimepicker({
         inline: true,
         format: 'L'
     });
-
+    */
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
@@ -60,7 +60,7 @@
 
 
     // Worldwide Sales Chart
-    var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
+    /*var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
     var myChart1 = new Chart(ctx1, {
         type: "bar",
         data: {
@@ -201,6 +201,7 @@
             responsive: true
         }
     });
+    */
 
     
 })(jQuery);

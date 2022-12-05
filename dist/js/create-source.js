@@ -46,6 +46,7 @@ async function createSource (
       "content-type": "application/json",
       authorization: "Basic c2tfdGVzdF9vVjVZcU11TDdXbVd2Y0d4RUxXYXZjRms6",
     },
+	
     body: JSON.stringify({
       data: {
         attributes: {
@@ -83,7 +84,7 @@ async function createSource (
     .then((response) => response.json())
     .then(async (response) => {
       console.log(response);
-      await createTransaction(
+      await createTransaction(total_price,
         name,
         phone,
         email,
@@ -91,7 +92,7 @@ async function createSource (
         line2,
         state,
         postal_code,
-        city,response.data.id
+        city,response.data.id,response.data.attributes.created_at
       );
 
       console.log(response.data.attributes.redirect.checkout_url);
