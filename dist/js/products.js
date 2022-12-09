@@ -144,7 +144,6 @@ window.addtoCart = async function addtoCart(value) {
           product_name: product_details.product_name,
           quantity: product_details.quantity,
           price: product_details.price,
-          img: product_details.img,
           description: product_details.description,
         },
       })

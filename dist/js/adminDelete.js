@@ -7,6 +7,7 @@ import {
   updateDoc,
   setDoc,
   increment,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 import {getProducts} from "./firestore-querries.js";
 import { ref , getStorage, uploadString,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
@@ -52,28 +53,11 @@ async function getProduct(id) {
   }
 }
 
-window.updateAvailable =  async function updateAvailable() {
-    products.forEach(async (doc) => {
-        let id = doc.id;
-        let available = document.getElementById(`available_${id}`).value;
-        let nameProduct = document.getElementById(`name_${id}`).value;
-        let descriptionProduct = document.getElementById(`description_${id}`).value;
-        let priceProduct = document.getElementById(`Phprice_${id}`).value;
-        //console.log(available);
-        updateAdmin(id, available, nameProduct, descriptionProduct, priceProduct);
-    });
 
-    alert("ALL CHANGES ARE SAVED!");
-}
-
-async function updateAdmin(id, value, nameProduct, descriptionProduct, priceProduct){
-    const docRef = doc(db, "products", id);
-    updateDoc(docRef, {
-        available: value,
-        product_name: nameProduct,
-        description: descriptionProduct,
-        price: priceProduct,
-    });
+window.deleteAdmin = async function deleteAdmin(id){
+    await deleteDoc(doc(db, "products", id));
+    alert("Delete Item: "+id);
+    document.getElementById(id).remove();
 }
 
 async function displayProduct(id, product_data) {
@@ -94,8 +78,7 @@ async function displayProduct(id, product_data) {
   };
   let yuarel = await imageUrl(id)
   
-  let template_html = 
-    `
+  let template_html = `
     <script>
     (function() {
       await imageUrl("${id}")
@@ -127,7 +110,7 @@ async function displayProduct(id, product_data) {
                 <div class="mb-2 me-2"><label class="" for="quantity1">Available:</label><span id="available_${id}" value="${available}" min="1">${available} </span</div>
               </div>
             </div>
-            <button class="btn btn-primary">DELETE</button>
+            <button class="btn btn-primary" onclick="deleteAdmin('${id}')">DELETE</button>
         </div>
     </div>
     `;
@@ -136,35 +119,6 @@ async function displayProduct(id, product_data) {
     .getElementById("products_gallery")
     .insertAdjacentHTML("beforeend", template_html);
 }
-window.toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
-
-window.imgLogB64 = async function (idss,file_id) {
-  
-   const file = document.getElementById(idss).files[0];
-   console.log(await toBase64(file));
-   const baseSixFour = await toBase64(file);
-   upFilerz(baseSixFour,file_id);
-}
-
-
-
-
-window.upFilerz =  async function (base46,filename){ //ano ini ta dae nagagana AHHAHA
-  
-  const storageRef = ref(storage, 'product-images/'+filename);
-  // Create a reference to 'images/mountains.jpg'
-  //const message4 = 'data:text/plain;base64,5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-  uploadString(storageRef, base46,'data_url').then((snapshot) => {
-  console.log('Uploaded a data_url string!');
-  alert("SAKSIS")
-}).catch(err=>{console.log(err)});
-
-}  
 
 
 
