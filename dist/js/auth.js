@@ -27,7 +27,7 @@ onAuthStateChanged(auth, (user) => {
     console.log(user.isAnonymous);
     if (user.isAnonymous) {
       sessionStorage.setItem("isAnonymous", "true");
-        $("#account-orders").css("display", "none");
+        $("#account-icon").css("display", "block");
     } else {
       sessionStorage.setItem("isAnonymous", "false");
       $("#account-icon").css("display", "none");
