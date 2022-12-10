@@ -164,6 +164,8 @@ window.addtoCart = async function addtoCart(quant,value) {
     setTimeout(function(){
       $('#toggleCart').toggleClass('toggleCartz');
     }, 2000);
+
+    document.documentElement.scrollTop = 0;
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");

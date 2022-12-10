@@ -22,6 +22,9 @@
   <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
   <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css" />
   <link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css" />
+  <link rel="stylesheet" media="screen" href="vendor/flatpickr/dist/flatpickr.min.css" />
+  <script src="vendor/flatpickr/dist/flatpickr.min.js"></script>
+  <script src="vendor/flatpickr/dist/plugins/rangePlugin.js"></script>
   <!-- Main Theme Styles + Bootstrap-->
   <link rel="stylesheet" media="screen" href="css/theme.css">
   <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
@@ -323,19 +326,13 @@
               <div class="invalid-feedback">Please enter your phone number!</div>
             </div>
             <div class="col-sm-6 mb-4">
-              <label class="form-label" for="fd-time">Delivery time<sup class="text-danger ms-1">*</sup></label>
-              <select class="form-select" id="fd-time">
-                <option value="asap">As soon as possible</option>
-                <option value="11:00am">by 11:00 AM</option>
-                <option value="11:15am">by 11:15 AM</option>
-                <option value="11:30am">by 11:30 AM</option>
-                <option value="11:45am">by 11:45 AM</option>
-                <option value="12:00pm">by 12:00 PM</option>
-                <option value="12:15pm">by 12:15 PM</option>
-                <option value="12:30pm">by 12:30 PM</option>
-                <option value="12:45pm">by 12:45 PM</option>
-                <option value="1:00pm">by 1:00 PM</option>
-              </select>
+              <!-- Date and time picker -->
+              <label class="form-label">Choose date and time</label>
+              <div class="input-group">
+                <input class="form-control date-picker rounded pe-5" type="text" placeholder="Choose date and time" data-datepicker-options='{"enableTime": true, "altInput": true, "altFormat": "F j, Y H:i", "dateFormat": "Y-m-d H:i"}'>
+                <i class="fi-calendar position-absolute top-50 end-0 translate-middle-y me-3"></i>
+              </div>
+
             </div>
             <div class="col-sm-6 mb-4">
               <div class="fs-sm fw-medium mb-3">Drop-off options</div>
@@ -352,22 +349,14 @@
           <h2 class="h5 pb-3">Delivery address</h2>
           <div class="row mb-4">
             <div class="col-sm-6 mb-4">
-              <label class="form-label" for="fd-city">City<sup class="text-danger ms-1">*</sup></label>
-              <select class="form-select" id="fd-city">
-                <option value="new-york">New York</option>
-                <option value="los-angeles">Los Angeles</option>
-                <option value="chicago">Chicago</option>
-                <option value="houston">Houston</option>
-                <option value="philadelphia">Philadelphia</option>
-                <option value="san-diego">San Diego</option>
-                <option value="miami">Miami</option>
-              </select>
-            </div>
-            <div class="col-sm-6 mb-4">
               <label class="form-label" for="fd-address">Address<sup class="text-danger ms-1">*</sup></label>
               <input class="form-control" type="text" placeholder="Street, Apartment number or suite" required
                 id="fd-address">
               <div class="invalid-feedback">Please enter your address!</div>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <label class="form-label" for="fd-address">Landmark</label>
+              <input class="form-control" type="text" placeholder="nearest landmark to be delivered to"id="fd-landmark">
             </div>
             <div class="col-12 mb-4">
               <label class="form-label mb-3" for="fd-comments"><span
@@ -377,17 +366,10 @@
           </div>
           <div class="row">
             <div class="col-sm-6 mb-4 mb-sm-0">
-              <h2 class="h5 pb-2">Cash on delivery</h2>
+              <h2 class="h5 pb-1">Cash on delivery</h2>
               <div class="form-check form-check-inline mb-3">
                 <input class="form-check-input" type="radio" name="payment" checked id="cash">
                 <label class="form-check-label" for="cash">Pay with cash to the courier</label>
-              </div>
-              <div class="d-flex align-items-center">
-                <label class="form-label fw-normal text-nowrap me-3 mb-0" for="fd-change">I need change from</label>
-                <div class="input-group flex-nowrap" style="width: 8rem;"><span class="input-group-text"><i
-                      class="ci-dollar"></i></span>
-                  <input class="form-control bg-none pe-3" type="text" id="fd-change">
-                </div>
               </div>
               <h2 class="h5 mt-3 pt-4 pb-2">Online payment</h2>
               <div class="form-check form-check-inline pb-4">
@@ -415,7 +397,8 @@
       </div>
     </div>
   </main>
-  <!-- Footer-->
+
+ <!-- Footer-->
   <footer class="footer bg-darker pt-5">
     <div class="container pt-2">
       <div class="row pb-2">
