@@ -39,11 +39,25 @@ if(admin_stat.exists()){
 
 const products = await getProducts();
 
+window.refresh = async function refresh(searchCat){
+
+  document.getElementById("products_gallery").innerText = "";
+  
+  products.forEach(async (doc) =>  {
+  
+    console.log(doc.id, " => ", doc.data());
+    await displayProduct(doc.id, doc.data(), searchCat);
+  });
+
+  searchCat = "";
+}
+
 products.forEach(async (doc) =>  {
   
   console.log(doc.id, " => ", doc.data());
-  await displayProduct(doc.id, doc.data());
+  await displayProduct(doc.id, doc.data(), "donut");
 });
+
 
 async function getProduct(id) {
   const docRef = doc(db, "products", id);
@@ -74,8 +88,8 @@ async function imageUrls(id_img){
   });
   return retUrl
 }
-async function displayProduct(id, product_data) {
 
+async function displayProduct(id, product_data, searchCategory) {
   let getUrl = await imageUrls(id)
   let price = product_data.price;
   let name = product_data.product_name;
@@ -83,6 +97,7 @@ async function displayProduct(id, product_data) {
   let available = product_data.available;
   let img = product_data.img;
   let description = product_data.description;
+  let category = product_data.category;
 
   let details_obj = {
     price: price,
@@ -93,26 +108,29 @@ async function displayProduct(id, product_data) {
     description: description,
   };
 
-  let template_html = `<div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter" id = "${id}">
-    <div class="card product-card border pb-2">
-    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal('${id}',${price},'${name}',${quantity},${available},'${getUrl}','${description}')">
-    <img
-          class="card-img-top" src="${getUrl}" alt="Photo here"></a>
-      <div class="card-body pt-1 pb-2">
-        <h3 class="product-title fs-md"><a href="#quick-view" data-bs-toggle="modal">${name}</a></h3>
-        <p class="fs-ms text-muted">${description}</p>
-        <span class="text-accent">Only ${available} left in stock!</span>
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="product-price"><span class="text-accent">₱ ${price}</span></div>
-          <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(1,this.value)" value="${id}">+<i class="ci-cart fs-base ms-1"></i></button>
+  if(searchCategory==category){
+
+    let template_html = `<div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter" id = "${id}">
+      <div class="card product-card border pb-2">
+      <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal('${id}',${price},'${name}',${quantity},${available},'${getUrl}','${description}')">
+      <img
+            class="card-img-top" src="${getUrl}" alt="Photo here"></a>
+        <div class="card-body pt-1 pb-2">
+          <h3 class="product-title fs-md"><a href="#quick-view" data-bs-toggle="modal">${name}</a></h3>
+          <p class="fs-ms text-muted">${description}</p>
+          <span class="text-accent">Only ${available} left in stock!</span>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="product-price"><span class="text-accent">₱ ${price}</span></div>
+            <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(1,this.value)" value="${id}">+<i class="ci-cart fs-base ms-1"></i></button>
+          </div>
         </div>
       </div>
-    </div>
-  </div>`;
+    </div>`;
 
-  document
-    .getElementById("products_gallery")
-    .insertAdjacentHTML("beforeend", template_html);
+    document
+      .getElementById("products_gallery")
+      .insertAdjacentHTML("beforeend", template_html);
+  }
 }
 
 

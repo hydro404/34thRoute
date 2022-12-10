@@ -43,7 +43,7 @@
 </head>
 <!-- Body-->
 
-<body class="handheld-toolbar-enabled" id="body">
+<body class="handheld-toolbar-enabled" id="body" onload="onloadZ()">
   <!-- Sign in / sign up modal-->
   <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -206,7 +206,7 @@
         <div class="ps-lg-3 w-100 text-end">
           <!-- For desktop-->
           <ul class="nav nav-tabs d-none d-lg-flex border-0 mb-0">
-            <li class="nav-item"><a class="nav-link active" id="donut_PC" onclick="active('donut_PC');" style="cursor: pointer;">Donuts</a></li>
+            <li class="nav-item"><a class="nav-link" id="donut_PC" onclick="active('donut_PC');" style="cursor: pointer;">Donuts</a></li>
             <li class="nav-item"><a class="nav-link" id="coffee_PC" onclick="active('coffee_PC');" style="cursor: pointer;">Coffee</a></li>
             <li class="nav-item"><a class="nav-link" id="milktea_PC" onclick="active('milktea_PC');" style="cursor: pointer;">Milktea</a></li>
             <li class="nav-item"><a class="nav-link" id="frappe_PC" onclick="active('frappe_PC');" style="cursor: pointer;">Frappe</a></li>
@@ -217,7 +217,7 @@
             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false"><i class="ci-menu fs-base me-2"></i>Categories</button>
             <div class="dropdown-menu dropdown-menu-end">
-              <a class="dropdown-item fs-base active" id="donut_MB" onclick="active('donut_MB');" style="cursor: pointer;">Donuts </a>
+              <a class="dropdown-item fs-base" id="donut_MB" onclick="active('donut_MB');" style="cursor: pointer;">Donuts </a>
               <a class="dropdown-item fs-base" id="coffee_MB" onclick="active('coffee_MB');" style="cursor: pointer;">Coffee</a>
               <a class="dropdown-item fs-base" id="milktea_MB" onclick="active('milktea_MB');" style="cursor: pointer;">Milktea</a>
               <a class="dropdown-item fs-base" id="frappe_MB" onclick="active('frappe_MB');" style="cursor: pointer;">Frappe</a>
@@ -229,8 +229,7 @@
 
 
     <script>
-      function active(st){
-        
+      function active(str){
         document.getElementById("donut_PC").classList.remove('active');
         document.getElementById("coffee_PC").classList.remove('active');
         document.getElementById("milktea_PC").classList.remove('active');
@@ -243,24 +242,35 @@
         document.getElementById("frappe_MB").classList.remove('active');
         document.getElementById("cakes_MB").classList.remove('active');
 
-        const myArray = st.split("_");
-        //console.log(myArray);
+        myArray = str.split("_");
+        //myArray[0] == category name
+        //myArray[1] == display type
+
+        sessionStorage.setItem("category", myArray[0]);
+        document.getElementById("catTitle").innerHTML = myArray[0].toUpperCase();
 
         if(myArray[1]==="MB"){
-          st2 = myArray[0] + "_PC";
+          str2 = myArray[0] + "_PC";
         }
         else{
-          st2 = myArray[0] + "_MB";
+          str2 = myArray[0] + "_MB";
         }
 
-        //console.log(st2);
-        document.getElementById(st).classList.add('active');
-        document.getElementById(st2).classList.add('active');
+        document.getElementById(str).classList.add('active');
+        document.getElementById(str2).classList.add('active');
+        refresh(myArray[0]);
+      }
+
+      function onloadZ(){
+        document.getElementById("donut_PC").classList.add('active');
+        document.getElementById("donut_MB").classList.add('active');
+        document.getElementById("catTitle").innerHTML = "donut".toUpperCase();
       }
     </script>
+
     <!-- Menu (Products grid)-->
     <section class="container tab-content py-4 py-sm-5">
-      <h2 class="text-center pt-2 pt-sm-0 mb-sm-4">Donuts</h2>
+      <h2 class="text-center pt-2 pt-sm-0 mb-sm-4" id="catTitle"></h2>
       <div class="row pt-3 pt-sm-0" id="products_gallery">
       <!-- Load more button-->
       <nav class="d-md-flex justify-content-between align-items-center text-center text-md-start pt-2 pb-4 mb-md-2"
