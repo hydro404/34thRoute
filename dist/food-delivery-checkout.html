@@ -326,10 +326,15 @@
               <div class="invalid-feedback">Please enter your phone number!</div>
             </div>
             <div class="col-sm-6 mb-4">
+              <label class="form-label" for="fd-email">Email<sup class="text-danger ms-1"></sup></label>
+              <input class="form-control" type="text" id="fd-email">
+              <div class="invalid-feedback">Please enter your phone email!</div>
+            </div>
+            <div class="col-sm-6 mb-4">
               <!-- Date and time picker -->
               <label class="form-label">Choose date and time</label>
               <div class="input-group">
-                <input class="form-control date-picker rounded pe-5" type="text" placeholder="Choose date and time" data-datepicker-options='{"enableTime": true, "altInput": true, "altFormat": "F j, Y H:i", "dateFormat": "Y-m-d H:i"}'>
+                <input class="form-control date-picker rounded pe-5" type="text" id="fd-date-time" placeholder="Choose date and time" data-datepicker-options='{"enableTime": true, "altInput": true, "altFormat": "F j, Y H:i", "dateFormat": "Y-m-d H:i"}'>
                 <i class="fi-calendar position-absolute top-50 end-0 translate-middle-y me-3"></i>
               </div>
 
@@ -349,13 +354,33 @@
           <h2 class="h5 pb-3">Delivery address</h2>
           <div class="row mb-4">
             <div class="col-sm-6 mb-4">
-              <label class="form-label" for="fd-address">Address<sup class="text-danger ms-1">*</sup></label>
-              <input class="form-control" type="text" placeholder="Street, Apartment number or suite" required
-                id="fd-address">
+              <label class="form-label" for="fd-address">Line 1<sup class="text-danger ms-1">*</sup></label>
+              <input class="form-control" type="text" placeholder="Street, Apartment number or suite" required id="fd-line1">
               <div class="invalid-feedback">Please enter your address!</div>
             </div>
             <div class="col-sm-6 mb-4">
-              <label class="form-label" for="fd-address">Landmark</label>
+              <label class="form-label" for="fd-address">Line 2<sup class="text-danger ms-1">*</sup></label>
+              <input class="form-control" type="text" placeholder="Street, Apartment number or suite" required id="fd-line2">
+              <div class="invalid-feedback">Please enter your address!</div>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <label class="form-label" for="fd-address">City<sup class="text-danger ms-1">*</sup></label>
+              <input class="form-control" type="text" placeholder="Street, Apartment number or suite" required id="fd-city">
+              <div class="invalid-feedback">Please enter your address!</div>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <label class="form-label" for="fd-address">State<sup class="text-danger ms-1">*</sup></label>
+              <input class="form-control" type="text" placeholder="Street, Apartment number or suite" required id="fd-state">
+              <div class="invalid-feedback">Please enter your address!</div>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <label class="form-label" for="fd-address">Postal Code<sup class="text-danger ms-1">*</sup></label>
+              <input class="form-control" type="text" placeholder="Street, Apartment number or suite" required id="fd-postal_code">
+              <div class="invalid-feedback">Please enter your address!</div>
+            </div>
+            
+            <div class="col-sm-6 mb-4">
+              <label class="form-label" for="fd-landmark">Landmark</label>
               <input class="form-control" type="text" placeholder="nearest landmark to be delivered to"id="fd-landmark">
             </div>
             <div class="col-12 mb-4">
@@ -385,11 +410,11 @@
               <div class="d-fle flex-column h-100 rounded-3 bg-secondary px-3 px-sm-4 py-4">
                 <h2 class="h5 pb-3">Your total</h2>
                 <div class="d-flex justify-content-between fs-md border-bottom pb-3 mb-3"><span>Subtotal:</span><span
-                    class="text-heading">$24.<small>00</small></span></div>
+                    class="text-heading" id="subtotal"></span></div>
                 <div class="d-flex justify-content-between fs-md border-bottom pb-3 mb-3"><span>Delivery:</span><span
-                    class="text-heading">$6.<small>00</small></span></div>
+                    class="text-heading">Php 20</span></div>
                 <div class="d-flex justify-content-between fs-md mb-2"><span>Total:</span><span
-                    class="text-heading fw-medium">$30.<small>00</small></span></div>
+                    class="text-heading fw-medium" id="total-deliver"></span></div>
               </div>
             </div>
           </div>

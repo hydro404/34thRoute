@@ -75,7 +75,7 @@ export async function createTransaction(price,
 ) {
   let items_cart = await getCartItems();
 
-
+  price = price + 20;
   let data = {}
   data["items"] = items_cart.data()
   data["data"] = {price,
