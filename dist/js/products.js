@@ -104,7 +104,7 @@ async function displayProduct(id, product_data) {
         <span class="text-accent">Only ${available} left in stock!</span>
         <div class="d-flex align-items-center justify-content-between">
           <div class="product-price"><span class="text-accent">₱ ${price}</span></div>
-          <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(this.value)" value="${id}">+<i class="ci-cart fs-base ms-1"></i></button>
+          <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(1,this.value)" value="${id}">+<i class="ci-cart fs-base ms-1"></i></button>
         </div>
       </div>
     </div>
@@ -136,14 +136,14 @@ window.addtoCart = async function addtoCart(quant,value) {
       console.log(true);
       //console.log(productID);
       await updateDoc(docRef, {
-        [`${value}.quantity`]: increment(1),
+        [`${value}.quantity`]: increment(parseInt(quant)),
       });
     } else {
       let product_details = await getProduct(value);
       await updateDoc(docRef, {
         [value]: {
           product_name: product_details.product_name,
-          quantity: parseInt(quant),
+          quantity: 1,
           price: product_details.price,
           description: product_details.description,
         },
@@ -158,7 +158,9 @@ window.addtoCart = async function addtoCart(quant,value) {
     }
     await updateCartDropDown();
     updateTotal();
+    
     $('#toggleCart').toggleClass('toggleCartz');
+    
     setTimeout(function(){
       $('#toggleCart').toggleClass('toggleCartz');
     }, 2000);
@@ -243,7 +245,7 @@ window.remove = async function remove(item) {
     document.getElementById(item).remove();
     delete parsed[item];
     sessionStorage.setItem("items_array", JSON.stringify(parsed));
-    updateCartDropDown();
+    await updateCartDropDown();
     updateTotal();
   
 };
