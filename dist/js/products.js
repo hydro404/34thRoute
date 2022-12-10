@@ -55,7 +55,7 @@ window.refresh = async function refresh(searchCat){
 products.forEach(async (doc) =>  {
   
   console.log(doc.id, " => ", doc.data());
-  await displayProduct(doc.id, doc.data(), "donut");
+  await displayProduct(doc.id, doc.data(), "donuts");
 });
 
 
@@ -121,15 +121,22 @@ async function displayProduct(id, product_data, searchCategory) {
           <span class="text-accent">Only ${available} left in stock!</span>
           <div class="d-flex align-items-center justify-content-between">
             <div class="product-price"><span class="text-accent">₱ ${price}</span></div>
-            <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(1,this.value)" value="${id}">+<i class="ci-cart fs-base ms-1"></i></button>
+            <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(1,this.value)" value="${id}" id="${id}_btn">+<i class="ci-cart fs-base ms-1"></i></button>
           </div>
         </div>
       </div>
     </div>`;
 
+    
+
     document
       .getElementById("products_gallery")
       .insertAdjacentHTML("beforeend", template_html);
+
+    if(available==0){
+        document.getElementById(`${id}_btn`).disabled = true;
+        console.log(`${id}_btn`);
+    }
   }
 }
 

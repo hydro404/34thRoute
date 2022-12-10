@@ -25,8 +25,9 @@ window.addAvailable = async function addAvailable() {
     let nameProduct = document.getElementById("itemName").value;
     let descriptionProduct = document.getElementById("itemDesc").value;
     let priceProduct = document.getElementById("itemPrice").value;
+    let category = document.getElementById("itemCat").value;
     //console.log(available);
-    addAdmin(available, nameProduct, descriptionProduct, priceProduct);
+    addAdmin(available, nameProduct, descriptionProduct, priceProduct, category);
 
   
 };
@@ -35,7 +36,8 @@ async function addAdmin(
   value,
   nameProduct,
   descriptionProduct,
-  priceProduct
+  priceProduct,
+  itemCategory
 ) {
   const docCollect = collection(db, "products");
   let prod_id = await addDoc(docCollect, {
@@ -43,7 +45,9 @@ async function addAdmin(
     product_name: nameProduct,
     description: descriptionProduct,
     price: parseInt(priceProduct),
-    quantity: 1
+    category: itemCategory,
+    quantity: 1,
+
   });
   imgLogB64("itemImage", prod_id.id);
 }
