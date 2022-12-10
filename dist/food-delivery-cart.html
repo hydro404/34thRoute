@@ -27,10 +27,11 @@
 
   <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
     integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <!-- Body-->
 
-<body class="handheld-toolbar-enabled">
+<body class="handheld-toolbar-enabled" id="body">
   <!-- Sign in / sign up modal-->
   <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -110,12 +111,13 @@
         <a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html"><img src="img/logoist.png" width="180" alt="Cartzilla"></a>
         <a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logoist2.png" width="95" alt="Cartzilla"></a>
         <div class="navbar-toolbar d-flex align-items-center order-lg-3">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span
+          <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span
               class="navbar-toggler-icon"></span></button><a class="navbar-tool d-none d-lg-flex"
             href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button"
             aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip" >Search</span>
             <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search" style="color: white !important;"></i></div>
           </a>
+        -->
           <a class="navbar-tool ms-2" href="account-profile.html" id="account-icon"><span
             class="navbar-tool-tooltip">Account</span>
           <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user" style="color: white !important;"></i></div>
@@ -343,9 +345,8 @@
           <div class="widget widget-links widget-light pb-2 mb-4">
             <h3 class="widget-title text-light">Follow us</h3>
             <ul class="widget-list">
-              <li class="widget-list-item"><a class="widget-list-link" href="#">Facebook</a></li>
-              <li class="widget-list-item"><a class="widget-list-link" href="#">Twitter</a></li>
-              <li class="widget-list-item"><a class="widget-list-link" href="#">Instagram</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" target="_blank" href="https://www.facebook.com/34thRoute">Facebook</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" target="_blank" href="https://www.instagram.com/34thRoute/">Instagram</a></li>
             </ul>
           </div>
         </div>
@@ -398,6 +399,13 @@
   <script src="js/theme.js"></script>
   <script type="module" src="./js/cart.js"></script>
   <script type="module" src="./js/auth.js"></script>
+  <script>
+    $(document).ready(function() {
+    $('#body').hide().fadeIn(1000, function() {
+    // Animation complete
+    });
+  });
+  </script>
 </body>
 
 </html>
