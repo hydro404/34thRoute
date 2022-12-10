@@ -95,7 +95,7 @@ async function displayProduct(id, product_data) {
 
   let template_html = `<div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter" id = "${id}">
     <div class="card product-card border pb-2">
-    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal(${price},'${name}',${quantity},${available},'${getUrl}','${description}')">
+    <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal('${id}',${price},'${name}',${quantity},${available},'${getUrl}','${description}')">
     <img
           class="card-img-top" src="${getUrl}" alt="Photo here"></a>
       <div class="card-body pt-1 pb-2">
@@ -117,7 +117,7 @@ async function displayProduct(id, product_data) {
 
 
 
-window.addtoCart = async function addtoCart(value) {
+window.addtoCart = async function addtoCart(quant,value) {
   //const washingtonRef = doc(db, "cart", userID);
 
   let cart_type = "cart";
@@ -143,7 +143,7 @@ window.addtoCart = async function addtoCart(value) {
       await updateDoc(docRef, {
         [value]: {
           product_name: product_details.product_name,
-          quantity: product_details.quantity,
+          quantity: parseInt(quant),
           price: product_details.price,
           description: product_details.description,
         },
@@ -183,7 +183,7 @@ window.addtoCart = async function addtoCart(value) {
   //   });
 };
 
-window.updateModal = function (
+window.updateModal = function (id,
   price,
   name,
   quantity,
@@ -212,25 +212,21 @@ window.updateModal = function (
                   </div>
                 </div>
                 <div class="mb-3 d-flex align-items-center">
-                  <select class="form-select me-3" style="width: 5rem;">
+                  <select class="form-select me-3" style="width: 5rem;" id="selectQuantity">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
-                  <button class="btn btn-primary btn-shadow d-block w-100" type="submit"><i
+                  <button class="btn btn-primary btn-shadow d-block w-100" onclick="addtoCart(document.getElementById('selectQuantity').value,this.value)" value="${id}"><i
                       class="ci-cart fs-lg me-2"></i>Add to Cart</button>
                 </div>
               </form>
               <h5 class="h6 mb-3 pb-3 border-bottom"><i
                   class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Only ${available} left in stock!</h5>
-              <h6 class="fs-sm mb-2">Ingredients:</h6>
-              <p class="fs-sm">Salami, Olives, Bell pepper, Mushrooms, Mozzarella, Parmesan</p>
-              <h6 class="fs-sm mb-2">Allergies</h6>
-              <p class="fs-sm">Gluten, Dairy</p>
-              <h6 class="fs-sm mb-2">Calories</h6>
-              <p class="fs-sm mb-0">811</p>
+              <h6 class="fs-sm mb-2">Description:</h6>
+              <p class="fs-sm">${description}</p>
             </div>
           </div>
         </div>
