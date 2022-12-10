@@ -1,18 +1,31 @@
 import { app, auth, db } from "./config.js";
 import { createTransaction, getCartItems } from "./firestore-querries.js";
 
-window.getDetails = function (){
+window.getDetails = function () {
   let name = $("#fd-name").val();
   let phone = $("#fd-phone").val();
+  let email = $("#fd-email").val();
+  let delivery_date = $("#fd-date-time").val();
   let line1 = $("#fd-line1").val();
   let line2 = $("#fd-line2").val();
+  let city = $("#fd-city").val();
   let state = $("#fd-state").val();
   let postal_code = $("#fd-postal_code").val();
-  let email = $("#fd-email").val();
-  let city = $("#fd-city").val();
+  let landmark = $("#fd-landmark").val();
 
-  createSource(name, phone, email, line1, line2, state, postal_code, city);
-}
+  createSource(
+    name,
+    phone,
+    email,
+    line1,
+    line2,
+    state,
+    postal_code,
+    city,
+    delivery_date,
+    landmark
+  );
+};
 
 //createSource("BENNY","09455573813","benny@gmail.com","line","line2","state",4510,"tabacpo city")
 let cartItems = await getCartItems();
@@ -29,22 +42,21 @@ if (cartItems.exists()) {
 
   window.parsed = JSON.parse(sessionStorage.getItem("items_array"));
 
-  for(let item of Object.entries(parsed)){
-      total_price += parseFloat(item[1].price * item[1].quantity);
-      product_obj.push({
-        [item[0]]: {
-          price: item[1].price,
-          quantity: item[1].quantity,
-        },
-      });
+  for (let item of Object.entries(parsed)) {
+    total_price += parseFloat(item[1].price * item[1].quantity);
+    product_obj.push({
+      [item[0]]: {
+        price: item[1].price,
+        quantity: item[1].quantity,
+      },
+    });
+  }
+  $("#subtotal").html("Php " + total_price);
 
-    }
-    $("#subtotal").html("Php "+total_price);
-    
-    $("#total-deliver").html("Php " + (total_price+20));
+  $("#total-deliver").html("Php " + (total_price + 20));
 }
 
-async function createSource (
+async function createSource(
   name,
   phone,
   email,
@@ -52,26 +64,32 @@ async function createSource (
   line2,
   state,
   postal_code,
-  city
+  city,
+  delivery_date,
+  landmark
 ) {
-  var product_obj = [];
+  let dropoff_option = "at-door"
+  if (document.getElementById("hand-to-me").checked){
+    dropoff_option = "hand-to-me";
+  }
+   var product_obj = [];
   let total_price = 0;
-  let parsed = await getCartItems()
-  console.log(parsed)
+  let parsed = await getCartItems();
+  console.log(parsed);
   Object.entries(parsed.data()).forEach((item, index) => {
-      total_price += parseFloat(item[1].price * item[1].quantity);
-      product_obj.push({
-        [item[0]]: {
-          price: item[1].price,
-          quantity: item[1].quantity,
-        },
-      });
+    total_price += parseFloat(item[1].price * item[1].quantity);
+    product_obj.push({
+      [item[0]]: {
+        price: item[1].price,
+        quantity: item[1].quantity,
+      },
     });
+  });
 
-  console.log(total_price)
+  console.log(total_price);
   const userID = sessionStorage.getItem("userID");
 
-  let amount = parseInt(total_price+"00");
+  let amount = parseInt(total_price + "00");
   const options = {
     method: "POST",
     headers: {
@@ -79,7 +97,7 @@ async function createSource (
       "content-type": "application/json",
       authorization: "Basic c2tfdGVzdF9vVjVZcU11TDdXbVd2Y0d4RUxXYXZjRms6",
     },
-    
+
     body: JSON.stringify({
       data: {
         attributes: {
@@ -105,6 +123,9 @@ async function createSource (
           currency: "PHP",
           metadata: {
             clientID: userID,
+            delivery_date: delivery_date,
+            landmark: landmark,
+            dropoff_option: dropoff_option
           },
         },
       },
@@ -112,10 +133,7 @@ async function createSource (
   };
   if (document.getElementById("cash").checked) {
     // hand payment
-
-  }
-  else{
-
+  } else {
     fetch("https://api.paymongo.com/v1/sources", options)
       .then((response) => response.json())
       .then(async (response) => {
@@ -130,6 +148,9 @@ async function createSource (
           state,
           postal_code,
           city,
+          date,
+          landmark,
+          dropoff_option,
           response.data.id,
           response.data.attributes.created_at
         );
@@ -138,7 +159,5 @@ async function createSource (
         window.location.href = response.data.attributes.redirect.checkout_url;
       })
       .catch((err) => console.error(err));
-
   }
-  
-};
+}

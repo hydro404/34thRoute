@@ -55,15 +55,16 @@ export async function removeCartItem(item) {
   //location.reload();
 }
 
-export async function transferGuestData(){
+export async function transferGuestData() {
   let guest_cart_items = await getCartItems();
 
   console.log(guest_cart_items.data());
-  sessionStorage["isAnonymous"] = 'false';
+  sessionStorage["isAnonymous"] = "false";
   await setDoc(doc(db, "cart", userID), guest_cart_items.data());
 }
 
-export async function createTransaction(price,
+export async function createTransaction(
+  price,
   name,
   phone,
   email,
@@ -71,14 +72,20 @@ export async function createTransaction(price,
   line2,
   state,
   postal_code,
-  city,sourceID,date
+  city,
+  date,
+  landmark,
+  dropoff_option,
+  sourceID,
+  date
 ) {
   let items_cart = await getCartItems();
 
   price = price + 20;
-  let data = {}
-  data["items"] = items_cart.data()
-  data["data"] = {price,
+  let data = {};
+  data["items"] = items_cart.data();
+  data["data"] = {
+    price,
     name,
     phone,
     email,
@@ -86,11 +93,14 @@ export async function createTransaction(price,
     line2,
     state,
     postal_code,
-    city,date
+    city,
+    date,
+    landmark,
+    dropoff_option,
   };
-  data["paid"] = "pending"
+  data["paid"] = "pending";
 
-  let source_data = {[sourceID]:data}
+  let source_data = { [sourceID]: data };
   await setDoc(doc(db, cart_type, userID), {});
   await updateDoc(doc(db, "transactions", userID), source_data);
 }
