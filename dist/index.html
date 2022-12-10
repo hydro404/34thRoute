@@ -24,9 +24,10 @@
     <link rel="stylesheet" media="screen" href="css/theme.css">
     <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
     integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
   <!-- Body-->
-  <body class="handheld-toolbar-enabled" onload="">
+  <body class="handheld-toolbar-enabled" id="body">
     <!-- Sign in / sign up modal-->
     <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -105,9 +106,16 @@
         <a class="navbar-brand d-none d-sm-block me-4 order-lg-1" href="index.html"><img src="img/logoist.png" width="180" alt="Cartzilla"></a>
         <a class="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logoist2.png" width="95" alt="Cartzilla"></a>
           <div class="navbar-toolbar d-flex align-items-center order-lg-3">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" style="padding-top: 0px;padding-bottom: 0px;"><i class="navbar-tool-icon ci-search" style="color: white !important;"></i></button><a class="navbar-tool d-none d-lg-flex" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button" aria-expanded="false" aria-controls="searchBox"><span class="navbar-tool-tooltip">Search</span>
-              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search" style="color: white !important;"></i></div></a><a class="navbar-tool ms-2" href="#signin-modal" data-bs-toggle="modal"><span class="navbar-tool-tooltip">Account</span>
-              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user" style="color: white !important;"></i></div></a>
+            <a class="navbar-tool ms-2" href="#signin-modal" data-bs-toggle="modal" id="account-icon"><span class="navbar-tool-tooltip">Account</span>
+              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user" style="color: white !important;"></i></div>
+            </a>
+            <a class="navbar-tool ms-2" href="account-orders.html" id="account-orders"><span class="navbar-tool-tooltip">Account Profile</span>
+              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user" style="color: white !important;"></i></div>
+            </a>
+            <a class="navbar-tool ms-2" href="adminIndex.html" id="admin-list-icon"><span
+              class="navbar-tool-tooltip">Admin</span>
+            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-briefcase" style="color: white !important;"></i></div>
+            </a>
               <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle"
                 href="food-delivery-cart.html"><span class="navbar-tool-label" id="total-items">0</span><i
                   class="navbar-tool-icon ci-cart"></i></a>
@@ -139,37 +147,7 @@
             <!-- Primary menu-->
           </div>
         </div>
-        <!-- Search collapse-->
-        <div class="search-box collapse" id="searchBox">
-          <div class="container py-2">
-            <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3" style="color: white !important;"></i>
-              <input class="form-control rounded-start" id="search-bar" type="text" placeholder="What will you be ordering today?" onkeyup="search_lods()">
-            </div>
-          </div>
-        </div>
       </header>
-
-      <script>
-        function search_lods() {
-          let input = document.getElementById('search-bar').value
-          input=input.toLowerCase();
-          let x = "Lowes Anthony"; //X is array of the name of the products
-          const myArray = x.split(" ");
-          console.log(myArray[0]);
-          console.log(input);
-         //for (j=0; j<x.length; j++){
-            //const myArray = x[j].split(" ");
-            for (i = 0; i < myArray.length; i++) { 
-                  if (input.includes(myArray[0].toLowerCase())) {
-                      console.log("TRUE");
-                  }
-                  else {
-                      console.log("FALSE");          
-                  }
-              }
-        }
-        //}
-      </script>
       <!-- Hero section-->
       <section class="bg-darker bg-size-cover bg-position-center py-5 py-lg-10" style="background-image: url(./img/coverphoto.png);">
         <div class="container pb-5">
@@ -199,21 +177,21 @@
               <div class="card-body py-4 text-center">
                 <h3 class="h5 mt-1">Classic Flavored Donuts</h3>
               </div></a></div>
-          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/3.jpg" alt="Sushi &amp; Rolls">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-single.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/3.jpg" alt="Sushi &amp; Rolls">
               <div class="card-body py-4 text-center">
                 <h3 class="h5 mt-1">Coffees</h3>
               </div></a></div>
-          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/4.jpg" alt="Pizza &amp; Pasta">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-single.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/4.jpg" alt="Pizza &amp; Pasta">
               <div class="card-body py-4 text-center">
                 <h3 class="h5 mt-1">Premium Milkteas</h3>
               </div></a></div>
-          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/5.jpg" alt="Coffee &amp; Desserts">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-single.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/5.jpg" alt="Coffee &amp; Desserts">
               <div class="card-body py-4 text-center">
                 <h3 class="h5 mt-1">Frappes</h3>
               </div></a></div>
-          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-category.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/6.jpg" alt="Healthy &amp; Food">
+          <div class="col-md-4 col-sm-6 mb-grid-gutter"><a class="card border-0 shadow" href="food-delivery-single.html"><img class="card-img-top" src="img/food-delivery/restaurants/single/6.jpg" alt="Healthy &amp; Food">
               <div class="card-body py-4 text-center">
-                <h3 class="h5 mt-1">Cakes [Made to order]</h3>
+                <h3 class="h5 mt-1">Made to Order Cakes</h3>
               </div></a></div>
         </div>
       </section>
@@ -360,9 +338,8 @@
             <div class="widget widget-links widget-light pb-2 mb-4">
               <h3 class="widget-title text-light">Follow us</h3>
               <ul class="widget-list">
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Facebook</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Twitter</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Instagram</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" target="_blank" href="https://www.facebook.com/34thRoute">Facebook</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" target="_blank" href="https://www.instagram.com/34thRoute/">Instagram</a></li>
               </ul>
             </div>
           </div>
@@ -412,5 +389,12 @@
       })();
     </script>
     <!-- End of ChatBot code -->
+    <script>
+      $(document).ready(function() {
+      $('#body').hide().fadeIn(1000, function() {
+      // Animation complete
+      });
+    });
+    </script>
   </body>
 </html>

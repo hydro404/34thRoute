@@ -27,8 +27,11 @@ onAuthStateChanged(auth, (user) => {
     console.log(user.isAnonymous);
     if (user.isAnonymous) {
       sessionStorage.setItem("isAnonymous", "true");
+        $("#account-orders").css("display", "none");
     } else {
       sessionStorage.setItem("isAnonymous", "false");
+      $("#account-icon").css("display", "none");
+      $("#account-orders").css("display", "block");
     }
     sessionStorage.setItem("userID", user.uid);
     //window.location.href = 'food-delivery-single.html'
