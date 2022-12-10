@@ -95,7 +95,7 @@ async function createSource (
         city,response.data.id,response.data.attributes.created_at
       );
 
-      console.log(response.data.attributes.redirect.checkout_url);
+      console.log(response);
       window.location.href = response.data.attributes.redirect.checkout_url;
     })
     .catch((err) => console.error(err));
