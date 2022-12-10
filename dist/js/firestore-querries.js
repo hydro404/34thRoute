@@ -88,7 +88,7 @@ export async function createTransaction(price,
     postal_code,
     city,date
   };
-  data["paid"] = false
+  data["paid"] = "pending"
 
   let source_data = {[sourceID]:data}
   await setDoc(doc(db, cart_type, userID), {});

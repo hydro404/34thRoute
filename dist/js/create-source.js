@@ -46,16 +46,14 @@ async function createSource (
       "content-type": "application/json",
       authorization: "Basic c2tfdGVzdF9vVjVZcU11TDdXbVd2Y0d4RUxXYXZjRms6",
     },
-	
+
     body: JSON.stringify({
       data: {
         attributes: {
           amount: amount,
           redirect: {
-            success:
-              "https://paymongo-kasmagtech.web.app/food-delivery-single.html",
-            failed:
-              "https://paymongo-kasmagtech.web.app/food-delivery-cart.html",
+            success: "https://paymongo-kasmagtech.web.app/account-orders.html",
+            failed: "https://paymongo-kasmagtech.web.app/account-orders.html",
           },
           billing: {
             address: {
