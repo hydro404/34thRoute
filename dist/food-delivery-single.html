@@ -206,7 +206,7 @@
         <div class="ps-lg-3 w-100 text-end">
           <!-- For desktop-->
           <ul class="nav nav-tabs d-none d-lg-flex border-0 mb-0">
-            <li class="nav-item"><a class="nav-link" id="donut_PC" onclick="active('donut_PC');" style="cursor: pointer;">Donuts</a></li>
+            <li class="nav-item"><a class="nav-link" id="donuts_PC" onclick="active('donuts_PC');" style="cursor: pointer;">Donuts</a></li>
             <li class="nav-item"><a class="nav-link" id="coffee_PC" onclick="active('coffee_PC');" style="cursor: pointer;">Coffee</a></li>
             <li class="nav-item"><a class="nav-link" id="milktea_PC" onclick="active('milktea_PC');" style="cursor: pointer;">Milktea</a></li>
             <li class="nav-item"><a class="nav-link" id="frappe_PC" onclick="active('frappe_PC');" style="cursor: pointer;">Frappe</a></li>
@@ -217,7 +217,7 @@
             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false"><i class="ci-menu fs-base me-2"></i>Categories</button>
             <div class="dropdown-menu dropdown-menu-end">
-              <a class="dropdown-item fs-base" id="donut_MB" onclick="active('donut_MB');" style="cursor: pointer;">Donuts </a>
+              <a class="dropdown-item fs-base" id="donuts_MB" onclick="active('donuts_MB');" style="cursor: pointer;">Donuts </a>
               <a class="dropdown-item fs-base" id="coffee_MB" onclick="active('coffee_MB');" style="cursor: pointer;">Coffee</a>
               <a class="dropdown-item fs-base" id="milktea_MB" onclick="active('milktea_MB');" style="cursor: pointer;">Milktea</a>
               <a class="dropdown-item fs-base" id="frappe_MB" onclick="active('frappe_MB');" style="cursor: pointer;">Frappe</a>
@@ -262,8 +262,8 @@
       }
 
       function onloadZ(){
-        document.getElementById("donut_PC").classList.add('active');
-        document.getElementById("donut_MB").classList.add('active');
+        document.getElementById("donuts_PC").classList.add('active');
+        document.getElementById("donuts_MB").classList.add('active');
         document.getElementById("catTitle").innerHTML = "donuts".toUpperCase();
       }
     </script>

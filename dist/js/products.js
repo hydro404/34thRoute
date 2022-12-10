@@ -108,17 +108,28 @@ async function displayProduct(id, product_data, searchCategory) {
     description: description,
   };
 
+  let stringerist = "";
+
   if(searchCategory==category){
+
+
+    if(available>0){
+      stringerist = `Only ${available} left in stock!`;
+    }
+    else{
+      stringerist =  `Out of Stock!`;
+    }
+
 
     let template_html = `<div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter" id = "${id}">
       <div class="card product-card border pb-2">
       <a class="d-block" href="#quick-view" data-bs-toggle="modal" id="modal_${id}" onclick="updateModal('${id}',${price},'${name}',${quantity},${available},'${getUrl}','${description}')">
       <img
             class="card-img-top" src="${getUrl}" alt="Photo here"></a>
-        <div class="card-body pt-1 pb-2">
+        <div class="card-body pt-2 pb-2">
           <h3 class="product-title fs-md"><a href="#quick-view" data-bs-toggle="modal">${name}</a></h3>
           <p class="fs-ms text-muted">${description}</p>
-          <span class="text-accent">Only ${available} left in stock!</span>
+          <span class="text-accent" >${stringerist}</span>
           <div class="d-flex align-items-center justify-content-between">
             <div class="product-price"><span class="text-accent">₱ ${price}</span></div>
             <button class="btn btn-primary btn-sm" type="button" onclick="addtoCart(1,this.value)" value="${id}" id="${id}_btn">+<i class="ci-cart fs-base ms-1"></i></button>
@@ -128,14 +139,13 @@ async function displayProduct(id, product_data, searchCategory) {
     </div>`;
 
     
-
     document
       .getElementById("products_gallery")
       .insertAdjacentHTML("beforeend", template_html);
 
     if(available==0){
         document.getElementById(`${id}_btn`).disabled = true;
-        console.log(`${id}_btn`);
+        //console.log(`${id}_btn`);
     }
   }
 }
