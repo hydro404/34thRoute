@@ -29,6 +29,11 @@ export async function getCartItems() {
   return docSnap;
 }
 
+export async function getAllTransactions() {
+  const querySnapshot = await getDocs(collection(db, "transactions"));
+  return querySnapshot;
+}
+
 export async function getTransactions() {
   const trans_reference = doc(db, "transactions", userID);
   const docSnap = await getDoc(trans_reference);
