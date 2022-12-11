@@ -39,6 +39,7 @@ onAuthStateChanged(auth, (user) => {
     //window.location.href = 'food-delivery-single.html'
     // ...
     console.log(uid);
+    $("#order-today").css("pointer-events", "auto");
   } else {
     CreateID();
     // User is signed out
@@ -78,6 +79,10 @@ window.SignIn = function SignIn() {
     });
 };
 
+window.deleteID = async function deleteID(userID) {
+  await deleteDoc(doc(db, "guests", userID));
+};
+
 window.SignUp = async function SignUp() {
   const userEmail = document.getElementById("su-email").value;
   const passWord = document.getElementById("su-password").value;
@@ -91,9 +96,16 @@ window.SignUp = async function SignUp() {
         .then(async (usercred) => {
           const user = usercred.user;
           console.log("Anonymous account successfully upgraded", user);
-          await transferGuestData();
+          try {
+            await transferGuestData();
+          } catch (error) {
+            const userID = sessionStorage["userID"];
+            sessionStorage["isAnonymous"] = "false";
+            await setDoc(doc(db, "cart", userID), {});
+          }
+          
           deleteID(user.uid);
-          window.location.href = "food-delivery-checkout.html";
+          window.location.reload();
         })
         .catch((error) => {
           console.log("Error upgrading anonymous account", error);
@@ -117,17 +129,16 @@ window.SignUp = async function SignUp() {
   }
 };
 
-window.deleteID = async function deleteID(userID) {
-  await deleteDoc(doc(db, "guests", userID));
-};
+
 
 window.CreateID = function CreateID() {
   signInAnonymously(auth)
     .then(async (vars) => {
       console.log(vars);
-      console.log("VARS written with ID: ", vars.user.uid);
       await setDoc(doc(db, "transactions", vars.user.uid), {});
-      const docRef = await setDoc(doc(db, "guests", vars.user.uid), {});
+      await setDoc(doc(db, "guests", vars.user.uid), {});
+      console.log("VARS written with ID: ", vars.user.uid);
+      
       sessionStorage.setItem("userID", vars.user.uid);
       $('#order-today').css('pointer-events',"auto");
       //window.location.href = 'food-delivery-checkout.html'

@@ -61,11 +61,17 @@ export async function removeCartItem(item) {
 }
 
 export async function transferGuestData() {
-  let guest_cart_items = await getCartItems();
 
-  console.log(guest_cart_items.data());
-  sessionStorage["isAnonymous"] = "false";
-  await setDoc(doc(db, "cart", userID), guest_cart_items.data());
+  try {
+    let guest_cart_items = await getCartItems();
+
+    console.log(guest_cart_items.data());
+    sessionStorage["isAnonymous"] = "false";
+    await setDoc(doc(db, "cart", userID), guest_cart_items.data());
+  } catch (error) {
+    
+  }
+  
 }
 
 export async function createTransaction(

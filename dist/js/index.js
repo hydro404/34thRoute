@@ -25,6 +25,7 @@ import {
 
 
 const userID = sessionStorage["userID"];
+
 $("#admin-list-icon").hide();
 window.updateCartDropDown = async function () {
   let total_price = 0;
@@ -92,8 +93,11 @@ window.updateCartDropDown = async function () {
   }
 };
 
-if (userID == "" || userID == null) {
+
+window.onload = async function(){
+  if (userID == "" || userID == null) {
 } else {
+  
   $("#order-today").css("pointer-events", "auto");
   $("#admin-list-icon").hide();
   let admin_stat = await checkAdmin();
@@ -107,6 +111,8 @@ if (userID == "" || userID == null) {
   }
   updateCartDropDown();
 }
+}
+
 
 async function getProduct(id) {
   const docRef = doc(db, "products", id);
