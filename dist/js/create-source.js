@@ -1,6 +1,15 @@
 import { app, auth, db } from "./config.js";
 import { createTransaction, getCartItems } from "./firestore-querries.js";
 
+const items = sessionStorage.getItem("items_array");
+
+if(items=="{}"){
+  window.location.href = "food-delivery-cart.html";
+}
+
+
+
+
 window.getDetails = function () {
   let name = $("#fd-name").val();
   let phone = $("#fd-phone").val();
@@ -12,19 +21,25 @@ window.getDetails = function () {
   let state = $("#fd-state").val();
   let postal_code = $("#fd-postal_code").val();
   let landmark = $("#fd-landmark").val();
+  
+  if(delivery_date==""){
+    document.getElementById("date_time").style.display = "block";
+  }
+  if(name!="" && phone != "" && email!="" && delivery_date!="" && line1!="" && city!="" && state!="" && postal_code!=""){
+    createSource(
+      name,
+      phone,
+      email,
+      line1,
+      line2,
+      state,
+      postal_code,
+      city,
+      delivery_date,
+      landmark
+    );
+  }
 
-  createSource(
-    name,
-    phone,
-    email,
-    line1,
-    line2,
-    state,
-    postal_code,
-    city,
-    delivery_date,
-    landmark
-  );
 };
 
 //createSource("BENNY","09455573813","benny@gmail.com","line","line2","state",4510,"tabacpo city")

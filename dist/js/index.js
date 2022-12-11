@@ -24,7 +24,7 @@ import {
 } from "./firestore-querries.js";
 
 const userID = sessionStorage["userID"];
-
+$("#admin-list-icon").hide();
 window.updateCartDropDown = async function () {
   let total_price = 0;
   var product_obj = [];
