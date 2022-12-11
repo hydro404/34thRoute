@@ -101,7 +101,7 @@ export async function createTransaction(
     date
   };
   data["paid"] = "pending";
-
+  
   let source_data = { [sourceID]: data };
   await setDoc(doc(db, cart_type, userID), {});
   await updateDoc(doc(db, "transactions", userID), source_data);

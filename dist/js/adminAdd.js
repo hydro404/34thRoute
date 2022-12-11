@@ -9,7 +9,7 @@ import {
   increment,
   addDoc,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
-import { getProducts } from "./firestore-querries.js";
+import { getProducts,checkAdmin } from "./firestore-querries.js";
 import {
   ref,
   getStorage,
@@ -18,6 +18,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
 // Create a root reference
 const storage = getStorage();
+
+let admin_stat = await checkAdmin();
+if (admin_stat.exists()) {
+  // $("#admin-list-icon").show();
+} else {
+  window.location.href = "index.html";
+}
 
 
 window.addAvailable = async function addAvailable() {

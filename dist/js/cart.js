@@ -33,6 +33,11 @@ const userID = sessionStorage.getItem("userID");
 let cart_type = "cart";
 if (sessionStorage["isAnonymous"] == "true") {
   cart_type = "guests";
+  
+}
+else{
+  $("#checkOutBtn").attr("href", "food-delivery-checkout.html");
+  $("#checkOutBtn").attr("data-bs-toggle", "");
 }
 
 window.updateQuantity = await updateQuantity;

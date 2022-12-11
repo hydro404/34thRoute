@@ -68,11 +68,11 @@ async function createSource(
   delivery_date,
   landmark
 ) {
-  let dropoff_option = "at-door"
-  if (document.getElementById("hand-to-me").checked){
+  let dropoff_option = "at-door";
+  if (document.getElementById("hand-to-me").checked) {
     dropoff_option = "hand-to-me";
   }
-   var product_obj = [];
+  var product_obj = [];
   let total_price = 0;
   let parsed = await getCartItems();
   console.log(parsed);
@@ -125,7 +125,7 @@ async function createSource(
             clientID: userID,
             delivery_date: delivery_date,
             landmark: landmark,
-            dropoff_option: dropoff_option
+            dropoff_option: dropoff_option,
           },
         },
       },
@@ -133,6 +133,36 @@ async function createSource(
   };
   if (document.getElementById("cash").checked) {
     // hand payment
+    // https://www.uuidtools.com/api/generate/v1
+    const options1 = {
+      method: "GET",
+    };
+
+    fetch("https://www.uuidtools.com/api/generate/v1", options1)
+      .then((response) => response.json())
+      .then(async (response) => {
+        console.log(response[0]);
+        await createTransaction(
+          total_price,
+          name,
+          phone,
+          email,
+          line1,
+          line2,
+          state,
+          postal_code,
+          city,
+          delivery_date,
+          landmark,
+          dropoff_option,
+          response[0],
+          Math.floor(new Date().getTime() / 1000),
+        );
+
+        // console.log(response);
+        window.location.href = "account-orders.html";
+      })
+      .catch((err) => console.error(err));
   } else {
     fetch("https://api.paymongo.com/v1/sources", options)
       .then((response) => response.json())

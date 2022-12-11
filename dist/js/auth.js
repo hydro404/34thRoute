@@ -48,11 +48,16 @@ onAuthStateChanged(auth, (user) => {
 
 import { transferGuestData } from "./firestore-querries.js";
 
-var form = document.getElementById("signin-tab");
-function handleForm(event) {
-  event.preventDefault();
+try {
+  var form = document.getElementById("signin-tab");
+  function handleForm(event) {
+    event.preventDefault();
+  }
+  form.addEventListener("submit", handleForm);
+} catch (error) {
+  
 }
-form.addEventListener("submit", handleForm);
+
 
 window.SignIn = function SignIn() {
   const userEmail = document.getElementById("si-email").value;

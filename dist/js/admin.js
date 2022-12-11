@@ -8,9 +8,17 @@ import {
   setDoc,
   increment,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
-import {getProducts} from "./firestore-querries.js";
+import {checkAdmin, getProducts} from "./firestore-querries.js";
 import { ref , getStorage, uploadString,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
 // Create a root reference
+
+let admin_stat = await checkAdmin();
+if (admin_stat.exists()) {
+  // $("#admin-list-icon").show();
+}
+else{
+  window.location.href = "index.html";
+}
 const storage = getStorage();
 
 async function imageUrl(id_img){

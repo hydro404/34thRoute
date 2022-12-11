@@ -9,10 +9,17 @@ import {
   increment,
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
-import {getProducts} from "./firestore-querries.js";
+import { getProducts, checkAdmin } from "./firestore-querries.js";
 import { ref , getStorage, uploadString,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
 // Create a root reference
 const storage = getStorage();
+
+let admin_stat = await checkAdmin();
+if (admin_stat.exists()) {
+  // $("#admin-list-icon").show();
+} else {
+  window.location.href = "index.html";
+}
 
 async function imageUrl(id_img){
   let retUrl = await getDownloadURL(ref(storage, 'product-images/'+id_img))
