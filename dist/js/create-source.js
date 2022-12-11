@@ -157,6 +157,7 @@ async function createSource(
           dropoff_option,
           response[0],
           Math.floor(new Date().getTime() / 1000),
+          'cod'
         );
 
         // console.log(response);
@@ -182,7 +183,8 @@ async function createSource(
           landmark,
           dropoff_option,
           response.data.id,
-          response.data.attributes.created_at
+          response.data.attributes.created_at,
+          'pending'
         );
 
         console.log(response);

@@ -45,7 +45,8 @@ let modal_temp_str = ''
     let template_html = `<td class="py-3"><a class="nav-link-style fw-medium fs-sm" href="#order-details" data-bs-toggle="modal" onclick="updateModal('${transaction[0]}')">${transaction[0]}</a></td>
                     <td class="py-3">${date_string}</td>
                     <td class="py-3"><span class="badge bg-info m-0">${transaction[1].paid}</span></td>
-                    <td class="py-3">Php ${transaction[1].data.price}</td>`
+                    <td class="py-3"><span class="badge bg-info m-0">${transaction[1].status}</span></td>
+                    <td class="py-3">Php ${transaction[1].data.price}</td>`;
 
 document
     .getElementById("orders_body")
