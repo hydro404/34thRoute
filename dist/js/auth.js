@@ -129,6 +129,7 @@ window.CreateID = function CreateID() {
       await setDoc(doc(db, "transactions", vars.user.uid), {});
       const docRef = await setDoc(doc(db, "guests", vars.user.uid), {});
       sessionStorage.setItem("userID", vars.user.uid);
+      $('#order-today').css('pointer-events',"auto");
       //window.location.href = 'food-delivery-checkout.html'
     })
     .catch((error) => {

@@ -114,7 +114,12 @@ export async function createTransaction(
 }
 
 export async function checkAdmin() {
-  const admin_ref = doc(db, "admins", userID);
-  const docSnap = await getDoc(admin_ref);
-  return docSnap;
+  
+  try {
+    const admin_ref = doc(db, "admins", userID);
+    const docSnap = await getDoc(admin_ref);
+    return docSnap;
+  } catch (error) {
+    return "error";
+  }
 }

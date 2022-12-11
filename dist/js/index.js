@@ -23,6 +23,7 @@ import {
   removeCartItem,
 } from "./firestore-querries.js";
 
+
 const userID = sessionStorage["userID"];
 $("#admin-list-icon").hide();
 window.updateCartDropDown = async function () {
@@ -93,6 +94,7 @@ window.updateCartDropDown = async function () {
 
 if (userID == "" || userID == null) {
 } else {
+  $("#order-today").css("pointer-events", "auto");
   $("#admin-list-icon").hide();
   let admin_stat = await checkAdmin();
   if (admin_stat.exists()) {
@@ -144,5 +146,3 @@ window.remove = async function remove(item) {
   updateCartDropDown();
   updateTotal();
 };
-
-
