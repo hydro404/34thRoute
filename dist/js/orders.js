@@ -40,8 +40,8 @@ let modal_temp_str = ''
     var unix_date = new Date(unix_timestamp * 1000);
     var year = unix_date.getFullYear();
     var date = unix_date.getDate();
-    var month = unix_date.getMonth();
-    var date_string = year+"-"+date+"-"+month;
+    var month = unix_date.getMonth()+1;
+    var date_string = month+"-"+date+"-"+year;
     let template_html = `<td class="py-3"><a class="nav-link-style fw-medium fs-sm" href="#order-details" data-bs-toggle="modal" onclick="updateModal('${transaction[0]}')">${transaction[0]}</a></td>
                     <td class="py-3">${date_string}</td>
                     <td class="py-3"><span class="badge bg-info m-0">${transaction[1].paid}</span></td>

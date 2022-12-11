@@ -31,6 +31,10 @@ else{
 document.getElementById("products_gallery").innerText = "";
 
 const userID = sessionStorage["userID"];
+
+if(userID == "" || userID == null){
+  window.location.href = "index.html"
+}
 $("#admin-list-icon").hide();
 let admin_stat = await checkAdmin();
 if(admin_stat.exists()){

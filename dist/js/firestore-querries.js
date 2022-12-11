@@ -73,7 +73,7 @@ export async function createTransaction(
   state,
   postal_code,
   city,
-  date,
+  delivery_date,
   landmark,
   dropoff_option,
   sourceID,
@@ -94,9 +94,11 @@ export async function createTransaction(
     state,
     postal_code,
     city,
-    date,
+    delivery_date,
+    landmark,
     landmark,
     dropoff_option,
+    date
   };
   data["paid"] = "pending";
 
