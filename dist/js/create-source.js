@@ -7,9 +7,6 @@ if(items=="{}"){
   window.location.href = "food-delivery-cart.html";
 }
 
-
-
-
 window.getDetails = function () {
   let name = $("#fd-name").val();
   let phone = $("#fd-phone").val();
