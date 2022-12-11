@@ -234,6 +234,16 @@ window.updateModal = function (id,
   img,
   description
 ) {
+
+  let stringerist = "";
+
+  if(available>0){
+    stringerist = `Only ${available} left in stock!`;
+  }
+  else{
+    stringerist =  `Out of Stock!`;
+  }
+
   let modal_template = `<div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -262,12 +272,12 @@ window.updateModal = function (id,
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
-                  <button class="btn btn-primary btn-shadow d-block w-100" onclick="addtoCart(document.getElementById('selectQuantity').value,this.value)" value="${id}"><i
+                  <button class="btn btn-primary btn-shadow d-block w-100" onclick="addtoCart(document.getElementById('selectQuantity').value,this.value)" value="${id}" id="${id}_btn"><i
                       class="ci-cart fs-lg me-2"></i>Add to Cart</button>
                 </div>
               </form>
               <h5 class="h6 mb-3 pb-3 border-bottom"><i
-                  class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Only ${available} left in stock!</h5>
+                  class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>${stringerist}</h5>
               <h6 class="fs-sm mb-2">Description:</h6>
               <p class="fs-sm">${description}</p>
             </div>
@@ -277,6 +287,10 @@ window.updateModal = function (id,
     </div>
   </div>`;
   document.getElementById("quick-view").innerHTML = modal_template;
+
+  if(available==0){
+    document.getElementById(`${id}_btn`).disabled = true;
+  }
 };
 
 window.remove = async function remove(item) {
