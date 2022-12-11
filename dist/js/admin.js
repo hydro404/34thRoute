@@ -67,20 +67,22 @@ window.updateAvailable =  async function updateAvailable() {
         let nameProduct = document.getElementById(`name_${id}`).value;
         let descriptionProduct = document.getElementById(`description_${id}`).value;
         let priceProduct = document.getElementById(`Phprice_${id}`).value;
+        let category = document.getElementById(`category_${id}`).value;
         //console.log(available);
-        updateAdmin(id, available, nameProduct, descriptionProduct, priceProduct);
+        updateAdmin(id, available, nameProduct, descriptionProduct, priceProduct, category);
     });
 
     alert("ALL CHANGES ARE SAVED!");
 }
 
-async function updateAdmin(id, value, nameProduct, descriptionProduct, priceProduct){
+async function updateAdmin(id, value, nameProduct, descriptionProduct, priceProduct, category){
     const docRef = doc(db, "products", id);
     updateDoc(docRef, {
         available: value,
         product_name: nameProduct,
         description: descriptionProduct,
         price: priceProduct,
+        category: category,
     });
 }
 
@@ -91,6 +93,7 @@ async function displayProduct(id, product_data) {
   let available = product_data.available;
   let img = product_data.img;
   let description = product_data.description;
+  let category = product_data.category;
 
   let details_obj = {
     price: price,
@@ -98,7 +101,8 @@ async function displayProduct(id, product_data) {
     quantity: quantity,
     available: available,
     img:img,
-    description:description
+    description:description,
+    category:category
   };
   let yuarel = await imageUrl(id)
   
@@ -113,19 +117,17 @@ async function displayProduct(id, product_data) {
                 
               </script>
     <div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 pb-3 border-bottom" id="${id}">
-        <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#">
+        <div class="d-block d-sm-flex align-items-center text-center text-sm-start">
+        <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4">
         <div class="input-group">
-
-
           <div class="image-upload me-5 img">
             <label for="input-file_${id}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
-                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"></path>
-              </svg>
-              <img src="${yuarel}" id="img_${id}" onclick="" height="120" width="120"></a>
-              
+              <img src="./img/upload.png" style="position:absolute; bottom:0px;right:0px;" width="50" class="imgha" >
+              <img src="${yuarel}" id="img_${id}" onclick="" height="120" width="120">
             </label>
+        </a>
+              
+            
             
             <input id="input-file_${id}" type="file" onchange="document.getElementById('img_${id}').src = window.URL.createObjectURL(this.files[0]);" style="display: none;" accept="image/jpeg, image/png"/>
             <!--<button id="upload-button" onchange='uploadFile("input-file_${id}")'; > Upload </button>-->
@@ -140,6 +142,9 @@ async function displayProduct(id, product_data) {
               <div class="form-group" style="display: flex !important;">
                 <div class="mb-2 me-2">Price in ₱ <input type="text" class="prodRow" value="${price}" id="Phprice_${id}"></input></div>
                 <div class="mb-2 me-2"><label class="" for="quantity1">Available</label><input class="form-control" type="number" id="available_${id}" value="${available}" min="1"> </div>
+              </div>
+              <div class="form-group">
+                <div class="mb-2 me-2">Category: <input type="text" class="prodRow" id="category_${id}"  value="${category}"></input></div>
               </div>
             </div>
         </div>

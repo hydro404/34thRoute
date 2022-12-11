@@ -35,7 +35,6 @@ window.addAvailable = async function addAvailable() {
     let category = document.getElementById("itemCat").value;
     //console.log(available);
     addAdmin(available, nameProduct, descriptionProduct, priceProduct, category);
-
   
 };
 

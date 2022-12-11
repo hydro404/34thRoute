@@ -74,6 +74,7 @@ async function displayProduct(id, product_data) {
   let available = product_data.available;
   let img = product_data.img;
   let description = product_data.description;
+  let category = product_data.category;
 
   let details_obj = {
     price: price,
@@ -108,6 +109,7 @@ async function displayProduct(id, product_data) {
           </div>
 
             <div class="pt-2">
+
               <div class="form-group">
                 <div class="mb-2">Product Name: <span id="name_${id}" value="${name}">${name}</span></div>
                 <div class="mb-2"><span class="text-muted me-2">Description:</span><span id="description_${id}" value="${description}">${description}</span></div>
@@ -115,6 +117,9 @@ async function displayProduct(id, product_data) {
               <div class="form-group" style="display: flex !important;">
                 <div class="mb-2 me-2">Price: <span value="${price}" id="Phprice_${id}">₱${price}</span></div>
                 <div class="mb-2 me-2"><label class="" for="quantity1">Available:</label><span id="available_${id}" value="${available}" min="1">${available} </span</div>
+              </div>
+              <div class="form-group">
+              <div class="mb-2">Category: <span id="category_${id}" value="${name}">${category}</span></div>
               </div>
             </div>
             <button class="btn btn-primary" onclick="deleteAdmin('${id}')">DELETE</button>

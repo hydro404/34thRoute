@@ -34,7 +34,11 @@ let modal_temp_str = ''
     
   }
 
-    console.log(modal_temp_str)
+    console.log(modal_temp_str);
+
+    if(transaction[1].status=="" || transaction[1].status==null){
+      transaction[1].status = "pending";
+    }
 
     let unix_timestamp = transaction[1].data.date
     var unix_date = new Date(unix_timestamp * 1000);
@@ -60,22 +64,27 @@ window.updateModal = async function (src_id) {
 console.log(trans_data.data()[src_id].items)
   for(let trans_item of Object.entries(trans_data.data()[src_id].items)){
     let url_img = await imageUrl(trans_item[0])
+
+    let subtotal = trans_item[1].price * trans_item[1].quantity;
+
+    console.log(subtotal);
     let modal_template = `<div class="d-sm-flex justify-content-between mb-4 pb-3 pb-sm-2 border-bottom">
                 <div class="d-sm-flex text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto" href="shop-single-v1.html" style="width: 10rem;"><img src="${url_img}" alt="Product"></a>
                   <div class="ps-sm-4 pt-2">
                     <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">${trans_item[1].product_name}</a></h3>
                     <div class="fs-sm"><span class="text-muted me-2">Size:</span>8.5</div>
                     <div class="fs-sm"><span class="text-muted me-2">Color:</span>White &amp; Blue</div>
-                    <div class="fs-lg text-accent pt-2">Php ${trans_item[1].price}<small>00</small></div>
+                    <div class="fs-lg text-accent pt-2">Php ${trans_item[1].price}</div>
                   </div>
                 </div>
                 <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
                   <div class="text-muted mb-2">Quantity: ${trans_item[1].quantity}</div>1
                 </div>
                 <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                  <div class="text-muted mb-2">Subtotal</div>$154.<small>00</small>
+                  <div class="text-muted mb-2">Subtotal</div>Php ${subtotal}
                 </div>
-              </div>`;
+              </div>
+              `;
       modal_temp_str += modal_template
 
     

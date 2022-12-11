@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Cartzilla | My orders</title>
+    <title>34th Route | My orders</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Cartzilla - Bootstrap E-commerce Template">
     <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
@@ -11,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/icon.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/icon.jpg">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -110,14 +110,18 @@
             </div>
             <!-- Footer-->
             <div class="modal-footer flex-wrap justify-content-between bg-secondary fs-md">
-              <div class="px-2 py-1"><span class="text-muted">Subtotal:&nbsp;</span><span>$265.<small>00</small></span></div>
-              <div class="px-2 py-1"><span class="text-muted">Shipping:&nbsp;</span><span>$22.<small>50</small></span></div>
-              <div class="px-2 py-1"><span class="text-muted">Tax:&nbsp;</span><span>$9.<small>50</small></span></div>
-              <div class="px-2 py-1"><span class="text-muted">Total:&nbsp;</span><span class="fs-lg">$297.<small>00</small></span></div>
+              <div class="px-2 py-1" id="totalItems"><span class="text-muted">Subtotal:&nbsp;</span><span>$265.<small>00</small></span></div>
+              <div class="px-2 py-1" id="shippingfee"><span class="text-muted">Shipping:&nbsp;</span><span>$22.<small>50</small></span></div>
+              <div class="px-2 py-1" id="totalExpense"><span class="text-muted">Total:&nbsp;</span><span class="fs-lg">$297.<small>00</small></span></div>
             </div>
+
           </div>
         </div>
       </div>
+
+      <script>
+        //document.getElementbyId()
+      </script>
       <!-- Navbar 3 Level (Light)-->
         <!-- Topbar
         <div class="topbar topbar-dark bg-dark">
@@ -207,7 +211,7 @@
       <!-- Page Title-->
       <div class="page-title-overlap bg-dark pt-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-          <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <div class="mb-3 mb-lg-0 pt-lg-2">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
                 <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
@@ -215,9 +219,15 @@
               </ol>
             </nav>
           </div>
+          
           <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
             <h1 class="h3 text-light mb-0">My orders</h1>
           </div>
+
+          <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+            <a class="btn btn-primary btn-sm d-none d-lg-inline-block" onclick="SignOut()"><i class="ci-sign-out me-2"></i>Sign out</a>
+          </div>
+
         </div>
       </div>
       <div class="container pb-5 mb-2 mb-md-4">
@@ -309,9 +319,7 @@
             <div class="widget widget-links widget-light pb-2 mb-4">
               <h3 class="widget-title text-light">Let us help you</h3>
               <ul class="widget-list">
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Help Center</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Support</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Contacts</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="/helpCenter.html">Help Center</a></li>
               </ul>
             </div>
           </div>
@@ -319,16 +327,9 @@
             <div class="widget widget-links widget-light pb-2 mb-4">
               <h3 class="widget-title text-light">Follow us</h3>
               <ul class="widget-list">
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Facebook</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Twitter</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Instagram</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="https://www.facebook.com/34thRoute">Facebook</a></li>
+                <li class="widget-list-item"><a class="widget-list-link" href="https://www.instagram.com/34thRoute/">Instagram</a></li>
               </ul>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-8">
-            <div class="widget pb-2 mb-4">
-              <h3 class="widget-title text-light pb-1">Download our app</h3>
-              <div class="d-flex flex-wrap"><a class="btn-market btn-apple border border-light me-3 mb-2" href="#" role="button"><span class="btn-market-subtitle">Download on the</span><span class="btn-market-title">App Store</span></a><a class="btn-market btn-google border border-light mb-2" href="#" role="button"><span class="btn-market-subtitle">Download on the</span><span class="btn-market-title">Google Play</span></a></div>
             </div>
           </div>
         </div>
@@ -337,9 +338,9 @@
           <div class="pb-4 fs-xs text-light opacity-50 text-center text-md-start">© All rights reserved. Made by <a class="text-light" href="https://createx.studio/" target="_blank" rel="noopener">Createx Studio</a></div>
           <div class="widget widget-links widget-light pb-4">
             <ul class="widget-list d-flex flex-wrap justify-content-center justify-content-md-start">
-              <li class="widget-list-item ms-4"><a class="widget-list-link fs-ms" href="#">Privacy Policy</a></li>
-              <li class="widget-list-item ms-4"><a class="widget-list-link fs-ms" href="#">Terms &amp; Conditions</a></li>
-              <li class="widget-list-item ms-4"><a class="widget-list-link fs-ms" href="#">Cookies Policy</a></li>
+              <li class="widget-list-item ms-4"><a class="widget-list-link fs-ms" href="/privacyPolicy.html">Privacy Policy</a></li>
+              <li class="widget-list-item ms-4"><a class="widget-list-link fs-ms" href="/termsCondition.html">Terms &amp; Conditions</a></li>
+              <li class="widget-list-item ms-4"><a class="widget-list-link fs-ms" href="/cookiePolicy.html">Cookies Policy</a></li>
             </ul>
           </div>
         </div>
