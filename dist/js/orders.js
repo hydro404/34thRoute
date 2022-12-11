@@ -34,7 +34,11 @@ let modal_temp_str = ''
     
   }
 
-    console.log(modal_temp_str)
+    console.log(modal_temp_str);
+
+    if(transaction[1].status=="" || transaction[1].status==null){
+      transaction[1].status = "pending";
+    }
 
     let unix_timestamp = transaction[1].data.date
     var unix_date = new Date(unix_timestamp * 1000);
