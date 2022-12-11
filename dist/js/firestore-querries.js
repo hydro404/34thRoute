@@ -82,7 +82,8 @@ export async function createTransaction(
   landmark,
   dropoff_option,
   sourceID,
-  date
+  date,
+  pay_status
 ) {
   let items_cart = await getCartItems();
 
@@ -105,7 +106,7 @@ export async function createTransaction(
     dropoff_option,
     date
   };
-  data["paid"] = "pending";
+  data["paid"] = pay_status;
   
   let source_data = { [sourceID]: data };
   await setDoc(doc(db, cart_type, userID), {});
