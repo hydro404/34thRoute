@@ -115,8 +115,8 @@ async function createSource(
         attributes: {
           amount: amount,
           redirect: {
-            success: "https://paymongo-kasmagtech.web.app/account-orders.html",
-            failed: "https://paymongo-kasmagtech.web.app/account-orders.html",
+            success: "https://34throute.online/account-orders.html",
+            failed: "https://34throute.online/account-orders.html",
           },
           billing: {
             address: {
