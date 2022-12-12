@@ -78,7 +78,7 @@ console.log(trans_data.data()[src_id].items)
                   </div>
                 </div>
                 <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                  <div class="text-muted mb-2">Quantity: ${trans_item[1].quantity}</div>1
+                  <div class="text-muted mb-2">Quantity: ${trans_item[1].quantity}</div>
                 </div>
                 <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
                   <div class="text-muted mb-2">Subtotal</div>Php ${subtotal}

@@ -41,14 +41,26 @@ export async function getTransactions() {
 }
 
 export async function updateQuantity(item, value) {
+  const item_q = await doc(db, "products", item);
+
+  const dat = await getDoc(item_q);
+  console.log("tinaoay",);
+  if(parseInt(dat.data().available) < value)
+  {
+    alert("You cannot add more products more than available!")
+    $('#quantity_'+item).value = parseInt(dat.data().available);
+    window.location.reload();
+  }
+  else{
   const cart_reference = doc(db, cart_type, userID);
   let updated = JSON.parse(sessionStorage["items_array"]);
   updated[item].quantity = parseInt(value);
-  console.log(JSON.parse(sessionStorage["items_array"])[item]);
+  //console.log(JSON.parse(sessionStorage["items_array"])[item]);
   updateDoc(cart_reference, {
     [`${item}.quantity`]: value,
   });
   sessionStorage["items_array"] = JSON.stringify(updated);
+}
 }
 
 export async function removeCartItem(item) {
