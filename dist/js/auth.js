@@ -27,11 +27,13 @@ onAuthStateChanged(auth, (user) => {
     console.log(user.isAnonymous);
     if (user.isAnonymous) {
       sessionStorage.setItem("isAnonymous", "true");
+      $("#sg-btn").css("display", "none");
         $("#account-icon").css("display", "block");
         // $("#account-orders").css("display", "block");
         // $("#account-orders").attr("href", "guest-orders.html");
     } else {
       sessionStorage.setItem("isAnonymous", "false");
+      $("#sg-btn").css("display", "block");
       $("#account-icon").css("display", "none");
       $("#account-orders").css("display", "block");
     }

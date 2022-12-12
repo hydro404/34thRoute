@@ -86,9 +86,7 @@ console.log(trans_data.data()[src_id].items)
               </div>
               `;
       modal_temp_str += modal_template
-
-    
-  }
+    }
   
   document.getElementById("modal-body").innerHTML = modal_temp_str;
 };
