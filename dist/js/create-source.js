@@ -3,7 +3,7 @@ import { createTransaction, getCartItems } from "./firestore-querries.js";
 
 const items = sessionStorage.getItem("items_array");
 
-if(items=="{}"){
+if(items=="{}" || items==null || items == ""){
   window.location.href = "food-delivery-cart.html";
 }
 
