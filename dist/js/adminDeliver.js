@@ -35,7 +35,7 @@ document.getElementById("products_gallery").innerText = "";
 
 const userID = sessionStorage["userID"];
 
-async function displayTransactions(user_trans_id,trans_id, trans_items, trans_data,status) {
+async function displayTransactions(user_trans_id,trans_id, trans_items, trans_data,status,pay_stats) {
   let total_price = trans_data.price;
   let line1 = trans_data.line1;
   let line2 = trans_data.line2;
@@ -80,6 +80,8 @@ async function displayTransactions(user_trans_id,trans_id, trans_items, trans_da
                 
                 <div class="mb-2"><span class="text-muted me-2">Landmark:</span><span id="" value="">${landmark}</span></div>
                 <div class="mb-2"><span class="text-muted me-2">Delivery Status:</span><span id="" value="">${status}</span></div>
+                
+                <div class="mb-2"><span class="text-muted me-2">Payment Status:</span><span id="" value="">${pay_stats}</span></div>
                 <div class="mb-2"><span class="text-muted me-2">Price:</span><span id="" value="">${total_price}</span></div>
               </div>
               
@@ -114,7 +116,8 @@ transactions.forEach(async (trans_doc) => {
         transaction_data[0],
         transaction_data[1].items,
         transaction_data[1].data,
-        transaction_data[1].status
+        transaction_data[1].status,
+        transaction_data[1].paid
       );
     }
       
