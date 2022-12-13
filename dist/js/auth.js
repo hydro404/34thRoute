@@ -88,30 +88,53 @@ window.deleteID = async function deleteID(userID) {
 window.SignUp = async function SignUp() {
   const userEmail = document.getElementById("su-email").value;
   const passWord = document.getElementById("su-password").value;
-  //console.log(userEmail);
+  const confirmPass = document.getElementById("su-password-confirm").value;
+  const fName = document.getElementById("su-name").value;
+
   if (userEmail !== "") {
     if (passWord !== "") {
-      const credential = EmailAuthProvider.credential(userEmail, passWord);
-      //isAnonymous false = no modal sa checkout
-      const auth = getAuth();
-      linkWithCredential(auth.currentUser, credential)
-        .then(async (usercred) => {
-          const user = usercred.user;
-          console.log("Anonymous account successfully upgraded", user);
-          try {
-            await transferGuestData();
-          } catch (error) {
-            const userID = sessionStorage["userID"];
-            sessionStorage["isAnonymous"] = "false";
-            await setDoc(doc(db, "cart", userID), {});
-          }
-          
-          deleteID(user.uid);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.log("Error upgrading anonymous account", error);
-        });
+      if(passWord == confirmPass){
+        const credential = EmailAuthProvider.credential(userEmail, passWord);
+        //isAnonymous false = no modal sa checkout
+        const auth = getAuth();
+        linkWithCredential(auth.currentUser, credential)
+          .then(async (usercred) => {
+            const user = usercred.user;
+            console.log("Anonymous account successfully upgraded", user);
+            try {
+              await transferGuestData();
+            } catch (error) {
+              const userID = sessionStorage["userID"];
+              sessionStorage["isAnonymous"] = "false";
+              await setDoc(doc(db, "cart", userID), {});
+            }
+            
+            deleteID(user.uid);
+
+            await setDoc(doc(db, "customer", sessionStorage["userID"]), {
+              name : fName,
+              email : "",
+              phone: "",
+              line1 : "",
+              line2 : "",
+              city : "",
+              state : "",
+              postalcode : "",
+              landmark : "",
+            });
+
+            console.log("Hello World");
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log("Error upgrading anonymous account", error);
+          });
+      }
+
+      else{
+        alert("Password do not match!");
+      }
+      
       //     createUserWithEmailAndPassword(auth, userEmail, passWord)
       // .then((userCredential) => {
       //   // Signed in

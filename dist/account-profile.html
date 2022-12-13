@@ -103,9 +103,7 @@
                       <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false" id="dropdown-items-cart">
                         
                       </div>
-                      <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
-                        <div class="fs-sm me-2 py-2"><span class="text-muted">Total:</span><span
-                            class="text-accent fs-base ms-1" id="dropdown_total_price">$24.<small>00</small></span></div><a
+                      <div class="d-flex flex-wrap justify-content-between align-items-center py-3"><a
                           class="btn btn-outline-secondary btn-sm" href="food-delivery-cart.html">Expand cart<i
                             class="ci-arrow-right ms-1 me-n1"></i></a>
                       </div><a class="btn btn-primary btn-sm d-block w-100" href="food-delivery-checkout.html"><i
@@ -192,26 +190,26 @@
             <div class="table-responsive fs-md mb-4 mt-5">
               <div class="pt-2">
                 <div class="form-group">
-                  <div class="mb-2 me-2">Full Name: <input type="text" class="form-control"></input></div>
+                  <div class="mb-2 me-2">Full Name: <input type="text" class="form-control" id="fnameInput"></input></div>
                 </div>
                 <div class="form-group" style="display: flex !important;">
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="email">Email:</label><input class="form-control" type="text"> </div>
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="phone">Phone number:</label><input class="form-control" type="text"> </div>
-                </div>
-
-                <div class="form-group" style="display: flex !important;">
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="line1">Line 1:</label><input class="form-control" type="text"> </div>
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="line2">Line 2:</label><input class="form-control" type="text"> </div>
+                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="email">Email:</label><input class="form-control" type="text" id="emailInput"> </div>
+                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="phone">Phone number:</label><input class="form-control" type="text" id="phoneInput"> </div>
                 </div>
 
                 <div class="form-group" style="display: flex !important;">
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="city">City:</label><input class="form-control" type="text"> </div>
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="state">State:</label><input class="form-control" type="text"> </div>
+                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="line1">Line 1:</label><input class="form-control" type="text" id="line1Input"> </div>
+                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="line2">Line 2:</label><input class="form-control" type="text" id="line2Input"> </div>
                 </div>
 
                 <div class="form-group" style="display: flex !important;">
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="postal">Postal Code:</label><input class="form-control" type="text"> </div>
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="landmark">Landmark:</label><input class="form-control" type="text"> </div>
+                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="city">City:</label><input class="form-control" type="text" id="cityInput"> </div>
+                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="state">State:</label><input class="form-control" type="text" id="stateInput"> </div>
+                </div>
+
+                <div class="form-group" style="display: flex !important;">
+                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="postal">Postal Code:</label><input class="form-control" type="text" id="postalInput"> </div>
+                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="landmark">Landmark:</label><input class="form-control" type="text" id="landmarkInput"> </div>
                 </div>
 
                 <div class="px-3 pt-4">
@@ -330,7 +328,7 @@
     <script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
     <!-- Main theme script-->
     <script src="js/theme.min.js"></script>
-    <script type="module" src="./js/orders.js"></script>
+    <script type="module" src="./js/account-profile.js"></script>
     <script type="module" src="./js/auth.js"></script>
   </body>
 </html>

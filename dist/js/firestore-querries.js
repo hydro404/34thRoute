@@ -23,6 +23,11 @@ export async function getProducts() {
   return querySnapshot;
 }
 
+export async function getCustomer() {
+  const querySnapshot = await getDocs(collection(db, "customer"));
+  return querySnapshot;
+}
+
 export async function getCartItems() {
   const cart_reference = doc(db, cart_type, userID);
   const docSnap = await getDoc(cart_reference);
