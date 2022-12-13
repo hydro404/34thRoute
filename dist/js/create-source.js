@@ -115,8 +115,8 @@ async function createSource(
         attributes: {
           amount: amount,
           redirect: {
-            success: "https://tf-route.web.app/account-orders.html",
-            failed: "https://tf-route.web.app/account-orders.html",
+            success: `${window.location.origin}/account-orders.html`,
+            failed: `${window.location.origin}/account-orders.html`,
           },
           billing: {
             address: {
