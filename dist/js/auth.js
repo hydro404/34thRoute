@@ -109,8 +109,9 @@ window.SignUp = async function SignUp() {
               await setDoc(doc(db, "cart", userID), {});
             }
             
+            
             deleteID(user.uid);
-
+            sessionStorage.setItem("email", userEmail);
             await setDoc(doc(db, "customer", sessionStorage["userID"]), {
               name : fName,
               email : "",
@@ -127,7 +128,8 @@ window.SignUp = async function SignUp() {
             window.location.reload();
           })
           .catch((error) => {
-            console.log("Error upgrading anonymous account", error);
+            //console.log("Error upgrading anonymous account", error);
+            alert(error);
           });
       }
 

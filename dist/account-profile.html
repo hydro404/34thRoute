@@ -163,7 +163,7 @@
               <div class="d-md-flex justify-content-between align-items-center text-center text-md-start p-4">
                 <div class="d-md-flex align-items-center">
                   <div class="ps-md-3">
-                    <h3 class="fs-base mb-0">Susan Gardner</h3><span class="text-accent fs-sm">s.gardner@example.com</span>
+                    <h3 class="fs-base mb-0" id="nameProfile"></h3><span class="text-accent fs-sm" id="emailProfile"></span>
                   </div>
                 </div><a class="btn btn-primary d-lg-none mb-2 mt-3 mt-md-0" href="#account-menu" data-bs-toggle="collapse" aria-expanded="false"><i class="ci-menu me-2"></i>Account menu</a>
               </div>
@@ -193,8 +193,7 @@
                   <div class="mb-2 me-2">Full Name: <input type="text" class="form-control" id="fnameInput"></input></div>
                 </div>
                 <div class="form-group" style="display: flex !important;">
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="email">Email:</label><input class="form-control" type="text" id="emailInput"> </div>
-                  <div class="mb-2 me-2" style="width: 50%;"><label class="" for="phone">Phone number:</label><input class="form-control" type="text" id="phoneInput"> </div>
+                  <div class="mb-2 me-2" style="width: 100%;"><label class="" for="phone">Phone number:</label><input class="form-control" type="text" id="phoneInput"> </div>
                 </div>
 
                 <div class="form-group" style="display: flex !important;">
@@ -217,7 +216,7 @@
                       <div class="row pt-3 pt-sm-0" id="products_gallery">
                       </div>
                       <span style="display:flex; justify-content:flex-end; width:100%; padding: 0;">
-                          <input type="submit" class="btn btn-outline-success m-2" value="Update" onclick="updateAvailable()"/>
+                          <input type="submit" class="btn btn-outline-success m-2" value="Update" onclick="updateDeets(sessionStorage.getItem('userID'))"/>
                       </span>
                   </div>
                 </div>
