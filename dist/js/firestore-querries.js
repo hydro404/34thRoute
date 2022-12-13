@@ -49,23 +49,24 @@ export async function updateQuantity(item, value) {
   const item_q = await doc(db, "products", item);
 
   const dat = await getDoc(item_q);
-  console.log("tinaoay",);
-  if(parseInt(dat.data().available) < value)
-  {
-    alert("You cannot add more products more than available!")
-    $('#quantity_'+item).value = parseInt(dat.data().available);
-    window.location.reload();
-  }
-  else{
-  const cart_reference = doc(db, cart_type, userID);
+  console.log("tinaoay");
   let updated = JSON.parse(sessionStorage["items_array"]);
-  updated[item].quantity = parseInt(value);
-  //console.log(JSON.parse(sessionStorage["items_array"])[item]);
-  updateDoc(cart_reference, {
-    [`${item}.quantity`]: value,
-  });
+  if (parseInt(dat.data().available) < value) {
+    alert("You cannot add more products more than available!");
+    $("#quantity_" + item).value = parseInt(dat.data().available);
+    window.location.reload();
+  } else {
+    const cart_reference = doc(db, cart_type, userID);
+    
+    updated[item].quantity = parseInt(value);
+    //console.log(JSON.parse(sessionStorage["items_array"])[item]);
+    updateDoc(cart_reference, {
+      [`${item}.quantity`]: value,
+    });
+    
+  }
+  
   sessionStorage["items_array"] = JSON.stringify(updated);
-}
 }
 
 export async function removeCartItem(item) {
@@ -78,17 +79,13 @@ export async function removeCartItem(item) {
 }
 
 export async function transferGuestData() {
-
   try {
     let guest_cart_items = await getCartItems();
 
     console.log(guest_cart_items.data());
     sessionStorage["isAnonymous"] = "false";
     await setDoc(doc(db, "cart", userID), guest_cart_items.data());
-  } catch (error) {
-    
-  }
-  
+  } catch (error) {}
 }
 
 export async function createTransaction(
@@ -127,17 +124,16 @@ export async function createTransaction(
     landmark,
     landmark,
     dropoff_option,
-    date
+    date,
   };
   data["paid"] = pay_status;
-  
+
   let source_data = { [sourceID]: data };
   await setDoc(doc(db, cart_type, userID), {});
   await updateDoc(doc(db, "transactions", userID), source_data);
 }
 
 export async function checkAdmin() {
-  
   try {
     const admin_ref = doc(db, "admins", userID);
     const docSnap = await getDoc(admin_ref);

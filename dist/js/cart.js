@@ -96,8 +96,8 @@ if (cartItems.exists()) {
                                       <label class="form-label" for="quantity1">Quantity</label>
                                       <input class="form-control" type="number" id="quantity_${item[0]}" value="${item[1].quantity}" min="1">
                                   <script>
-                                    document.getElementById("quantity_${item[0]}").addEventListener("input", (element) => {
-                                      updateQuantity('${item[0]}',element.target.value)
+                                    document.getElementById("quantity_${item[0]}").addEventListener("input", async (element) => {
+                                      await updateQuantity('${item[0]}',element.target.value)
                                       updateTotal();
                                     });
                                   </script>
