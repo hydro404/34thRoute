@@ -6,30 +6,6 @@ import {
 } from "./firestore-querries.js";
 
 import { ref , getStorage, uploadString,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
-
-import {
-  getCustomer,
-} from "./firestore-querries.js";
-
-const customer = await getCustomer();
-
-const userID = sessionStorage["userID"];
-const email = sessionStorage["email"];
-
-const name = document.getElementById("nameProfile");
-
-const emailProfile = document.getElementById("emailProfile");
-
-customer.forEach(async (doc) =>  {
-  console.log(doc.id, " => ", doc.data());
-
-  if(userID==doc.id){
-    name.innerHTML = doc.data().name;
-    emailProfile.innerHTML = email;
-  }
-});
-
-
 const storage = await getStorage();
 async function imageUrl(id_img){
   console.log(id_img)

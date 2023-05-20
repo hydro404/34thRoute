@@ -158,7 +158,7 @@ async function displayProduct(id, product_data, searchCategory) {
 
 window.addtoCart = async function addtoCart(quant,value) {
   //const washingtonRef = doc(db, "cart", userID);
-  let product_details = await getProduct(value);
+
   let cart_type = "cart";
   if (sessionStorage["isAnonymous"] == "true") {
     cart_type = "guests";
@@ -167,34 +167,22 @@ window.addtoCart = async function addtoCart(quant,value) {
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     console.log("Document datas:", Object.entries(await docSnap.data()));
-    const id_exist = Object.entries(await docSnap.data()).find(
+    let id_exist = Object.entries(await docSnap.data()).find(
       (data) => data[0] == value
     );
-    console.log("exist",id_exist);
+    console.log(id_exist);
     if (id_exist) {
-      let temp_prod = await getDoc(docRef);
-
-      let temp_item_q = parseInt(temp_prod.data()[value].quantity)
-      console.log("temppppppppp",temp_item_q + parseInt(quant));
-      
-      console.log(product_details.available);
-      if(parseInt(product_details.available) > parseInt(temp_item_q + parseInt(quant))){
-        // sa checkout nalang, su icocopy su address details HAHAHlat tapuson ko ine HAHHAA
-        await updateDoc(docRef, {
-        [`${value}.quantity`]: temp_item_q + parseInt(quant),
-      });
-      }
-      else{
-        alert("Cannot Exceed "+ product_details.available)
-      }
+      console.log(true);
       //console.log(productID);
-      
+      await updateDoc(docRef, {
+        [`${value}.quantity`]: increment(parseInt(quant)),
+      });
     } else {
       let product_details = await getProduct(value);
       await updateDoc(docRef, {
         [value]: {
           product_name: product_details.product_name,
-          quantity: quant,
+          quantity: 1,
           price: product_details.price,
           description: product_details.description,
         },

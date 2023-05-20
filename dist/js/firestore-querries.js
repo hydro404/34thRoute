@@ -63,6 +63,7 @@ export async function updateQuantity(item, value) {
     updateDoc(cart_reference, {
       [`${item}.quantity`]: value,
     });
+    
   }
   
   sessionStorage["items_array"] = JSON.stringify(updated);
@@ -132,16 +133,9 @@ export async function createTransaction(
   data["paid"] = pay_status;
 
   let source_data = { [sourceID]: data };
-  
-
-  try {
-    await updateDoc(doc(db, "transactions", userID), source_data);
-    await setDoc(doc(db, cart_type, userID), {});
-  } catch (error) {
-    console.log("failed");
-  }
-  
-} 
+  await setDoc(doc(db, cart_type, userID), {});
+  await updateDoc(doc(db, "transactions", userID), source_data);
+}
 
 export async function checkAdmin() {
   try {
