@@ -24,7 +24,9 @@ import {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
-    console.log(user.isAnonymous);
+    sessionStorage.setItem("email", user.email);
+
+    console.log(user);
     if (user.isAnonymous) {
       sessionStorage.setItem("isAnonymous", "true");
       $("#sg-btn").css("display", "none");
@@ -70,6 +72,7 @@ window.SignIn = function SignIn() {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      console.log(user)
       window.location.href = "food-delivery-single.html";
     })
     .catch((error) => {

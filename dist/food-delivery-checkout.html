@@ -338,7 +338,25 @@
               <!-- Date and time picker -->
               <label class="form-label">Choose date and time<sup class="text-danger ms-1">*</sup></label>
               <div class="input-group">
-                <input class="form-control date-picker rounded pe-5" type="text" id="fd-date-time" placeholder="Choose date and time" data-datepicker-options='{"enableTime": true, "altInput": true, "altFormat": "F j, Y H:i", "dateFormat": "Y-m-d H:i"}' required>
+                <input class="form-control date-picker rounded pe-5" type="text" id="fd-date-time" placeholder="Delivery" data-datepicker-options='{"enableTime": true, "altInput": true, "altFormat": "F j, Y H:i", "dateFormat": "Y-m-d H:i"}' required>
+                <i class="fi-calendar position-absolute top-50 end-0 translate-middle-y me-3"></i>
+                <div class="invalid-feedback" id="date_time" style="display: none;">Required!</div>
+              </div>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <!-- Date and time picker -->
+              <label class="form-label">Choose date and time<sup class="text-danger ms-1">*</sup></label>
+              <div class="input-group">
+                <input class="form-control date-picker rounded pe-5" type="text" id="fd-date-time-start" placeholder="Start Rent" data-datepicker-options='{"enableTime": true, "altInput": true, "altFormat": "F j, Y H:i", "dateFormat": "Y-m-d H:i"}' required>
+                <i class="fi-calendar position-absolute top-50 end-0 translate-middle-y me-3"></i>
+                <div class="invalid-feedback" id="date_time" style="display: none;">Required!</div>
+              </div>
+            </div>
+            <div class="col-sm-6 mb-4">
+              <!-- Date and time picker -->
+              <label class="form-label">Choose date and time<sup class="text-danger ms-1">*</sup></label>
+              <div class="input-group">
+                <input class="form-control date-picker rounded pe-5" type="text" id="fd-date-time-end" placeholder="End Rent" data-datepicker-options='{"enableTime": true, "altInput": true, "altFormat": "F j, Y H:i", "dateFormat": "Y-m-d H:i"}' required>
                 <i class="fi-calendar position-absolute top-50 end-0 translate-middle-y me-3"></i>
                 <div class="invalid-feedback" id="date_time" style="display: none;">Required!</div>
               </div>

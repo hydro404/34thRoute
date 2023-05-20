@@ -3,7 +3,7 @@ import { createTransaction, getCartItems } from "./firestore-querries.js";
 
 const items = sessionStorage.getItem("items_array");
 
-if(items=="{}" || items==null || items == ""){
+if (items == "{}" || items == null || items == "") {
   window.location.href = "food-delivery-cart.html";
 }
 
@@ -12,17 +12,19 @@ window.getDetails = function () {
   let phone = $("#fd-phone").val();
   let email = $("#fd-email").val();
   let delivery_date = $("#fd-date-time").val();
+  let rent_start_date = $("#fd-date-time-start").val();
+  let rent_end_date = $("#fd-date-time-end").val();
   let line1 = $("#fd-line1").val();
   let line2 = $("#fd-line2").val();
   let city = $("#fd-city").val();
   let state = $("#fd-state").val();
   let postal_code = $("#fd-postal_code").val();
   let landmark = $("#fd-landmark").val();
-  
-  if(delivery_date==""){
+
+  if (delivery_date == "") {
     document.getElementById("date_time").style.display = "block";
   }
-  if(name!="" && phone != "" && email!="" && delivery_date!="" && line1!="" && city!="" && state!="" && postal_code!=""){
+  if (name != "" && phone != "" && email != "" && delivery_date != "" && line1 != "" && city != "" && state != "" && postal_code != "") {
     createSource(
       name,
       phone,
@@ -33,7 +35,9 @@ window.getDetails = function () {
       postal_code,
       city,
       delivery_date,
-      landmark
+      landmark,
+      rent_start_date,
+      rent_end_date
     );
   }
 
@@ -78,7 +82,9 @@ async function createSource(
   postal_code,
   city,
   delivery_date,
-  landmark
+  landmark,
+  rent_start_date,
+  rent_end_date
 ) {
   let dropoff_option = "at-door";
   if (document.getElementById("hand-to-me").checked) {
@@ -115,8 +121,8 @@ async function createSource(
         attributes: {
           amount: amount,
           redirect: {
-            success: `${window.location.origin}/account-orders.html`,
-            failed: `${window.location.origin}/account-orders.html`,
+            success: `${window.location.origin}/dist/account-orders.html`,
+            failed: `${window.location.origin}/dist/account-orders.html`,
           },
           billing: {
             address: {
@@ -138,6 +144,8 @@ async function createSource(
             delivery_date: delivery_date,
             landmark: landmark,
             dropoff_option: dropoff_option,
+            rent_start_date: rent_start_date,
+            rent_end_date: rent_end_date
           },
         },
       },
@@ -169,7 +177,9 @@ async function createSource(
           dropoff_option,
           response[0],
           Math.floor(new Date().getTime() / 1000),
-          'cod'
+          'cod',
+          rent_start_date,
+  rent_end_date
         );
 
         // console.log(response);
@@ -196,7 +206,9 @@ async function createSource(
           dropoff_option,
           response.data.id,
           response.data.attributes.created_at,
-          'pending'
+          'pending',
+          rent_start_date,
+  rent_end_date
         );
 
         console.log(response);

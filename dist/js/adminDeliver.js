@@ -44,6 +44,8 @@ async function displayTransactions(user_trans_id,trans_id, trans_items, trans_da
   let state = trans_data.state;
 
   let delivery_date = trans_data.delivery_date;
+  let rent_start_date = trans_data.rent_start_date;
+  let rent_end_date = trans_data.rent_end_date;
   let dropoff_option = trans_data.dropoff_option;
   let email = trans_data.email;
   let landmark = trans_data.landmark;
@@ -76,6 +78,8 @@ async function displayTransactions(user_trans_id,trans_id, trans_items, trans_da
                 <div class="mb-2"><span class="text-muted me-2">Phone:</span><span id="" value="">${phone}</span></div>
                 <div class="mb-2"><span class="text-muted me-2">Email:</span><span id="" value="">${email}</span></div>
                 <div class="mb-2"><span class="text-muted me-2">Delivery Date:</span><span id="" value="">${delivery_date}</span></div>
+                <div class="mb-2"><span class="text-muted me-2">Start Date:</span><span id="" value="">${rent_start_date}</span></div>
+                <div class="mb-2"><span class="text-muted me-2">End Date:</span><span id="" value="">${rent_end_date}</span></div>
                 <div class="mb-2"><span class="text-muted me-2">Drop off option:</span><span id="" value="">${dropoff_option}</span></div>
                 
                 <div class="mb-2"><span class="text-muted me-2">Landmark:</span><span id="" value="">${landmark}</span></div>

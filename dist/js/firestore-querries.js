@@ -102,7 +102,9 @@ export async function createTransaction(
   dropoff_option,
   sourceID,
   date,
-  pay_status
+  pay_status,
+  rent_start_date,
+  rent_end_date
 ) {
   let items_cart = await getCartItems();
 
@@ -124,6 +126,8 @@ export async function createTransaction(
     landmark,
     dropoff_option,
     date,
+    rent_start_date,
+  rent_end_date
   };
   data["paid"] = pay_status;
 
